@@ -23,7 +23,7 @@ shippo.config.api_key = "<API-KEY>"
 shippo.config.api_version = "2018-02-08"
 shippo.config.verify_ssl_certs = True
 shippo.config.rates_req_timeout = 30.0
-shippo.config.timeout_in_seconds = None 
+shippo.config.timeout_in_seconds = None
 # default timeout set in the above line is:
 # 80 seconds for RequestsClient
 # 55 seconds for UrlFetchClient

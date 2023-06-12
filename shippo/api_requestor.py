@@ -1,6 +1,5 @@
 import calendar
 import datetime
-import logging
 import os
 import socket
 import ssl
@@ -10,8 +9,6 @@ import warnings
 import sys
 from shippo import error, http_client, util, certificate_blacklist
 from shippo.config import config, Configuration
-from shippo.error import ConfigurationError
-from shippo.version import VERSION
 
 
 def _encode_datetime(dttime):

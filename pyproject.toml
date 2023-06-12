@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 150
+extend-exclude = [".ipython/"]
+
+[tool.ruff.flake8-annotations]
+allow-star-arg-any = true
+
+[tool.ruff.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.ruff.pylint]
+max-args = 10
+max-branches = 25
+max-returns = 11
+max-statements = 85

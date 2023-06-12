@@ -8,7 +8,6 @@ from shippo.config import config
 from shippo.test.helper import (
     create_mock_shipment,
     DUMMY_ADDRESS,
-    INVALID_ADDRESS,
     ShippoTestCase,
 )
 

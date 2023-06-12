@@ -1,5 +1,5 @@
 
-from shippo import api_requestor, config
+from shippo import api_requestor
 from mock import patch, Mock
 from unittest2 import TestCase
 import unittest2
@@ -7,7 +7,6 @@ import sys
 
 from shippo.api_requestor import APIRequestor
 from shippo.config import config, Configuration
-from shippo.error import ConfigurationError
 
 
 class APIRequestorTests(TestCase):

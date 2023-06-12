@@ -108,7 +108,7 @@ Now that we have the costs per delivery window for all sample destination
 addresses we can return the min, max and average values.
 """
 for delivery_window in DELIVERY_WINDOWS:
-    if not str(delivery_window) in shipping_costs:
+    if str(delivery_window) not in shipping_costs:
         print("No rates found for delivery window of %s days" % delivery_window)
     else:
         costs = shipping_costs[str(delivery_window)]

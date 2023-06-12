@@ -131,7 +131,7 @@ try:
         requested_end_time= pickupTimeEnd.isoformat() + "Z",
         is_test= False
     )
-except shippo.error.InvalidRequestError as err:
+except shippo.error.InvalidRequestError:
     print("A pickup has already been scheduled for today.")
 else:
     if pickup.status == "SUCCESS":

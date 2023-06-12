@@ -272,17 +272,6 @@ class CustomsDeclaration(CreateableAPIResource, ListableAPIResource, FetchableAP
         return "customs/declarations/"
 
 
-class Order(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
-    """
-    An Order allows you group line items for a shipment.
-    """
-
-    @classmethod
-    def class_url(cls):
-        cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
-
-
 class Parcel(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
 
     @classmethod
@@ -483,7 +472,7 @@ class Track(CreateableAPIResource):
         """
         carrier_token = urllib.parse.quote_plus(carrier_token)
         tracking_number = urllib.parse.quote_plus(tracking_number)
-        tn = urllib.parse.quote_plus(tracking_number)
+        urllib.parse.quote_plus(tracking_number)
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url() + carrier_token + '/' + tracking_number
         response, api_key = requestor.request('get', url)

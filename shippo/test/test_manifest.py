@@ -5,13 +5,10 @@ from mock import patch
 
 import shippo
 from shippo.test.helper import (
-    DUMMY_ADDRESS,
-    DUMMY_MANIFEST,
     INVALID_MANIFEST,
     ShippoTestCase,
     create_mock_transaction,
-    create_mock_manifest,
-    create_mock_shipment
+    create_mock_manifest
 )
 
 from shippo.test.helper import shippo_vcr
