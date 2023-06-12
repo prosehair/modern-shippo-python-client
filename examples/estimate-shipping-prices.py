@@ -1,5 +1,3 @@
-import shippo
-
 """
 In this tutorial we want to calculate our average shipping costs so
 we set pricing for customers.
@@ -28,6 +26,8 @@ For a delivery window of 7 days:
 --> Avg. costs: 29.95
 
 """
+
+import shippo
 
 # Define delivery windows in max. days
 # Pick an east coast, a west coast and a mid-west destination
@@ -58,10 +58,8 @@ parcel = {
     "mass_unit": "lb",
 }
 
-"""
-For each destination address we now create a Shipment object
-and store the min, max, average shipping rates per delivery window.
-"""
+# For each destination address we now create a Shipment object
+# and store the min, max, average shipping rates per delivery window.
 shipping_costs = {}
 
 for delivery_address_zip_code in DESTINATION_ADDRESSES_ZIP_CODES:
@@ -87,10 +85,8 @@ for delivery_address_zip_code in DESTINATION_ADDRESSES_ZIP_CODES:
         existing_rate_prices = shipping_costs[str(delivery_window)] if str(delivery_window) in shipping_costs else []
         shipping_costs[str(delivery_window)] = existing_rate_prices + new_rate_prices
 
-"""
-Now that we have the costs per delivery window for all sample destination
-addresses we can return the min, max and average values.
-"""
+# Now that we have the costs per delivery window for all sample destination
+# addresses we can return the min, max and average values.
 for delivery_window in DELIVERY_WINDOWS:
     if str(delivery_window) not in shipping_costs:
         print("No rates found for delivery window of %s days" % delivery_window)

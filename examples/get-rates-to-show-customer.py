@@ -1,11 +1,12 @@
-import shippo
-
 """
 In this tutorial we have an order with a sender address,
 recipient address and parcel. We will retrieve all avail-
 able shipping rates, display them to the user and purchase
 a label after the user has selected a rate.
 """
+
+import shippo
+
 
 # for demo purposes we set the max. transit time here
 MAX_TRANSIT_TIME_DAYS = 3

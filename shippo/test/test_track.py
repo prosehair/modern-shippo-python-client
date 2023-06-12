@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
-from shippo.test.helper import ShippoTestCase
-
-from shippo.test.helper import shippo_vcr
+from shippo.test.helper import ShippoTestCase, shippo_vcr
 
 
 class TrackTests(ShippoTestCase):
@@ -14,7 +9,7 @@ class TrackTests(ShippoTestCase):
     usps_tracking_no = "9205590164917337534322"
 
     def setUp(self):
-        super(TrackTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -25,7 +20,7 @@ class TrackTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(TrackTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -60,7 +55,3 @@ class TrackTests(ShippoTestCase):
         tracking = shippo.Track.create(carrier="usps", tracking_number="EXAMPLEOFINVALID123TRACKINGNUMBER", metadata="metadata")
         self.assertFalse(tracking.tracking_status)
         self.assertFalse(tracking.tracking_history)
-
-
-if __name__ == "__main__":
-    unittest2.main()

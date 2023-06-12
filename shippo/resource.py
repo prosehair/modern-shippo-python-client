@@ -12,16 +12,15 @@ warnings.filterwarnings("always", category=DeprecationWarning, module="shippo")
 def convert_to_shippo_object(resp, api_key):
     if isinstance(resp, list):
         return [convert_to_shippo_object(i, api_key) for i in resp]
-    elif isinstance(resp, dict) and not isinstance(resp, ShippoObject):
+    if isinstance(resp, dict) and not isinstance(resp, ShippoObject):
         resp = resp.copy()
         return ShippoObject.construct_from(resp, api_key)
-    else:
-        return resp
+    return resp
 
 
 class ShippoObject(dict):
     def __init__(self, id=None, api_key=None, **params):
-        super(ShippoObject, self).__init__()
+        super().__init__()
 
         self._unsaved_values = set()
         self._transient_values = set()
@@ -36,7 +35,7 @@ class ShippoObject(dict):
 
     def __setattr__(self, k, v):
         if k[0] == "_" or k in self.__dict__:
-            return super(ShippoObject, self).__setattr__(k, v)
+            super().__setattr__(k, v)
         else:
             self[k] = v
 
@@ -47,7 +46,7 @@ class ShippoObject(dict):
         try:
             return self[k]
         except KeyError as err:
-            raise AttributeError(*err.args)
+            raise AttributeError(*err.args) from err
 
     def __setitem__(self, k, v):
         if v == "":
@@ -57,7 +56,7 @@ class ShippoObject(dict):
                 "You may set %s.%s = None to delete the property" % (k, str(self), k)
             )
 
-        super(ShippoObject, self).__setitem__(k, v)
+        super().__setitem__(k, v)
 
         # Allows for unpickling in Python 3.x
         if not hasattr(self, "_unsaved_values"):
@@ -67,7 +66,7 @@ class ShippoObject(dict):
 
     def __getitem__(self, k):
         try:
-            return super(ShippoObject, self).__getitem__(k)
+            return super().__getitem__(k)
         except KeyError as err:
             if k in self._transient_values:
                 raise KeyError(
@@ -76,12 +75,11 @@ class ShippoObject(dict):
                     "the result returned by Shippo's API, probably as a "
                     "result of a save().  The attributes currently "
                     "available on this object are: %s" % (k, k, ", ".join(list(self.keys())))
-                )
-            else:
-                raise err
+                ) from err
+            raise err
 
     def __delitem__(self, k):
-        raise TypeError("You cannot delete attributes on a ShippoObject. " "To unset a property, set it to None.")
+        raise TypeError("You cannot delete attributes on a ShippoObject  To unset a property, set it to None.")
 
     @classmethod
     def construct_from(cls, values, api_key):
@@ -105,7 +103,7 @@ class ShippoObject(dict):
         self._transient_values = self._transient_values - set(values)
 
         for k, v in list(values.items()):
-            super(ShippoObject, self).__setitem__(k, convert_to_shippo_object(v, api_key))
+            super().__setitem__(k, convert_to_shippo_object(v, api_key))
 
         self._previous_metadata = values.get("metadata")
 
@@ -131,8 +129,7 @@ class ShippoObject(dict):
 
         if sys.version_info[0] < 3:
             return unicode_repr.encode("utf-8")
-        else:
-            return unicode_repr
+        return unicode_repr
 
     def __str__(self):
         return util.json.dumps(self, sort_keys=True, indent=2)
@@ -150,7 +147,7 @@ class APIResource(ShippoObject):
     @classmethod
     def class_name(cls):
         if cls == APIResource:
-            raise NotImplementedError("APIResource is an abstract class.  You should perform " "actions on its subclasses (e.g. Address, Parcel)")
+            raise NotImplementedError("APIResource is an abstract class. You should perform actions on its subclasses (e.g. Address, Parcel)")
         return str(urllib.parse.quote_plus(cls.__name__.lower()))
 
     @classmethod
@@ -162,9 +159,8 @@ class APIResource(ShippoObject):
         object_id = self.get("object_id")
         if not object_id:
             raise error.InvalidRequestError(
-                "Could not determine which URL to request: %s instance " "has invalid ID: %r" % (type(self).__name__, object_id), "object_id"
+                "Could not determine which URL to request: %s instance has invalid ID: %r" % (type(self).__name__, object_id), "object_id"
             )
-        object_id = object_id
         base = self.class_url()
         extn = urllib.parse.quote_plus(object_id)
         return "%s/%s" % (base, extn)
@@ -200,7 +196,6 @@ class ListableAPIResource(APIResource):
 class FetchableAPIResource(APIResource):
     @classmethod
     def retrieve(cls, object_id, api_key=None):
-        object_id = object_id
         extn = urllib.parse.quote_plus(object_id)
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url() + extn
@@ -211,7 +206,6 @@ class FetchableAPIResource(APIResource):
 class UpdateableAPIResource(APIResource):
     @classmethod
     def update(cls, object_id, api_key=None, **params):
-        object_id = object_id
         extn = urllib.parse.quote_plus(object_id)
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url() + extn
@@ -220,11 +214,10 @@ class UpdateableAPIResource(APIResource):
 
     @classmethod
     def remove(cls, object_id, api_key=None, **params):
-        object_id = object_id
         extn = urllib.parse.quote_plus(object_id)
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url() + extn
-        response, api_key = requestor.request("delete", url, params)
+        requestor.request("delete", url, params)
         return "Deleted the webhook"
 
 
@@ -342,7 +335,7 @@ class Transaction(CreateableAPIResource, ListableAPIResource, FetchableAPIResour
         Takes the parameters as a dictionary instead of key word arguments.
         """
         # will be removed in the next major version
-        return super(Transaction, cls).create(api_key, **params)
+        return super().create(api_key, **params)
 
     @classmethod
     def class_url(cls):
@@ -370,7 +363,8 @@ class CarrierAccount(CreateableAPIResource, ListableAPIResource, FetchableAPIRes
 
 class Webhook(CreateableAPIResource, ListableAPIResource, FetchableAPIResource, UpdateableAPIResource):
     """
-    retrieve, update and delete webhooks for a Shippo account programmatically. The same functionality is already exposed in the Shippo dashboard at https://app.goshippo.com/api/.
+    retrieve, update and delete webhooks for a Shippo account programmatically.
+    The same functionality is already exposed in the Shippo dashboard at https://app.goshippo.com/api/.
 
     To add both a webhook and track a url at the same see the shippo.Track.create function.
     """
@@ -383,7 +377,7 @@ class Webhook(CreateableAPIResource, ListableAPIResource, FetchableAPIResource, 
     @classmethod
     def list_webhooks(cls, api_key=None, **params):
         """List all the webhooks associated with the account"""
-        return super(Webhook, cls).all(api_key, **params)
+        return super().all(api_key, **params)
 
     @classmethod
     def create(cls, api_key=None, **params):
@@ -403,14 +397,14 @@ class Webhook(CreateableAPIResource, ListableAPIResource, FetchableAPIResource, 
             (ShippoObject) -- The server response
         """
 
-        return super(Webhook, cls).create(api_key, **params)
+        return super().create(api_key, **params)
 
     @classmethod
     def update_webhook(cls, object_id, api_key=None, **params):
         """
         Update webhook's url, is_test, and/or event
         """
-        return super(Webhook, cls).update(api_key, **params)
+        return super().update(api_key, **params)
 
     @classmethod
     def delete(cls, object_id, api_key=None, **params):
@@ -425,7 +419,7 @@ class Webhook(CreateableAPIResource, ListableAPIResource, FetchableAPIResource, 
         Returns:
             (ShippoObject) -- The server response
         """
-        return super(Webhook, cls).remove(object_id, api_key, **params)
+        return super().remove(object_id, api_key, **params)
 
 
 class Track(CreateableAPIResource):
@@ -483,7 +477,7 @@ class Track(CreateableAPIResource):
         Returns:
             (ShippoObject) -- The server response
         """
-        return super(Track, cls).create(api_key, **params)
+        return super().create(api_key, **params)
 
     @classmethod
     def class_url(cls):
@@ -518,15 +512,8 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
         Returns:
             (ShippoObject) -- The server response
         """
-        object_id = object_id
-        extn = urllib.parse.quote_plus(object_id)
-        glue = "?"
-        for key in params:
-            extn += glue + key + "=" + str(params[key])
-            if glue == "?":
-                glue = "&"
         requestor = api_requestor.APIRequestor(api_key)
-        url = cls.class_url() + extn
+        url = cls.class_url() + urllib.parse.quote_plus(object_id) + "?" + urllib.parse.urlencode(params)
         response, api_key = requestor.request("get", url)
         return convert_to_shippo_object(response, api_key)
 
@@ -547,7 +534,6 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
         Returns:
             (ShippoObject) -- The server response
         """
-        object_id = object_id
         extn = urllib.parse.quote_plus(object_id)
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url() + extn + "/add_shipments"
@@ -571,7 +557,6 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
         Returns:
             (ShippoObject) -- The server response
         """
-        object_id = object_id
         extn = urllib.parse.quote_plus(object_id)
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url() + extn + "/remove_shipments"
@@ -593,7 +578,6 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
         Returns:
             (ShippoObject) -- The server response
         """
-        object_id = object_id
         extn = urllib.parse.quote_plus(object_id)
         requestor = api_requestor.APIRequestor(api_key)
         url = cls.class_url() + extn + "/purchase"

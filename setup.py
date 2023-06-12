@@ -23,7 +23,7 @@ setup(
         'simplejson >= 3.16.0, <= 3.17.2',
     ],
     test_suite='shippo.test.all',
-    tests_require=['unittest2', 'mock', 'vcrpy'],
+    tests_require=['vcrpy'],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

@@ -1,5 +1,3 @@
-import shippo
-
 """
 In this tutorial we have an order with a sender address,
 recipient address and parcel information that we need to ship.
@@ -7,6 +5,8 @@ recipient address and parcel information that we need to ship.
 We want to get the cheapest shipping label that will
 get the packages to the customer within 3 days.
 """
+
+import shippo
 
 # for demo purposes we set the max. transit time here
 MAX_TRANSIT_TIME_DAYS = 3

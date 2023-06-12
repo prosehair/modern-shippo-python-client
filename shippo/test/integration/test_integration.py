@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
 from shippo.config import config
@@ -16,7 +13,7 @@ class FunctionalTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(FunctionalTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -27,7 +24,7 @@ class FunctionalTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(FunctionalTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -80,7 +77,3 @@ class FunctionalTests(ShippoTestCase):
     # def test_missing_id(self):
     #     address = shippo.Address()
     #     self.assertRaises(shippo.error.APIError, address.refresh)
-
-
-if __name__ == "__main__":
-    unittest2.main()

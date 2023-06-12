@@ -1,19 +1,14 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
-from shippo.test.helper import create_mock_shipment, ShippoTestCase, DUMMY_TRANSACTION
-
-from shippo.test.helper import shippo_vcr
+from shippo.test.helper import create_mock_shipment, ShippoTestCase, DUMMY_TRANSACTION, shippo_vcr
 
 
 class TransactionTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(TransactionTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -24,7 +19,7 @@ class TransactionTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(TransactionTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -51,7 +46,7 @@ class TransactionTests(ShippoTestCase):
         TRANSACTION["rate"] = rate.object_id
         transaction = shippo.Transaction.create(**TRANSACTION)
         retrieve = shippo.Transaction.retrieve(transaction.object_id)
-        self.assertItemsEqual(transaction, retrieve)
+        self.assertCountEqual(transaction, retrieve)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/transaction")
     def test_invalid_retrieve(self):
@@ -67,7 +62,3 @@ class TransactionTests(ShippoTestCase):
         pagesize = 1
         transaction_list = shippo.Transaction.all(size=pagesize)
         self.assertEqual(len(transaction_list.results), pagesize)
-
-
-if __name__ == "__main__":
-    unittest2.main()

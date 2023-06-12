@@ -1,9 +1,9 @@
-import shippo
-
 """
 In this tutorial we have an order with a sender address,
 recipient address and parcel information that we need to ship.
 """
+
+import shippo
 
 # Replace <API-KEY> with your key
 shippo.config.api_key = "<API-KEY>"

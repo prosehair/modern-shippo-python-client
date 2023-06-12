@@ -1,23 +1,14 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
-from shippo.test.helper import (
-    create_mock_shipment,
-    INVALID_SHIPMENT,
-    ShippoTestCase,
-)
-
-from shippo.test.helper import shippo_vcr
+from shippo.test.helper import create_mock_shipment, INVALID_SHIPMENT, ShippoTestCase, shippo_vcr
 
 
 class ShipmentTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(ShipmentTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -28,7 +19,7 @@ class ShipmentTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(ShipmentTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -45,7 +36,7 @@ class ShipmentTests(ShippoTestCase):
     def test_retrieve(self):
         shipment = create_mock_shipment()
         retrieve = shippo.Shipment.retrieve(shipment.object_id)
-        self.assertItemsEqual(shipment, retrieve)
+        self.assertCountEqual(shipment, retrieve)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/shipment")
     def test_invalid_retrieve(self):
@@ -78,7 +69,3 @@ class ShipmentTests(ShippoTestCase):
     def test_invalid_get_rate(self):
         # we are testing asynchronous=True in order to test the 2nd API call of the function
         self.assertRaises(shippo.error.APIError, shippo.Shipment.get_rates, "EXAMPLE_OF_INVALID_ID", asynchronous=True)
-
-
-if __name__ == "__main__":
-    unittest2.main()

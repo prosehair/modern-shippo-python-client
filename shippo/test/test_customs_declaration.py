@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
 from shippo.test.helper import (
@@ -18,7 +15,7 @@ class CustomsDeclarationTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(CustomsDeclarationTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -29,7 +26,7 @@ class CustomsDeclarationTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(CustomsDeclarationTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -53,7 +50,7 @@ class CustomsDeclarationTests(ShippoTestCase):
         CustomsDeclaration = shippo.CustomsDeclaration.create(**customs_declaration_parameters)
         # Test Retrieving Object
         retrieve = shippo.CustomsDeclaration.retrieve(CustomsDeclaration.object_id)
-        self.assertItemsEqual(CustomsDeclaration, retrieve)
+        self.assertCountEqual(CustomsDeclaration, retrieve)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/customs-declaration")
     def test_invalid_retrieve(self):
@@ -69,7 +66,3 @@ class CustomsDeclarationTests(ShippoTestCase):
         pagesize = 1
         customs_declaration_list = shippo.CustomsDeclaration.all(size=pagesize)
         self.assertEqual(len(customs_declaration_list.results), pagesize)
-
-
-if __name__ == "__main__":
-    unittest2.main()

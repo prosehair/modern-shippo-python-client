@@ -1,20 +1,16 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
 from datetime import datetime
 
-import shippo
-from shippo.test.helper import ShippoTestCase, DUMMY_ORDER
+from unittest.mock import patch
 
-from shippo.test.helper import shippo_vcr
+import shippo
+from shippo.test.helper import DUMMY_ORDER, ShippoTestCase, shippo_vcr
 
 
 class OrderTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(OrderTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -25,7 +21,7 @@ class OrderTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(OrderTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -46,7 +42,7 @@ class OrderTests(ShippoTestCase):
         ORDER["placed_at"] = datetime.now().isoformat() + "Z"
         order = shippo.Order.create(**ORDER)
         retrieve = shippo.Order.retrieve(order.object_id)
-        self.assertItemsEqual(order.object_id, retrieve.object_id)
+        self.assertCountEqual(order.object_id, retrieve.object_id)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/order")
     def test_invalid_retrieve(self):
@@ -62,7 +58,3 @@ class OrderTests(ShippoTestCase):
         pagesize = 1
         order_list = shippo.Order.all(size=pagesize)
         self.assertEqual(len(order_list.results), pagesize)
-
-
-if __name__ == "__main__":
-    unittest2.main()

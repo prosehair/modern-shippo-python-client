@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
-from shippo.test.helper import create_mock_shipment, ShippoTestCase, DUMMY_BATCH, INVALID_BATCH
-
-from shippo.test.helper import shippo_vcr
+from shippo.test.helper import ShippoTestCase, DUMMY_BATCH, INVALID_BATCH, create_mock_shipment, shippo_vcr
 
 BATCH_ADD_SIZE = 4
 
@@ -15,7 +10,7 @@ class BatchTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(BatchTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -26,7 +21,7 @@ class BatchTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(BatchTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -47,7 +42,7 @@ class BatchTests(ShippoTestCase):
         BATCH = DUMMY_BATCH.copy()
         batch = shippo.Batch.create(**BATCH)
         retrieve = shippo.Batch.retrieve(batch.object_id)
-        self.assertItemsEqual(batch, retrieve)
+        self.assertCountEqual(batch, retrieve)
         # Leave enough time for the batch to be processed
         retrieve = shippo.Batch.retrieve(batch.object_id, **{"object_results": "creation_succeeded"})
         self.assertGreater(len(retrieve["batch_shipments"]["results"]), 0)
@@ -65,7 +60,7 @@ class BatchTests(ShippoTestCase):
         batch_size = len(retrieve.batch_shipments.results)
         self.assertEqual(batch.status, "VALIDATING")
         addon = []
-        for i in range(BATCH_ADD_SIZE):
+        for _ in range(BATCH_ADD_SIZE):
             mock_shipment = create_mock_shipment()
             addon.append({"shipment": mock_shipment.object_id})
         added = shippo.Batch.add(batch.object_id, addon)
@@ -89,7 +84,7 @@ class BatchTests(ShippoTestCase):
         batch_size = len(retrieve.batch_shipments.results)
         self.assertEqual(batch.status, "VALIDATING")
         addon = []
-        for i in range(BATCH_ADD_SIZE):
+        for _ in range(BATCH_ADD_SIZE):
             mock_shipment = create_mock_shipment()
             addon.append({"shipment": mock_shipment.object_id})
         added = shippo.Batch.add(batch.object_id, addon)
@@ -124,7 +119,3 @@ class BatchTests(ShippoTestCase):
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
     def test_invalid_purchase(self):
         self.assertRaises(shippo.error.APIError, shippo.Batch.purchase, "INVALID_OBJECT_ID")
-
-
-if __name__ == "__main__":
-    unittest2.main()

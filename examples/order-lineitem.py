@@ -1,10 +1,11 @@
+"""
+In this example, we are creating (and consuming) an order object with lineitem(s).
+"""
+
 from datetime import datetime
 
 import shippo
 
-"""
-In this example, we are creating (and consuming) an order object with lineitem(s).
-"""
 
 # Replace <API-KEY> with your key
 shippo.config.api_key = "<API-KEY>"

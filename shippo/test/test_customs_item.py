@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
 from shippo.test.helper import (
@@ -17,7 +14,7 @@ class CustomsItemTest(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(CustomsItemTest, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -28,7 +25,7 @@ class CustomsItemTest(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(CustomsItemTest, self).tearDown()
+        super().tearDown()
         self.client_patcher.stop()
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/customs-item")
@@ -44,7 +41,7 @@ class CustomsItemTest(ShippoTestCase):
     def test_retrieve(self):
         customs_item = shippo.CustomsItem.create(**DUMMY_CUSTOMS_ITEM)
         retrieve = shippo.CustomsItem.retrieve(customs_item.object_id)
-        self.assertItemsEqual(customs_item, retrieve)
+        self.assertCountEqual(customs_item, retrieve)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/customs-item")
     def test_invalid_retrieve(self):
@@ -60,7 +57,3 @@ class CustomsItemTest(ShippoTestCase):
         pagesize = 1
         customs_items_list = shippo.CustomsItem.all(size=pagesize)
         self.assertEqual(len(customs_items_list.results), pagesize)
-
-
-if __name__ == "__main__":
-    unittest2.main()

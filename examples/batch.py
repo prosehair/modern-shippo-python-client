@@ -1,9 +1,10 @@
-import shippo
-import time
-
 """
 In this tutorial we see how to use and interact with batches
 """
+
+import time
+
+import shippo
 
 # Replace <API-KEY> with your key
 shippo.config.api_key = "<API-KEY>"

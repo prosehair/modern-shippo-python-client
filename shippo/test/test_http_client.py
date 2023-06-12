@@ -1,9 +1,9 @@
 import warnings
-import unittest2
 
-from mock import Mock
+import unittest
+from unittest.mock import Mock
+
 import shippo
-
 from shippo.test.helper import ShippoUnitTestCase
 
 VALID_API_METHODS = ("get", "post", "delete")
@@ -11,7 +11,7 @@ VALID_API_METHODS = ("get", "post", "delete")
 
 class HttpClientTests(ShippoUnitTestCase):
     def setUp(self):
-        super(HttpClientTests, self).setUp()
+        super().setUp()
 
         self.original_filters = warnings.filters[:]
         warnings.simplefilter("ignore")
@@ -19,7 +19,7 @@ class HttpClientTests(ShippoUnitTestCase):
     def tearDown(self):
         warnings.filters = self.original_filters
 
-        super(HttpClientTests, self).tearDown()
+        super().tearDown()
 
     def check_default(self, none_libs, expected):
         for lib in none_libs:
@@ -37,13 +37,11 @@ class HttpClientTests(ShippoUnitTestCase):
 
 
 class ClientTestBase:
+    valid_url =  "https://api.goshippo.com/v1/echo"
+
     @property
     def request_mock(self):
         return self.request_mocks[self.request_client.name]
-
-    @property
-    def valid_url(self, path="/v1/echo"):
-        return "https://api.goshippo.com%s" % (path,)
 
     def make_client(self, verify_ssl_certs, timeout_in_seconds=None):
         return self.request_client(verify_ssl_certs, timeout_in_seconds)
@@ -52,13 +50,13 @@ class ClientTestBase:
         client = self.make_client(verify_ssl_certs=True)
         return client.request(method, url, headers, post_data)
 
-    def mock_response(self, body, code):
+    def mock_response(self, mock, body, code):
         raise NotImplementedError("You must implement this in your test subclass")
 
-    def mock_error(self, error):
+    def mock_error(self, mock):
         raise NotImplementedError("You must implement this in your test subclass")
 
-    def check_call(self, meth, abs_url, headers, params):
+    def check_call(self, mock, meth, url, post_data, headers):
         raise NotImplementedError("You must implement this in your test subclass")
 
     def test_request(self):
@@ -141,4 +139,4 @@ class UrlFetchClientTests(ShippoUnitTestCase, ClientTestBase):
 
 
 if __name__ == "__main__":
-    unittest2.main()
+    unittest.main()

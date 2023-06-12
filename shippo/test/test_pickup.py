@@ -1,20 +1,16 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
 from datetime import datetime, timedelta
 
-import shippo
-from shippo.test.helper import create_mock_international_transaction, ShippoTestCase, DUMMY_PICKUP
+from unittest.mock import patch
 
-from shippo.test.helper import shippo_vcr
+import shippo
+from shippo.test.helper import create_mock_international_transaction, ShippoTestCase, DUMMY_PICKUP, shippo_vcr
 
 
 class PickupTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(PickupTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -25,7 +21,7 @@ class PickupTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(PickupTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -42,10 +38,6 @@ class PickupTests(ShippoTestCase):
         try:
             pickup = shippo.Pickup.create(**PICKUP)
         except shippo.error.InvalidRequestError:
-            self.assertTrue(True)
+            self.skipTest("Invalid request error")
         else:
             self.assertEqual(pickup.status, "SUCCESS")
-
-
-if __name__ == "__main__":
-    unittest2.main()

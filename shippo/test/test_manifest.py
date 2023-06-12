@@ -1,19 +1,14 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
-from shippo.test.helper import INVALID_MANIFEST, ShippoTestCase, create_mock_transaction, create_mock_manifest
-
-from shippo.test.helper import shippo_vcr
+from shippo.test.helper import INVALID_MANIFEST, ShippoTestCase, create_mock_transaction, create_mock_manifest, shippo_vcr
 
 
 class ManifestTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(ManifestTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -24,7 +19,7 @@ class ManifestTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(ManifestTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -43,7 +38,7 @@ class ManifestTests(ShippoTestCase):
     def test_retrieve(self):
         manifest = create_mock_manifest()
         retrieve = shippo.Manifest.retrieve(manifest.object_id)
-        self.assertItemsEqual(manifest, retrieve)
+        self.assertCountEqual(manifest, retrieve)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/manifest")
     def test_invalid_retrieve(self):
@@ -59,7 +54,3 @@ class ManifestTests(ShippoTestCase):
         pagesize = 1
         manifest_list = shippo.Manifest.all(size=pagesize)
         self.assertEqual(len(manifest_list.results), pagesize)
-
-
-if __name__ == "__main__":
-    unittest2.main()

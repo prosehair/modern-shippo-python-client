@@ -1,23 +1,19 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
 from shippo.test.helper import (
     DUMMY_PARCEL,
     INVALID_PARCEL,
     ShippoTestCase,
+    shippo_vcr,
 )
-
-from shippo.test.helper import shippo_vcr
 
 
 class ParcelTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(ParcelTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -28,7 +24,7 @@ class ParcelTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(ParcelTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -45,7 +41,7 @@ class ParcelTests(ShippoTestCase):
     def test_retrieve(self):
         parcel = shippo.Parcel.create(**DUMMY_PARCEL)
         retrieve = shippo.Parcel.retrieve(parcel.object_id)
-        self.assertItemsEqual(parcel, retrieve)
+        self.assertCountEqual(parcel, retrieve)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/parcel")
     def test_invalid_retrieve(self):
@@ -61,7 +57,3 @@ class ParcelTests(ShippoTestCase):
         pagesize = 2
         parcel_list = shippo.Parcel.all(size=pagesize)
         self.assertEqual(len(parcel_list.results), pagesize)
-
-
-if __name__ == "__main__":
-    unittest2.main()

@@ -48,7 +48,7 @@ def new_default_http_client(*args, **kwargs):
     return impl(*args, **kwargs)
 
 
-class HTTPClient(object):
+class HTTPClient:
     def __init__(self, verify_ssl_certs, timeout_in_seconds):
         if timeout_in_seconds is None:
             raise ValueError("`timeout_in_seconds` cannot be None")
@@ -80,15 +80,15 @@ class RequestsClient(HTTPClient):
         try:
             try:
                 result = requests.request(method, url, headers=headers, data=post_data, timeout=self._timeout_in_seconds, **kwargs)
-            except NotImplementedError as e:
+            except NotImplementedError as err:
                 raise TypeError(
                     "Warning: It looks like your installed version of the "
                     '"requests" library is not compatible with Shippo\'s '
                     "usage thereof. (HINT: The most likely cause is that "
                     'your "requests" library is out of date. You can fix '
                     'that by running "pip install -U requests".) The '
-                    "underlying error was: %s" % (e,)
-                )
+                    "underlying error was: %s" % (err,)
+                ) from err
 
             # This causes the content to actually be read, which could cause
             # e.g. a socket timeout. TODO: The other fetch methods probably
@@ -104,7 +104,7 @@ class RequestsClient(HTTPClient):
 
     def _handle_request_error(self, e):
         if isinstance(e, requests.exceptions.RequestException):
-            msg = "Unexpected error communicating with Shippo.  " "If this problem persists, let us know at " "support@goshippo.com."
+            msg = "Unexpected error communicating with Shippo.  If this problem persists, let us know at support@goshippo.com."
             err = "%s: %s" % (type(e).__name__, str(e))
         else:
             msg = (
@@ -168,7 +168,7 @@ class UrlFetchClient(HTTPClient):
                 "Please let us know at support@goshippo.com."
             )
         else:
-            msg = "Unexpected error communicating with Shippo. If this " "problem persists, let us know at support@goshippo.com."
+            msg = "Unexpected error communicating with Shippo. If this problem persists, let us know at support@goshippo.com."
 
         msg = textwrap.fill(msg) + "\n\n(Network error: " + str(e) + ")"
         raise error.APIConnectionError(msg)

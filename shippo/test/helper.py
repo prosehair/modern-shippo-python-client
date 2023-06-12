@@ -1,12 +1,12 @@
 import datetime
 import os
-import re
-import shippo
-from shippo.config import config
+from unittest import TestCase
+from unittest.mock import patch, Mock
+
 import vcr
 
-from mock import patch, Mock
-from unittest2 import TestCase
+import shippo
+from shippo.config import config
 
 NOW = datetime.datetime.now()
 
@@ -23,6 +23,7 @@ DUMMY_ADDRESS = {
     "phone": "+1 555 341 9393",
     "metadata": "Customer ID 123456",
 }
+
 INVALID_ADDRESS = {
     "name": "Laura Behrens Wu",
     "company": "Shippo",
@@ -33,6 +34,7 @@ INVALID_ADDRESS = {
     "phone": "+1 555 341 9393",
     "metadata": "Customer ID 123456",
 }
+
 NOT_POSSIBLE_ADDRESS = {
     "name": "Laura Behrens Wu",
     "company": "Shippo",
@@ -46,6 +48,7 @@ NOT_POSSIBLE_ADDRESS = {
     "phone": "+1 555 341 9393",
     "metadata": "Customer ID 123456",
 }
+
 DUMMY_PARCEL = {
     "length": "5",
     "width": "5",
@@ -56,9 +59,13 @@ DUMMY_PARCEL = {
     "template": "",
     "metadata": "Customer ID 123456",
 }
+
 INVALID_PARCEL = {"length": "5", "width": "5", "distance_unit": "cm", "weight": "2", "template": "", "metadata": "Customer ID 123456"}
+
 DUMMY_MANIFEST = {"provider": "USPS", "shipment_date": "2017-03-31T17:37:59.817Z", "address_from": "28828839a2b04e208ac2aa4945fbca9a"}
+
 INVALID_MANIFEST = {"provider": "RANDOM_INVALID_PROVIDER", "shipment_date": "2014-05-16T23:59:59Z", "address_from": "EXAMPLE_OF_INVALID_ADDRESS"}
+
 DUMMY_CUSTOMS_ITEM = {
     "description": "T-Shirt",
     "quantity": 2,
@@ -70,7 +77,9 @@ DUMMY_CUSTOMS_ITEM = {
     "origin_country": "US",
     "metadata": "Order ID #123123",
 }
+
 INVALID_CUSTOMS_ITEM = {"value_currency": "USD", "tariff_number": "", "origin_country": "US", "metadata": "Order ID #123123"}
+
 DUMMY_CUSTOMS_DECLARATION = {
     "exporter_reference": "",
     "importer_reference": "",
@@ -90,6 +99,7 @@ DUMMY_CUSTOMS_DECLARATION = {
     "items": ["0c1a723687164307bb2175972fbcd9ef"],
     "metadata": "Order ID #123123",
 }
+
 INVALID_CUSTOMS_DECLARATION = {
     "exporter_reference": "",
     "importer_reference": "",
@@ -108,6 +118,7 @@ INVALID_CUSTOMS_DECLARATION = {
     "incoterm": "",
     "metadata": "Order ID #123123",
 }
+
 TO_ADDRESS = {
     "name": "John Smith",
     "company": "Initech",
@@ -121,6 +132,7 @@ TO_ADDRESS = {
     "phone": "+1 630 333 7333",
     "metadata": "Customer ID 123456",
 }
+
 FROM_ADDRESS = {
     "name": "Laura Behrens Wu",
     "company": "Shippo",
@@ -134,6 +146,7 @@ FROM_ADDRESS = {
     "phone": "+1 555 341 9393",
     "metadata": "Customer ID 123456",
 }
+
 DUMMY_SHIPMENT = {
     "address_from": "4f406a13253945a8bc8deb0f8266b245",
     "address_to": "4c7185d353764d0985a6a7825aed8ffb",
@@ -144,6 +157,7 @@ DUMMY_SHIPMENT = {
     "extra": {"signature_confirmation": True, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency": "USD"}},
     "metadata": "Customer ID 123456",
 }
+
 DUMMY_INTERNATIONAL_SHIPMENT = {
     "address_from": "4f406a13253945a8bc8deb0f8266b245",
     "address_to": "4c7185d353764d0985a6a7825aed8ffb",
@@ -154,6 +168,7 @@ DUMMY_INTERNATIONAL_SHIPMENT = {
     "extra": {"signature_confirmation": True, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency": "USD"}},
     "metadata": "Customer ID 123456",
 }
+
 INVALID_SHIPMENT = {
     "address_from": "4f406a13253945a8bc8deb0f8266b245",
     "submission_type": "PICKUP",
@@ -162,8 +177,11 @@ INVALID_SHIPMENT = {
     "customs_declaration": "b741b99f95e841639b54272834bc478c",
     "metadata": "Customer ID 123456",
 }
+
 DUMMY_TRANSACTION = {"rate": "67891d0ebaca4973ae2569d759da6139", "metadata": "Customer ID 123456"}
+
 INVALID_TRANSACTION = {"metadata": "Customer ID 123456"}
+
 DUMMY_BATCH = {
     "default_carrier_account": "e68e95b95e33431a87bdecdd2b891c2b",
     "default_servicelevel_token": "usps_priority",
@@ -223,6 +241,7 @@ DUMMY_BATCH = {
         },
     ],
 }
+
 INVALID_BATCH = {
     "default_carrier_account": "NOT_VALID",
     "default_servicelevel_token": "usps_priority",
@@ -230,6 +249,7 @@ INVALID_BATCH = {
     "metadata": "teehee",
     "batch_shipments": [],
 }
+
 DUMMY_PICKUP = {
     "carrier_account": "abcdefghijklmnopqrstuvwxyz0123456789",
     "location": {
@@ -253,6 +273,7 @@ DUMMY_PICKUP = {
     "requested_end_time": "2022-01-02T00:00:00.000Z",
     "is_test": False,
 }
+
 DUMMY_ORDER = {
     "to_address": {
         "city": "San Francisco",
@@ -311,7 +332,7 @@ def create_mock_manifest(transaction=None):
 def create_mock_transaction(asynchronous=False):
     shipment = create_mock_shipment(asynchronous)
     rates = shipment.rates
-    usps_rate = list([x for x in rates if x.servicelevel.token == "usps_priority"])[0]
+    usps_rate = list(x for x in rates if x.servicelevel.token == "usps_priority")[0]
     t = DUMMY_TRANSACTION.copy()
     t["rate"] = usps_rate.object_id
     t["asynchronous"] = asynchronous
@@ -333,7 +354,7 @@ def create_mock_international_shipment():
 def create_mock_international_transaction(asynchronous=False):
     shipment = create_mock_shipment(asynchronous)
     rates = shipment.rates
-    usps_rate = list([x for x in rates if x.servicelevel.token == "usps_priority"])[0]
+    usps_rate = list(x for x in rates if x.servicelevel.token == "usps_priority")[0]
     t = DUMMY_TRANSACTION.copy()
     t["rate"] = usps_rate.object_id
     t["asynchronous"] = asynchronous
@@ -345,7 +366,7 @@ class ShippoTestCase(TestCase):
     RESTORE_ATTRIBUTES = ("api_version", "api_key")
 
     def setUp(self):
-        super(ShippoTestCase, self).setUp()
+        super().setUp()
 
         self._shippo_original_attributes = {}
 
@@ -361,32 +382,17 @@ class ShippoTestCase(TestCase):
         config.app_version = os.environ.get("APP_VERSION", "1.0.0")
 
     def tearDown(self):
-        super(ShippoTestCase, self).tearDown()
+        super().tearDown()
 
         for attr in self.RESTORE_ATTRIBUTES:
             setattr(config, attr, self._shippo_original_attributes[attr])
-
-    # Python < 2.7 compatibility
-    def assertRaisesRegexp(self, exception, regexp, callable, *args, **kwargs):
-        try:
-            callable(*args, **kwargs)
-        except exception as err:
-            if regexp is None:
-                return True
-
-            if isinstance(regexp, str):
-                regexp = re.compile(regexp)
-            if not regexp.search(str(err)):
-                raise self.failureException('"%s" does not match "%s"' % (regexp.pattern, str(err)))
-        else:
-            raise self.failureException("%s was not raised" % (exception.__name__,))
 
 
 class ShippoUnitTestCase(ShippoTestCase):
     REQUEST_LIBRARIES = ["urlfetch", "requests"]
 
     def setUp(self):
-        super(ShippoUnitTestCase, self).setUp()
+        super().setUp()
 
         self.request_patchers = {}
         self.request_mocks = {}
@@ -397,7 +403,7 @@ class ShippoUnitTestCase(ShippoTestCase):
             self.request_patchers[lib] = patcher
 
     def tearDown(self):
-        super(ShippoUnitTestCase, self).tearDown()
+        super().tearDown()
 
         for patcher in list(self.request_patchers.values()):
             patcher.stop()
@@ -405,14 +411,14 @@ class ShippoUnitTestCase(ShippoTestCase):
 
 class ShippoApiTestCase(ShippoTestCase):
     def setUp(self):
-        super(ShippoApiTestCase, self).setUp()
+        super().setUp()
 
         self.requestor_patcher = patch("shippo.api_requestor.APIRequestor")
         requestor_class_mock = self.requestor_patcher.start()
         self.requestor_mock = requestor_class_mock.return_value
 
     def tearDown(self):
-        super(ShippoApiTestCase, self).tearDown()
+        super().tearDown()
 
         self.requestor_patcher.stop()
 

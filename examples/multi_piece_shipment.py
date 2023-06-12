@@ -1,6 +1,3 @@
-import shippo
-import time
-
 """
 In this example we have a shipment with multiple parcels,
 note that not all carriers offer this (most notably USPS).
@@ -8,6 +5,10 @@ To ensure that this works as expected try using UPS or FedEx.
 Make sure you specify a carrier_account below which is active
 and allows for multi-parcel shipments!
 """
+
+import time
+
+import shippo
 
 # Replace <API-KEY> with your key
 shippo.config.api_key = "<API-KEY>"

@@ -22,12 +22,11 @@ def _encode_datetime(dttime):
 
 def _api_encode(data):
     for key, value in list(data.items()):
-        key = key
         if value is None:
             continue
-        elif hasattr(value, "shippo_id"):
+        if hasattr(value, "shippo_id"):
             yield (key, value.shippo_id)
-        elif isinstance(value, list) or isinstance(value, tuple):
+        elif isinstance(value, (list, tuple)):
             for subvalue in value:
                 yield ("%s[]" % (key,), subvalue)
         elif isinstance(value, dict):
@@ -49,7 +48,7 @@ def _build_api_url(url, query):
     return urllib.parse.urlunsplit((scheme, netloc, path, query, fragment))
 
 
-class APIRequestor(object):
+class APIRequestor:
     _CERTIFICATE_VERIFIED = False
 
     def __init__(self, key=None, client=None):
@@ -70,16 +69,15 @@ class APIRequestor(object):
         return resp, my_api_key
 
     def handle_api_error(self, rbody, rcode, resp):
-        if rcode in [400, 404]:
+        if rcode in (400, 404):
             raise error.InvalidRequestError(rbody, rcode, resp)
-        elif rcode == 401:
+        if rcode == 401:
             raise error.AuthenticationError(rbody, rcode, resp)
-        else:
-            raise error.APIError(rbody, rcode, resp)
+        raise error.APIError(rbody, rcode, resp)
 
     @staticmethod
     def get_python_version() -> str:
-        return sys.version.split(" ")[0]
+        return sys.version.split(" ", maxsplit=1)[0]
 
     @staticmethod
     def get_shippo_user_agent_header(configuration: Configuration) -> str:
@@ -114,12 +112,12 @@ class APIRequestor(object):
 
         abs_url = "%s%s" % (config.api_base, url)
 
-        if method == "get" or method == "delete":
+        if method in ("get", "delete"):
             if params:
                 encoded_params = urllib.parse.urlencode(list(_api_encode(params or {})))
                 abs_url = _build_api_url(abs_url, encoded_params)
             post_data = None
-        elif method == "post" or method == "put":
+        elif method in ("post", "put"):
             post_data = util.json.dumps(params)
         else:
             raise error.APIConnectionError(
@@ -148,7 +146,7 @@ class APIRequestor(object):
         }
 
         rbody, rcode = self._client.request(method, abs_url, headers, post_data)
-        util.logger.info("API request to %s returned (response code, response body) of " "(%d, %r)", abs_url, rcode, rbody)
+        util.logger.info("API request to %s returned (response code, response body) of (%d, %r)", abs_url, rcode, rbody)
         return rbody, rcode, my_api_key
 
     def interpret_response(self, rbody, rcode):
@@ -158,9 +156,9 @@ class APIRequestor(object):
                 if rbody == "":
                     rbody = '{"msg": "empty_response"}'
             resp = util.json.loads(rbody)
-        except Exception:
-            raise error.APIError("Invalid response body from API: %s " "(HTTP response code was %d)" % (rbody, rcode), rbody, rcode)
-        if not (200 <= rcode < 300):
+        except Exception as err:
+            raise error.APIError("Invalid response body from API: %s (HTTP response code was %d)" % (rbody, rcode), rbody, rcode) from err
+        if not 200 <= rcode < 300:
             self.handle_api_error(rbody, rcode, resp)
         return resp
 
@@ -195,7 +193,6 @@ class APIRequestor(object):
                         "production logs."
                     )
                     return
-                else:
-                    raise
+                raise
 
             self._CERTIFICATE_VERIFIED = certificate_blacklist.verify(uri.hostname, der_cert)

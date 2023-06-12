@@ -1,6 +1,3 @@
-import shippo
-from datetime import datetime, timedelta
-
 """
 In this tutorial we have an order with a sender address,
 recipient address and parcel. The shipment is going from the
@@ -10,6 +7,10 @@ In addition to that we know that the customer expects the
 shipment to arrive within 3 days. We now want to purchase
 the cheapest shipping label with a transit time <= 3 days.
 """
+
+from datetime import datetime, timedelta
+
+import shippo
 
 # replace <API-KEY> with your key
 shippo.config.api_key = "<API-KEY>"

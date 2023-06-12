@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-import unittest2
-
-from mock import patch
+from unittest.mock import patch
 
 import shippo
 from shippo.test.helper import (
@@ -18,7 +15,7 @@ class AddressTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
     def setUp(self):
-        super(AddressTests, self).setUp()
+        super().setUp()
 
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
@@ -29,7 +26,7 @@ class AddressTests(ShippoTestCase):
         client_mock.side_effect = get_http_client
 
     def tearDown(self):
-        super(AddressTests, self).tearDown()
+        super().tearDown()
 
         self.client_patcher.stop()
 
@@ -47,7 +44,7 @@ class AddressTests(ShippoTestCase):
     def test_retrieve(self):
         address = shippo.Address.create(**DUMMY_ADDRESS)
         retrieve = shippo.Address.retrieve(address.object_id)
-        self.assertItemsEqual(address, retrieve)
+        self.assertCountEqual(address, retrieve)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/address")
     def test_invalid_retrieve(self):
@@ -76,7 +73,3 @@ class AddressTests(ShippoTestCase):
         address = shippo.Address.create(**DUMMY_ADDRESS)
         self.assertEqual(address.is_complete, True)
         address = shippo.Address.validate(address.object_id)
-
-
-if __name__ == "__main__":
-    unittest2.main()
