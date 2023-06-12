@@ -21,8 +21,7 @@ class FunctionalTests(ShippoTestCase):
         def get_http_client(*args, **kwargs):
             return self.request_client(*args, **kwargs)
 
-        self.client_patcher = patch(
-            'shippo.http_client.new_default_http_client')
+        self.client_patcher = patch("shippo.http_client.new_default_http_client")
 
         client_mock = self.client_patcher.start()
         client_mock.side_effect = get_http_client
@@ -35,9 +34,8 @@ class FunctionalTests(ShippoTestCase):
     def test_dns_failure(self):
         api_base = config.api_base
         try:
-            config.api_base = 'https://my-invalid-domain.ireallywontresolve/v1'
-            self.assertRaises(shippo.error.APIConnectionError,
-                              shippo.Address.create)
+            config.api_base = "https://my-invalid-domain.ireallywontresolve/v1"
+            self.assertRaises(shippo.error.APIConnectionError, shippo.Address.create)
         finally:
             config.api_base = api_base
 
@@ -48,7 +46,7 @@ class FunctionalTests(ShippoTestCase):
             address_validated = shippo.Address.validate(address.object_id)
             self.assertEqual(address_validated.is_complete, True)
         except shippo.error.AuthenticationError:
-            self.fail('Set your SHIPPO_API_KEY in your os.environ')
+            self.fail("Set your SHIPPO_API_KEY in your os.environ")
         except Exception as inst:
             self.fail("Test failed with exception %s" % inst)
 
@@ -56,30 +54,27 @@ class FunctionalTests(ShippoTestCase):
         try:
             address = shippo.Address.create(**DUMMY_ADDRESS)
         except shippo.error.AuthenticationError:
-            self.fail('Set your SHIPPO_API_KEY in your os.environ')
+            self.fail("Set your SHIPPO_API_KEY in your os.environ")
 
-        self.assertEqual(address['object_created'], address.object_created)
-        address['foo'] = 'bar'
-        self.assertEqual(address.foo, 'bar')
+        self.assertEqual(address["object_created"], address.object_created)
+        address["foo"] = "bar"
+        self.assertEqual(address.foo, "bar")
 
     def test_unicode(self):
         # Make sure unicode requests can be sent
-        self.assertRaises(shippo.error.APIError,
-                          shippo.Address.retrieve,
-                          '☃')
+        self.assertRaises(shippo.error.APIError, shippo.Address.retrieve, "☃")
 
     def test_get_rates(self):
         try:
             shipment = create_mock_shipment()
-            rates = shippo.Shipment.get_rates(
-                shipment.object_id, asynchronous=False)
+            rates = shippo.Shipment.get_rates(shipment.object_id, asynchronous=False)
         except shippo.error.InvalidRequestError:
             pass
         except shippo.error.AuthenticationError:
-            self.fail('Set your SHIPPO_API_KEY in your os.environ')
+            self.fail("Set your SHIPPO_API_KEY in your os.environ")
         except Exception as inst:
             self.fail("Test failed with exception %s" % inst)
-        self.assertTrue('results' in rates)
+        self.assertTrue("results" in rates)
 
     # --- if dynamic object typing is implemented, this will be a useful test
     # def test_missing_id(self):
@@ -87,5 +82,5 @@ class FunctionalTests(ShippoTestCase):
     #     self.assertRaises(shippo.error.APIError, address.refresh)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest2.main()

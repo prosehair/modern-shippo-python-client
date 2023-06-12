@@ -2,8 +2,7 @@ import hashlib
 from shippo.error import APIError
 
 
-BLACKLISTED_DIGESTS = {
-}
+BLACKLISTED_DIGESTS = {}
 
 
 def verify(hostname, certificate):
@@ -21,11 +20,13 @@ def verify(hostname, certificate):
     fingerprint = sha.hexdigest()
 
     if fingerprint in BLACKLISTED_DIGESTS[hostname]:
-        raise APIError("Invalid server certificate. You tried to "
-                       "connect to a server that has a revoked "
-                       "SSL certificate, which means we cannot "
-                       "securely send data to that server. "
-                       "Please email support@goshippo.com if you "
-                       "need help connecting to the correct API "
-                       "server.")
+        raise APIError(
+            "Invalid server certificate. You tried to "
+            "connect to a server that has a revoked "
+            "SSL certificate, which means we cannot "
+            "securely send data to that server. "
+            "Please email support@goshippo.com if you "
+            "need help connecting to the correct API "
+            "server."
+        )
     return True

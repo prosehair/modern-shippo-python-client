@@ -39,14 +39,7 @@ example_batch = {
                     "country": "US",
                     "phone": "4151234567",
                 },
-                "parcels": [{
-                    "length": "5",
-                    "width": "5",
-                    "height": "5",
-                    "distance_unit": "in",
-                    "weight": "2",
-                    "mass_unit": "oz"
-                }]
+                "parcels": [{"length": "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit": "oz"}],
             }
         },
         {
@@ -71,17 +64,10 @@ example_batch = {
                     "country": "US",
                     "phone": "4151234567",
                 },
-                "parcels": [{
-                    "length": "5",
-                    "width": "5",
-                    "height": "5",
-                    "distance_unit": "in",
-                    "weight": "20",
-                    "mass_unit": "lb"
-                }]
+                "parcels": [{"length": "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "20", "mass_unit": "lb"}],
             }
-        }
-    ]
+        },
+    ],
 }
 
 # create batch, passing in each attribute as a parameter
@@ -96,7 +82,7 @@ batch = shippo.Batch.create(**example_batch)
 batch = shippo.Batch.retrieve(batch.object_id)
 tries = 0
 TIMEOUT = 60  # thirty second timeout
-while batch.status == 'VALIDATING' and tries < TIMEOUT:
+while batch.status == "VALIDATING" and tries < TIMEOUT:
     time.sleep(0.5)
     batch = shippo.Batch.retrieve(batch.object_id)
     tries += 1
@@ -134,16 +120,11 @@ parcel = {
     "mass_unit": "lb",
 }
 
-shipment = shippo.Shipment.create(
-    address_from=address_from,
-    address_to=address_to,
-    parcels=[parcel],
-    asynchronous=False
-)
+shipment = shippo.Shipment.create(address_from=address_from, address_to=address_to, parcels=[parcel], asynchronous=False)
 
 # the post data should be in an array even if it's just one shipment
 # each shipment object_id should be in an dictionary as shown below
-added = shippo.Batch.add(batch.object_id, [{'shipment': shipment.object_id}])
+added = shippo.Batch.add(batch.object_id, [{"shipment": shipment.object_id}])
 print(added)
 
 # now let's remove a shipment from our batch

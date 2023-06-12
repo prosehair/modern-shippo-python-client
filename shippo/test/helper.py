@@ -21,7 +21,7 @@ DUMMY_ADDRESS = {
     "zip": "94117",
     "country": "US",
     "phone": "+1 555 341 9393",
-    "metadata": "Customer ID 123456"
+    "metadata": "Customer ID 123456",
 }
 INVALID_ADDRESS = {
     "name": "Laura Behrens Wu",
@@ -31,7 +31,7 @@ INVALID_ADDRESS = {
     "state": "CA",
     "country": "US",
     "phone": "+1 555 341 9393",
-    "metadata": "Customer ID 123456"
+    "metadata": "Customer ID 123456",
 }
 NOT_POSSIBLE_ADDRESS = {
     "name": "Laura Behrens Wu",
@@ -44,7 +44,7 @@ NOT_POSSIBLE_ADDRESS = {
     "zip": "74338",
     "country": "US",
     "phone": "+1 555 341 9393",
-    "metadata": "Customer ID 123456"
+    "metadata": "Customer ID 123456",
 }
 DUMMY_PARCEL = {
     "length": "5",
@@ -54,26 +54,11 @@ DUMMY_PARCEL = {
     "weight": "2",
     "mass_unit": "lb",
     "template": "",
-    "metadata": "Customer ID 123456"
+    "metadata": "Customer ID 123456",
 }
-INVALID_PARCEL = {
-    "length": "5",
-    "width": "5",
-    "distance_unit": "cm",
-    "weight": "2",
-    "template": "",
-    "metadata": "Customer ID 123456"
-}
-DUMMY_MANIFEST = {
-    "provider": "USPS",
-    "shipment_date": "2017-03-31T17:37:59.817Z",
-    "address_from": "28828839a2b04e208ac2aa4945fbca9a"
-}
-INVALID_MANIFEST = {
-    "provider": "RANDOM_INVALID_PROVIDER",
-    "shipment_date": "2014-05-16T23:59:59Z",
-    "address_from": "EXAMPLE_OF_INVALID_ADDRESS"
-}
+INVALID_PARCEL = {"length": "5", "width": "5", "distance_unit": "cm", "weight": "2", "template": "", "metadata": "Customer ID 123456"}
+DUMMY_MANIFEST = {"provider": "USPS", "shipment_date": "2017-03-31T17:37:59.817Z", "address_from": "28828839a2b04e208ac2aa4945fbca9a"}
+INVALID_MANIFEST = {"provider": "RANDOM_INVALID_PROVIDER", "shipment_date": "2014-05-16T23:59:59Z", "address_from": "EXAMPLE_OF_INVALID_ADDRESS"}
 DUMMY_CUSTOMS_ITEM = {
     "description": "T-Shirt",
     "quantity": 2,
@@ -83,14 +68,9 @@ DUMMY_CUSTOMS_ITEM = {
     "value_currency": "USD",
     "tariff_number": "",
     "origin_country": "US",
-    "metadata": "Order ID #123123"
+    "metadata": "Order ID #123123",
 }
-INVALID_CUSTOMS_ITEM = {
-    "value_currency": "USD",
-    "tariff_number": "",
-    "origin_country": "US",
-    "metadata": "Order ID #123123"
-}
+INVALID_CUSTOMS_ITEM = {"value_currency": "USD", "tariff_number": "", "origin_country": "US", "metadata": "Order ID #123123"}
 DUMMY_CUSTOMS_DECLARATION = {
     "exporter_reference": "",
     "importer_reference": "",
@@ -107,10 +87,8 @@ DUMMY_CUSTOMS_DECLARATION = {
     "certify_signer": "Laura Behrens Wu",
     "disclaimer": "",
     "incoterm": "",
-    "items": [
-        "0c1a723687164307bb2175972fbcd9ef"
-    ],
-    "metadata": "Order ID #123123"
+    "items": ["0c1a723687164307bb2175972fbcd9ef"],
+    "metadata": "Order ID #123123",
 }
 INVALID_CUSTOMS_DECLARATION = {
     "exporter_reference": "",
@@ -128,7 +106,7 @@ INVALID_CUSTOMS_DECLARATION = {
     "certify_signer": "Laura Behrens Wu",
     "disclaimer": "",
     "incoterm": "",
-    "metadata": "Order ID #123123"
+    "metadata": "Order ID #123123",
 }
 TO_ADDRESS = {
     "name": "John Smith",
@@ -141,7 +119,7 @@ TO_ADDRESS = {
     "zip": "94103",
     "country": "US",
     "phone": "+1 630 333 7333",
-    "metadata": "Customer ID 123456"
+    "metadata": "Customer ID 123456",
 }
 FROM_ADDRESS = {
     "name": "Laura Behrens Wu",
@@ -154,7 +132,7 @@ FROM_ADDRESS = {
     "zip": "94117",
     "country": "US",
     "phone": "+1 555 341 9393",
-    "metadata": "Customer ID 123456"
+    "metadata": "Customer ID 123456",
 }
 DUMMY_SHIPMENT = {
     "address_from": "4f406a13253945a8bc8deb0f8266b245",
@@ -163,16 +141,8 @@ DUMMY_SHIPMENT = {
     "submission_type": "PICKUP",
     "insurance_amount": "200",
     "insurance_currency": "USD",
-    "extra": {
-        "signature_confirmation": True,
-        "reference_1": "",
-        "reference_2": "",
-        "insurance": {
-            "amount": "200",
-            "currency": "USD"
-        }
-    },
-    "metadata": "Customer ID 123456"
+    "extra": {"signature_confirmation": True, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency": "USD"}},
+    "metadata": "Customer ID 123456",
 }
 DUMMY_INTERNATIONAL_SHIPMENT = {
     "address_from": "4f406a13253945a8bc8deb0f8266b245",
@@ -181,40 +151,19 @@ DUMMY_INTERNATIONAL_SHIPMENT = {
     "submission_type": "PICKUP",
     "insurance_amount": "200",
     "insurance_currency": "USD",
-    "extra": {
-        "signature_confirmation": True,
-        "reference_1": "",
-        "reference_2": "",
-        "insurance": {
-            "amount": "200",
-            "currency": "USD"
-        }
-    },
-    "metadata": "Customer ID 123456"
+    "extra": {"signature_confirmation": True, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency": "USD"}},
+    "metadata": "Customer ID 123456",
 }
 INVALID_SHIPMENT = {
     "address_from": "4f406a13253945a8bc8deb0f8266b245",
     "submission_type": "PICKUP",
     "shipment_date": "2017-03-31T17:37:59.817Z",
-    "extra": {
-        "signature_confirmation": True,
-        "reference_1": "",
-        "reference_2": "",
-        "insurance": {
-            "amount": "200",
-            "currency": "USD"
-        }
-    },
+    "extra": {"signature_confirmation": True, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency": "USD"}},
     "customs_declaration": "b741b99f95e841639b54272834bc478c",
-    "metadata": "Customer ID 123456"
+    "metadata": "Customer ID 123456",
 }
-DUMMY_TRANSACTION = {
-    "rate": "67891d0ebaca4973ae2569d759da6139",
-    "metadata": "Customer ID 123456"
-}
-INVALID_TRANSACTION = {
-    "metadata": "Customer ID 123456"
-}
+DUMMY_TRANSACTION = {"rate": "67891d0ebaca4973ae2569d759da6139", "metadata": "Customer ID 123456"}
+INVALID_TRANSACTION = {"metadata": "Customer ID 123456"}
 DUMMY_BATCH = {
     "default_carrier_account": "e68e95b95e33431a87bdecdd2b891c2b",
     "default_servicelevel_token": "usps_priority",
@@ -244,14 +193,7 @@ DUMMY_BATCH = {
                     "country": "US",
                     "phone": "4151234567",
                 },
-                "parcels": [{
-                    "length": "5",
-                    "width": "5",
-                    "height": "5",
-                    "distance_unit": "in",
-                    "weight": "2",
-                    "mass_unit": "oz"
-                }]
+                "parcels": [{"length": "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit": "oz"}],
             }
         },
         {
@@ -276,83 +218,68 @@ DUMMY_BATCH = {
                     "country": "US",
                     "phone": "4151234567",
                 },
-                "parcels": [{
-                    "length": "5",
-                    "width": "5",
-                    "height": "5",
-                    "distance_unit": "in",
-                    "weight": "2",
-                    "mass_unit": "oz"
-                }]
+                "parcels": [{"length": "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit": "oz"}],
             }
-        }
-    ]
+        },
+    ],
 }
 INVALID_BATCH = {
     "default_carrier_account": "NOT_VALID",
     "default_servicelevel_token": "usps_priority",
     "label_filetype": "PDF_4x6",
     "metadata": "teehee",
-    "batch_shipments": []
+    "batch_shipments": [],
 }
 DUMMY_PICKUP = {
-        "carrier_account": "abcdefghijklmnopqrstuvwxyz0123456789",
-        "location": {
-            "building_location_type" : "Knock on Door",
-            "address" : {
-                "name": "Laura Behrens Wu",
-                "company": "Shippo",
-                "street1": "Clayton St.",
-                "street_no": "215",
-                "street2": "",
-                "city": "San Francisco",
-                "state": "CA",
-                "zip": "94117",
-                "country": "US",
-                "phone": "+1 555 341 9393",
-                "metadata": "Customer ID 123456"
-            },
+    "carrier_account": "abcdefghijklmnopqrstuvwxyz0123456789",
+    "location": {
+        "building_location_type": "Knock on Door",
+        "address": {
+            "name": "Laura Behrens Wu",
+            "company": "Shippo",
+            "street1": "Clayton St.",
+            "street_no": "215",
+            "street2": "",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94117",
+            "country": "US",
+            "phone": "+1 555 341 9393",
+            "metadata": "Customer ID 123456",
         },
-        "transactions": [ "abcdefghijklmnopqrstuvwxyz0123456789" ],
-        "requested_start_time": "2022-01-01T00:00:00.00Z",
-        "requested_end_time": "2022-01-02T00:00:00.000Z",
-        "is_test": False
+    },
+    "transactions": ["abcdefghijklmnopqrstuvwxyz0123456789"],
+    "requested_start_time": "2022-01-01T00:00:00.00Z",
+    "requested_end_time": "2022-01-02T00:00:00.000Z",
+    "is_test": False,
 }
 DUMMY_ORDER = {
-            "to_address": {
-                "city": "San Francisco",
-                "company": "Shippo",
-                "country": "US",
-                "email": "shippotle@goshippo.com",
-                "name": "Mr Hippo",
-                "phone": "15553419393",
-                "state": "CA",
-                "street1": "215 Clayton St.",
-                "zip": "94117"
-            },
-            "line_items": [
-                {
-                    "quantity": 1,
-                    "sku": "HM-123",
-                    "title": "Hippo Magazines",
-                    "total_price": "12.10",
-                    "currency": "USD",
-                    "weight": "0.40",
-                    "weight_unit": "lb"
-                }
-            ],
-            "placed_at": "2022-01-01T00:00:00.000Z",
-            "order_number": "#1068",
-            "order_status": "PAID",
-            "shipping_cost": "12.83",
-            "shipping_cost_currency": "USD",
-            "shipping_method": "USPS First Class Package",
-            "subtotal_price": "12.10",
-            "total_price": "24.93",
-            "total_tax": "0.00",
-            "currency": "USD",
-            "weight": "0.40",
-            "weight_unit": "lb"
+    "to_address": {
+        "city": "San Francisco",
+        "company": "Shippo",
+        "country": "US",
+        "email": "shippotle@goshippo.com",
+        "name": "Mr Hippo",
+        "phone": "15553419393",
+        "state": "CA",
+        "street1": "215 Clayton St.",
+        "zip": "94117",
+    },
+    "line_items": [
+        {"quantity": 1, "sku": "HM-123", "title": "Hippo Magazines", "total_price": "12.10", "currency": "USD", "weight": "0.40", "weight_unit": "lb"}
+    ],
+    "placed_at": "2022-01-01T00:00:00.000Z",
+    "order_number": "#1068",
+    "order_status": "PAID",
+    "shipping_cost": "12.83",
+    "shipping_cost_currency": "USD",
+    "shipping_method": "USPS First Class Package",
+    "subtotal_price": "12.10",
+    "total_price": "24.93",
+    "total_tax": "0.00",
+    "currency": "USD",
+    "weight": "0.40",
+    "weight_unit": "lb",
 }
 
 
@@ -361,10 +288,10 @@ def create_mock_shipment(asynchronous=False, api_key=None):
     from_address = shippo.Address.create(api_key=api_key, **FROM_ADDRESS)
     parcel = shippo.Parcel.create(api_key=api_key, **DUMMY_PARCEL)
     SHIPMENT = DUMMY_SHIPMENT.copy()
-    SHIPMENT['address_from'] = from_address.object_id
-    SHIPMENT['address_to'] = to_address.object_id
-    SHIPMENT['parcels'] = [parcel.object_id]
-    SHIPMENT['asynchronous'] = asynchronous
+    SHIPMENT["address_from"] = from_address.object_id
+    SHIPMENT["address_to"] = to_address.object_id
+    SHIPMENT["parcels"] = [parcel.object_id]
+    SHIPMENT["asynchronous"] = asynchronous
     shipment = shippo.Shipment.create(api_key=api_key, **SHIPMENT)
     return shipment
 
@@ -375,8 +302,8 @@ def create_mock_manifest(transaction=None):
     rate = shippo.Rate.retrieve(transaction.rate)
     shipment = shippo.Shipment.retrieve(rate.shipment)
     MANIFEST = DUMMY_MANIFEST.copy()
-    MANIFEST['address_from'] = shipment.address_from
-    MANIFEST['async'] = False
+    MANIFEST["address_from"] = shipment.address_from
+    MANIFEST["async"] = False
     manifest = shippo.Manifest.create(**MANIFEST)
     return manifest
 
@@ -384,11 +311,10 @@ def create_mock_manifest(transaction=None):
 def create_mock_transaction(asynchronous=False):
     shipment = create_mock_shipment(asynchronous)
     rates = shipment.rates
-    usps_rate = list(
-        [x for x in rates if x.servicelevel.token == 'usps_priority'])[0]
+    usps_rate = list([x for x in rates if x.servicelevel.token == "usps_priority"])[0]
     t = DUMMY_TRANSACTION.copy()
-    t['rate'] = usps_rate.object_id
-    t['asynchronous'] = asynchronous
+    t["rate"] = usps_rate.object_id
+    t["asynchronous"] = asynchronous
     txn = shippo.Transaction.create(**t)
     return txn
 
@@ -398,25 +324,25 @@ def create_mock_international_shipment():
     customs_item = shippo.CustomsItem.create(**DUMMY_CUSTOMS_ITEM)
     customs_declaration_parameters = DUMMY_CUSTOMS_DECLARATION.copy()
     customs_declaration_parameters["items"][0] = customs_item.object_id
-    customs_declaration = shippo.CustomsDeclaration.create(
-        **customs_declaration_parameters)
-    SHIPMENT['customs_declaration'] = customs_declaration.object_id
+    customs_declaration = shippo.CustomsDeclaration.create(**customs_declaration_parameters)
+    SHIPMENT["customs_declaration"] = customs_declaration.object_id
     shipment = shippo.Shipment.create(**SHIPMENT)
     return shipment
+
 
 def create_mock_international_transaction(asynchronous=False):
     shipment = create_mock_shipment(asynchronous)
     rates = shipment.rates
-    usps_rate = list(
-        [x for x in rates if x.servicelevel.token == 'usps_priority'])[0]
+    usps_rate = list([x for x in rates if x.servicelevel.token == "usps_priority"])[0]
     t = DUMMY_TRANSACTION.copy()
-    t['rate'] = usps_rate.object_id
-    t['asynchronous'] = asynchronous
+    t["rate"] = usps_rate.object_id
+    t["asynchronous"] = asynchronous
     txn = shippo.Transaction.create(**t)
     return txn, usps_rate.carrier_account
 
+
 class ShippoTestCase(TestCase):
-    RESTORE_ATTRIBUTES = ('api_version', 'api_key')
+    RESTORE_ATTRIBUTES = ("api_version", "api_key")
 
     def setUp(self):
         super(ShippoTestCase, self).setUp()
@@ -425,14 +351,14 @@ class ShippoTestCase(TestCase):
 
         for attr in self.RESTORE_ATTRIBUTES:
             self._shippo_original_attributes[attr] = getattr(config, attr)
-        api_base = os.environ.get('SHIPPO_API_BASE')
+        api_base = os.environ.get("SHIPPO_API_BASE")
         if api_base:
             config.api_base = api_base
 
-        config.api_key = os.environ.get('SHIPPO_API_KEY', '51895b669caa45038110fd4074e61e0d')
-        config.api_version = os.environ.get('SHIPPO_API_VERSION', '2018-02-08')
-        config.app_name = os.environ.get('APP_NAME', 'MyAwesomeApp')
-        config.app_version = os.environ.get('APP_VERSION', '1.0.0')
+        config.api_key = os.environ.get("SHIPPO_API_KEY", "51895b669caa45038110fd4074e61e0d")
+        config.api_version = os.environ.get("SHIPPO_API_VERSION", "2018-02-08")
+        config.app_name = os.environ.get("APP_NAME", "MyAwesomeApp")
+        config.app_version = os.environ.get("APP_VERSION", "1.0.0")
 
     def tearDown(self):
         super(ShippoTestCase, self).tearDown()
@@ -451,15 +377,13 @@ class ShippoTestCase(TestCase):
             if isinstance(regexp, str):
                 regexp = re.compile(regexp)
             if not regexp.search(str(err)):
-                raise self.failureException('"%s" does not match "%s"' %
-                                            (regexp.pattern, str(err)))
+                raise self.failureException('"%s" does not match "%s"' % (regexp.pattern, str(err)))
         else:
-            raise self.failureException(
-                '%s was not raised' % (exception.__name__,))
+            raise self.failureException("%s was not raised" % (exception.__name__,))
 
 
 class ShippoUnitTestCase(ShippoTestCase):
-    REQUEST_LIBRARIES = ['urlfetch', 'requests']
+    REQUEST_LIBRARIES = ["urlfetch", "requests"]
 
     def setUp(self):
         super(ShippoUnitTestCase, self).setUp()
@@ -480,11 +404,10 @@ class ShippoUnitTestCase(ShippoTestCase):
 
 
 class ShippoApiTestCase(ShippoTestCase):
-
     def setUp(self):
         super(ShippoApiTestCase, self).setUp()
 
-        self.requestor_patcher = patch('shippo.api_requestor.APIRequestor')
+        self.requestor_patcher = patch("shippo.api_requestor.APIRequestor")
         requestor_class_mock = self.requestor_patcher.start()
         self.requestor_mock = requestor_class_mock.return_value
 
@@ -494,10 +417,7 @@ class ShippoApiTestCase(ShippoTestCase):
         self.requestor_patcher.stop()
 
     def mock_response(self, res):
-        self.requestor_mock.request = Mock(return_value=(res, 'reskey'))
+        self.requestor_mock.request = Mock(return_value=(res, "reskey"))
 
 
-shippo_vcr = vcr.VCR(
-    filter_headers=['Authorization'],
-    record_mode=config.vcr_record_mode
-)
+shippo_vcr = vcr.VCR(filter_headers=["Authorization"], record_mode=config.vcr_record_mode)

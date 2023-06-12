@@ -1,3 +1,7 @@
+[tool.black]
+target-version = ["py310"]
+line-length = 150
+
 [tool.ruff]
 line-length = 150
 extend-exclude = [".ipython/"]

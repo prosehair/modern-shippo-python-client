@@ -16,21 +16,22 @@ else:
     try:
         # Require version 0.9.0 which has SSL verification enabled by default
         version = requests.__version__
-        major, minor, patch = [int(i) for i in version.split('.')]
+        major, minor, patch = [int(i) for i in version.split(".")]
     except Exception:
         # Probably some new-fangled version, so it should support verify
         pass
     else:
         if (major, minor, patch) < (0, 9, 0):
             sys.stderr.write(
-                'Warning: the Shippo library requires that your Python '
+                "Warning: the Shippo library requires that your Python "
                 '"requests" library be newer than version 0.9.0, but your '
                 '"requests" library is version %s. Shippo will fall back to '
-                'an alternate HTTP library so everything should work. We '
+                "an alternate HTTP library so everything should work. We "
                 'recommend upgrading your "requests" library. If you have any '
-                'questions, please contact support@goshippo.com. (HINT: running '
+                "questions, please contact support@goshippo.com. (HINT: running "
                 '"pip install -U requests" should upgrade your requests '
-                'library to the latest version.)' % (version,))
+                "library to the latest version.)" % (version,)
+            )
             requests = None
 
 try:
@@ -48,7 +49,6 @@ def new_default_http_client(*args, **kwargs):
 
 
 class HTTPClient(object):
-
     def __init__(self, verify_ssl_certs, timeout_in_seconds):
         if timeout_in_seconds is None:
             raise ValueError("`timeout_in_seconds` cannot be None")
@@ -59,43 +59,36 @@ class HTTPClient(object):
         self._timeout_in_seconds = timeout_in_seconds
 
     def request(self, method, url, headers, post_data=None):
-        raise NotImplementedError(
-            'HTTPClient subclasses must implement `request`')
+        raise NotImplementedError("HTTPClient subclasses must implement `request`")
 
 
 class RequestsClient(HTTPClient):
-    name = 'requests'
+    name = "requests"
 
     DEFAULT_TIMEOUT = 80
 
-    def __init__(self, verify_ssl_certs=True,
-                 timeout_in_seconds=None):
+    def __init__(self, verify_ssl_certs=True, timeout_in_seconds=None):
         timeout = timeout_in_seconds or self.DEFAULT_TIMEOUT
         super().__init__(verify_ssl_certs, timeout)
-
 
     def request(self, method, url, headers, post_data=None):
         kwargs = {}
 
         if not self._verify_ssl_certs:
-            kwargs['verify'] = False
+            kwargs["verify"] = False
 
         try:
             try:
-                result = requests.request(method,
-                                          url,
-                                          headers=headers,
-                                          data=post_data,
-                                          timeout=self._timeout_in_seconds,
-                                          **kwargs)
+                result = requests.request(method, url, headers=headers, data=post_data, timeout=self._timeout_in_seconds, **kwargs)
             except NotImplementedError as e:
                 raise TypeError(
-                    'Warning: It looks like your installed version of the '
+                    "Warning: It looks like your installed version of the "
                     '"requests" library is not compatible with Shippo\'s '
-                    'usage thereof. (HINT: The most likely cause is that '
+                    "usage thereof. (HINT: The most likely cause is that "
                     'your "requests" library is out of date. You can fix '
                     'that by running "pip install -U requests".) The '
-                    'underlying error was: %s' % (e,))
+                    "underlying error was: %s" % (e,)
+                )
 
             # This causes the content to actually be read, which could cause
             # e.g. a socket timeout. TODO: The other fetch methods probably
@@ -111,15 +104,15 @@ class RequestsClient(HTTPClient):
 
     def _handle_request_error(self, e):
         if isinstance(e, requests.exceptions.RequestException):
-            msg = ("Unexpected error communicating with Shippo.  "
-                   "If this problem persists, let us know at "
-                   "support@goshippo.com.")
+            msg = "Unexpected error communicating with Shippo.  " "If this problem persists, let us know at " "support@goshippo.com."
             err = "%s: %s" % (type(e).__name__, str(e))
         else:
-            msg = ("Unexpected error communicating with Shippo. "
-                   "It looks like there's probably a configuration "
-                   "issue locally.  If this problem persists, let us "
-                   "know at support@goshippo.com.")
+            msg = (
+                "Unexpected error communicating with Shippo. "
+                "It looks like there's probably a configuration "
+                "issue locally.  If this problem persists, let us "
+                "know at support@goshippo.com."
+            )
             err = "A %s was raised" % (type(e).__name__,)
             if str(e):
                 err += " with error message %s" % (str(e),)
@@ -130,14 +123,13 @@ class RequestsClient(HTTPClient):
 
 
 class UrlFetchClient(HTTPClient):
-    name = 'urlfetch'
+    name = "urlfetch"
 
     # GAE requests time out after 60 seconds, so make sure we leave
     # some time for the application to handle a slow Shippo
     DEFAULT_TIMEOUT = 55
 
-    def __init__(self, verify_ssl_certs=True,
-                 timeout_in_seconds=None):
+    def __init__(self, verify_ssl_certs=True, timeout_in_seconds=None):
         timeout = timeout_in_seconds or self.DEFAULT_TIMEOUT
         super().__init__(verify_ssl_certs, timeout)
 
@@ -152,7 +144,7 @@ class UrlFetchClient(HTTPClient):
                 # api.goshippo.com.
                 validate_certificate=self._verify_ssl_certs,
                 deadline=self._timeout_in_seconds,
-                payload=post_data
+                payload=post_data,
             )
         except urlfetch.Error as e:
             self._handle_request_error(e, url)
@@ -161,19 +153,22 @@ class UrlFetchClient(HTTPClient):
 
     def _handle_request_error(self, e, url):
         if isinstance(e, urlfetch.InvalidURLError):
-            msg = ("The Shippo library attempted to fetch an "
-                   "invalid URL (%r). This is likely due to a bug "
-                   "in the Shippo Python bindings. Please let us know "
-                   "at support@goshippo.com." % (url,))
+            msg = (
+                "The Shippo library attempted to fetch an "
+                "invalid URL (%r). This is likely due to a bug "
+                "in the Shippo Python bindings. Please let us know "
+                "at support@goshippo.com." % (url,)
+            )
         elif isinstance(e, urlfetch.DownloadError):
             msg = "There was a problem retrieving data from Shippo."
         elif isinstance(e, urlfetch.ResponseTooLargeError):
-            msg = ("There was a problem receiving all of your data from "
-                   "Shippo.  This is likely due to a bug in Shippo. "
-                   "Please let us know at support@goshippo.com.")
+            msg = (
+                "There was a problem receiving all of your data from "
+                "Shippo.  This is likely due to a bug in Shippo. "
+                "Please let us know at support@goshippo.com."
+            )
         else:
-            msg = ("Unexpected error communicating with Shippo. If this "
-                   "problem persists, let us know at support@goshippo.com.")
+            msg = "Unexpected error communicating with Shippo. If this " "problem persists, let us know at support@goshippo.com."
 
         msg = textwrap.fill(msg) + "\n\n(Network error: " + str(e) + ")"
         raise error.APIConnectionError(msg)

@@ -39,19 +39,12 @@ shippo.config.api_key = "<API-KEY>"
 
 # sample address_from
 # The complete refence for the address object is available here: https://goshippo.com/docs/reference#addresses
-address_from = {
-    "city": "San Francisco",
-    "state": "CA",
-    "zip": "94117",
-    "country": "US"
-}
+address_from = {"city": "San Francisco", "state": "CA", "zip": "94117", "country": "US"}
 
 # sample address_to placeholder object
 # The complete refence for the address object is available here: https://goshippo.com/docs/reference#addresses
 
-address_to = {
-    "country": "US"
-}
+address_to = {"country": "US"}
 
 # Sample parcel, make sure to replace placeholders with your average shipment size
 # The complete reference for parcel object is here: https://goshippo.com/docs/reference#parcels
@@ -73,18 +66,13 @@ shipping_costs = {}
 
 for delivery_address_zip_code in DESTINATION_ADDRESSES_ZIP_CODES:
     # Change delivery address to current delivery address
-    address_to['zip'] = delivery_address_zip_code
+    address_to["zip"] = delivery_address_zip_code
     # Creating the shipment object. asynchronous=False indicates that the function will wait until all
     # rates are generated before it returns.
     # The reference for the shipment object is here: https://goshippo.com/docs/reference#shipments
     # By default Shippo API operates on an async basis. You can read about our async flow here: https://goshippo.com/docs/async
 
-    shipment = shippo.Shipment.create(
-        address_from=address_from,
-        address_to=address_to,
-        parcels=[parcel],
-        asynchronous=False
-    )
+    shipment = shippo.Shipment.create(address_from=address_from, address_to=address_to, parcels=[parcel], asynchronous=False)
     # Rates are stored in the `rates` array
     # The details on the returned object are here: https://goshippo.com/docs/reference#rates
 
@@ -94,14 +82,10 @@ for delivery_address_zip_code in DESTINATION_ADDRESSES_ZIP_CODES:
     # `shipping_costs` dictionary to analyse it later.
     for delivery_window in DELIVERY_WINDOWS:
         # Filter rates that are within delivery window
-        eligible_rates = (
-            rate for rate in rates if rate['estimated_days'] <= delivery_window)
-        new_rate_prices = list(float(rate['amount'])
-                               for rate in eligible_rates if rate['amount'])
-        existing_rate_prices = shipping_costs[str(delivery_window)] if str(
-            delivery_window) in shipping_costs else []
-        shipping_costs[str(delivery_window)
-                       ] = existing_rate_prices + new_rate_prices
+        eligible_rates = (rate for rate in rates if rate["estimated_days"] <= delivery_window)
+        new_rate_prices = list(float(rate["amount"]) for rate in eligible_rates if rate["amount"])
+        existing_rate_prices = shipping_costs[str(delivery_window)] if str(delivery_window) in shipping_costs else []
+        shipping_costs[str(delivery_window)] = existing_rate_prices + new_rate_prices
 
 """
 Now that we have the costs per delivery window for all sample destination

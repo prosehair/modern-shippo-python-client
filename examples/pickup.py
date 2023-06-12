@@ -26,7 +26,7 @@ address_from = {
     "zip": "95122",
     "country": "US",
     "phone": "+1 555 341 9393",
-    "email": "support@goshippo.com"
+    "email": "support@goshippo.com",
 }
 
 # Example address_to object dict
@@ -42,19 +42,12 @@ address_to_international = {
     "country": "CA",
     "phone": "+1 555 341 9393",
     "email": "support@goshippo.com",
-    "metadata": "For Order Number 123"
+    "metadata": "For Order Number 123",
 }
 
 # parcel object dict
 # The complete reference for parcel object is here: https://goshippo.com/docs/reference#parcels
-parcel = {
-    "length": "5",
-    "width": "5",
-    "height": "5",
-    "distance_unit": "in",
-    "weight": "2",
-    "mass_unit": "lb"
-}
+parcel = {"length": "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit": "lb"}
 
 # Example CustomsItems object.
 #  The complete reference for customs object is here: https://goshippo.com/docs/reference#customsitems
@@ -66,18 +59,19 @@ customs_item = {
     "value_amount": "20",
     "value_currency": "USD",
     "origin_country": "US",
-    "tariff_number": ""
+    "tariff_number": "",
 }
 
 # Creating the CustomsDeclaration
 # The details on creating the CustomsDeclaration is here: https://goshippo.com/docs/reference#customsdeclarations
 customs_declaration = shippo.CustomsDeclaration.create(
-    contents_type='MERCHANDISE',
-    contents_explanation='T-Shirt purchase',
-    non_delivery_option='RETURN',
+    contents_type="MERCHANDISE",
+    contents_explanation="T-Shirt purchase",
+    non_delivery_option="RETURN",
     certify=True,
-    certify_signer='Mr Hippo',
-    items=[customs_item])
+    certify_signer="Mr Hippo",
+    items=[customs_item],
+)
 
 # Creating the shipment object. asynchronous=False indicates that the function will wait until all
 # rates are generated before it returns.
@@ -89,7 +83,8 @@ shipment_international = shippo.Shipment.create(
     address_to=address_to_international,
     parcels=[parcel],
     customs_declaration=customs_declaration.object_id,
-    asynchronous=False)
+    asynchronous=False,
+)
 
 # Get the first usps or dhl express rate.
 # The details on the returned object are here: https://goshippo.com/docs/reference#rates
@@ -104,13 +99,12 @@ selected_rate_carrier_account = rate_international.carrier_account
 
 # Purchase the desired rate.
 # The complete information about purchasing the label: https://goshippo.com/docs/reference#transaction-create
-transaction_international = shippo.Transaction.create(
-    rate=rate_international.object_id, asynchronous=False)
+transaction_international = shippo.Transaction.create(rate=rate_international.object_id, asynchronous=False)
 
 if transaction_international.status != "SUCCESS":
     print("Failed purchasing the label due to:")
     for message in transaction_international.messages:
-        print("- %s" % message['text'])
+        print("- %s" % message["text"])
 
 # $pickupTimeStart = date('Y-m-d H:i:s', time());
 # $pickupTimeEnd = date('Y-m-d H:i:s', time() + 60*60*24);
@@ -121,15 +115,15 @@ pickupTimeEnd = pickupTimeStart + timedelta(days=1)
 # Only 1 pickup can be scheduled in a day
 try:
     pickup = shippo.Pickup.create(
-        carrier_account= selected_rate_carrier_account,
-        location= {
-            "building_location_type" : "Knock on Door",
-            "address" : address_from,
+        carrier_account=selected_rate_carrier_account,
+        location={
+            "building_location_type": "Knock on Door",
+            "address": address_from,
         },
-        transactions= [transaction_international.object_id],
-        requested_start_time= pickupTimeStart.isoformat() + "Z",
-        requested_end_time= pickupTimeEnd.isoformat() + "Z",
-        is_test= False
+        transactions=[transaction_international.object_id],
+        requested_start_time=pickupTimeStart.isoformat() + "Z",
+        requested_end_time=pickupTimeEnd.isoformat() + "Z",
+        is_test=False,
     )
 except shippo.error.InvalidRequestError:
     print("A pickup has already been scheduled for today.")
@@ -139,7 +133,7 @@ else:
     else:
         print("Failed scheduling a pickup:")
         for message in pickup.messages:
-            print("- %s" % message['text'])
+            print("- %s" % message["text"])
 
 # For more tutorials of address validation, tracking, returns, refunds, and other functionality, check out our
 # complete documentation: https://goshippo.com/docs/

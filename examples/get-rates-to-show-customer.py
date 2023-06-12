@@ -54,12 +54,7 @@ parcel = {
 # For complete reference to the shipment object: https://goshippo.com/docs/reference#shipments
 # This object has asynchronous=False, indicating that the function will wait until all rates are generated before it returns.
 # By default, Shippo handles responses asynchronously. However this will be depreciated soon. Learn more: https://goshippo.com/docs/async
-shipment = shippo.Shipment.create(
-    address_from=address_from,
-    address_to=address_to,
-    parcels=[parcel],
-    asynchronous=False
-)
+shipment = shippo.Shipment.create(address_from=address_from, address_to=address_to, parcels=[parcel], asynchronous=False)
 
 # Rates are stored in the `rates` array
 # The details on the returned object are here: https://goshippo.com/docs/reference#rates
@@ -77,23 +72,21 @@ can use it for the label purchase later.
 """
 
 # After the user has selected a rate, use the corresponding object_id
-selected_rate_object_id = '<SELECTED-RATE-OBJECT-ID>'
+selected_rate_object_id = "<SELECTED-RATE-OBJECT-ID>"
 
 # Purchase the desired rate. asynchronous=False indicates that the function will wait until the
 # carrier returns a shipping label before it returns
-transaction = shippo.Transaction.create(
-    rate=selected_rate_object_id, asynchronous=False)
+transaction = shippo.Transaction.create(rate=selected_rate_object_id, asynchronous=False)
 
 # print the shipping label from label_url
 # Get the tracking number from tracking_number
 if transaction.status == "SUCCESS":
-    print("Purchased label with tracking number %s" %
-          transaction.tracking_number)
+    print("Purchased label with tracking number %s" % transaction.tracking_number)
     print("The label can be downloaded at %s" % transaction.label_url)
 else:
     print("Failed purchasing the label due to:")
     for message in transaction.messages:
-        print("- %s" % message['text'])
+        print("- %s" % message["text"])
 
 # For more tutorals of address validation, tracking, returns, refunds, and other functionality, check out our
 # complete documentation: https://goshippo.com/docs/
