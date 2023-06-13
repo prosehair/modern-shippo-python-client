@@ -13,28 +13,22 @@ interactions:
       Shippo-API-Version:
       - '2018-02-08'
       User-Agent:
-      - Shippo/v1 PythonBindings/2.0.2
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
       X-Shippo-Client-User-Agent:
-      - '{"bindings_version": "2.0.2", "lang": "python", "publisher": "shippo", "httplib":
-        "requests", "lang_version": "3.7.9", "platform": "Darwin-21.2.0-x86_64-i386-64bit",
-        "uname": "Darwin Mac-mini.local 21.2.0 Darwin Kernel Version
-        21.2.0: Sun Nov 28 20:28:54 PST 2021; root:xnu-8019.61.5~1/RELEASE_X86_64
-        x86_64 i386"}'
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: GET
     uri: https://api.goshippo.com/orders/EXAMPLE_OF_INVALID_ID
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA7LJMLTzyy9RcMsvzUux0QfybArsQjJSFYpSC0tTi0tSUxRCg3wU9POLUlKLivVd
-        Ixx9A3xc4/3d4j39whx9PF3iPV0UyhOLFfKAhqSBDFHIz1MoycgsVihOLSpLLdKz0S+wAwAAAP//
-        AwDIFUFIZgAAAA==
+      string: <h1>Not Found</h1><p>The requested URL /orders/EXAMPLE_OF_INVALID_ID
+        was not found on this server.</p>
     headers:
       Connection:
       - keep-alive
       Content-Type:
       - text/html
       Date:
-      - Mon, 10 Jan 2022 17:18:42 GMT
+      - Mon, 12 Jun 2023 17:06:58 GMT
       Transfer-Encoding:
       - chunked
       content-encoding:
@@ -46,12 +40,12 @@ interactions:
       server:
       - istio-envoy
       set-cookie:
-      - tracker_sessionid=dd7c011d9c9d400dabcc3d41d3b6b89a; Domain=.goshippo.com;
+      - tracker_sessionid=7114601bf8f44ab39bafa18df86f6ceb; Domain=.goshippo.com;
         Path=/
       vary:
       - Accept-Language, Host, Cookie, Accept-Encoding
       x-envoy-upstream-service-time:
-      - '8'
+      - '6'
     status:
       code: 404
       message: Not Found

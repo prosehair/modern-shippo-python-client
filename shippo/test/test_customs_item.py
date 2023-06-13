@@ -49,7 +49,7 @@ class CustomsItemTest(ShippoTestCase):
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/customs-item")
     def test_list_all(self):
-        customs_items_list = shippo.CustomsItem.all()
+        customs_items_list = shippo.CustomsItem.all(size=10, page=1)
         self.assertTrue("results" in customs_items_list)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/customs-item")

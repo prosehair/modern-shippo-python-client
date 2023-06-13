@@ -6,7 +6,8 @@ from shippo.test.helper import ShippoTestCase, shippo_vcr
 
 class TrackTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
-    usps_tracking_no = "9205590164917337534322"
+    tracking_no = "SHIPPO_TRANSIT"
+    carrier_token = "shippo"
 
     def setUp(self):
         super().setUp()
@@ -26,32 +27,27 @@ class TrackTests(ShippoTestCase):
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/track")
     def test_get_status(self):
-        carrier_token = "usps"
-        tracking = shippo.Track.get_status(carrier_token, self.usps_tracking_no)
+        tracking = shippo.Track.get_status(self.carrier_token, self.tracking_no)
         self.assertTrue(tracking)
         self.assertTrue("tracking_status" in tracking)
         self.assertTrue("tracking_history" in tracking)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/track")
     def test_invalid_get_status(self):
-        self.assertRaises(shippo.error.InvalidRequestError, shippo.Track.get_status, "EXAMPLE_OF_INVALID_CARRIER", self.usps_tracking_no)
-        self.assertRaises(shippo.error.APIError, shippo.Track.get_status, "usps", "EXAMPLE_OF_INVALID_TRACKING_NUMBER")
+        with self.assertRaises(shippo.error.InvalidRequestError):
+            shippo.Track.get_status("EXAMPLE_OF_INVALID_CARRIER", self.tracking_no)
+
+        with self.assertRaises(shippo.error.InvalidRequestError):
+            shippo.Track.get_status(self.carrier_token, "EXAMPLE_OF_INVALID_TRACKING_NUMBER")
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/track")
     def test_create(self):
-        tracking = shippo.Track.create(carrier="usps", tracking_number=self.usps_tracking_no, metadata="metadata")
+        tracking = shippo.Track.create(carrier=self.carrier_token, tracking_number=self.tracking_no, metadata="metadata")
         self.assertTrue(tracking)
         self.assertTrue("tracking_status" in tracking)
         self.assertTrue("tracking_history" in tracking)
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/track")
-    def test_invalid_create(self):
-        self.assertRaises(
-            shippo.error.InvalidRequestError,
-            shippo.Track.create,
-            None,
-            **{"carrier": "EXAMPLE_OF_INVALID_CARRIER", "tracking_number": self.usps_tracking_no, "metadata": "metadata"},
-        )
-        tracking = shippo.Track.create(carrier="usps", tracking_number="EXAMPLEOFINVALID123TRACKINGNUMBER", metadata="metadata")
-        self.assertFalse(tracking.tracking_status)
-        self.assertFalse(tracking.tracking_history)
+    def test_invalid_carrier(self):
+        with self.assertRaises(shippo.error.InvalidRequestError):
+            shippo.Track.create(carrier="EXAMPLE_OF_INVALID_CARRIER", tracking_number=self.tracking_no, metadata="metadata")

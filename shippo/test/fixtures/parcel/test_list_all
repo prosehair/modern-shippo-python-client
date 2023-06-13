@@ -2,40 +2,196 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin guozhen-shippo-mbp.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: GET
     uri: https://api.goshippo.com/parcels/
   response:
     body:
-      string: !!binary |
-        H4sIAAvz61gC/+2VS4/TMBSF/0qVNZNev+NICBCzGYklYgEaVbZz2wTlpcRpgWr+O3ZalcLMoiOk
-        rppdzj0nzvGnOPvEdVPrk3xBJIg3i6TFH/EuKb3vx3y5NH2VbrqxrPq+S13XLLdk2ZvBYT0u3/Vm
-        g29pEmL9gNuqm8YQbae6DsqA41T7KHzbJ539js6vRm88xqd/+fDp4T7mjgM3YJgUcUSBqDvgdwQ+
-        U5IDy4GnSsivZ+6pL17hrmajsXYtNdFaIHLC0DDHuCHKMaYFSDwLdLsWh5jZTN2vEtv35/2jz2PT
-        14cmx7I1thtfxoxIIVzRtauKf6USq03p/9aKKuxK63A1tdU8cvMau5OVnqyNGceTrbZR2pp6wpVp
-        jhCPr3NQ3TQM2Lqff/QGvQlbZ2L+4zT6rsFh8XC/IJRxIePzAv0hjvdPsVXV4qoKbWeKj3PzMS7j
-        hwmD4X+40lyoFOSFXGe3Yi9wlUZZnnGALHRYAzeaOZRra4FTyFDeuF6bK2cpAX0p1+DOiHjOlUhq
-        jSOFtZxy0KAdMcpZZTgtMgbsxvXaXEGmGuilXEGlQtHnXIvwWSpbCE0I4USsLc0kR4Vrhk46J25c
-        r8gVcqFzFrjS7AKuB3fgql84h8NPlDoGXBpJeZahEcgYLUCFQxgl4Teur+X6+PQbT6jpa50JAAA=
+      string: '{"next": "https://api.goshippo.com/parcels/?page=2", "previous": null,
+        "results": [{"object_state": "VALID", "object_created": "2023-06-12T17:09:43.272Z",
+        "object_updated": "2023-06-12T17:09:43.985Z", "object_id": "87e736d4d1a948b58879bf6a2ac70c52",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "5.0000",
+        "width": "5.0000", "height": "5.0000", "distance_unit": "cm", "weight": "2.0000",
+        "mass_unit": "lb", "value_amount": null, "value_currency": null, "metadata":
+        "Customer ID 123456", "extra": {}, "line_items": [], "test": true}, {"object_state":
+        "VALID", "object_created": "2023-06-12T17:09:32.607Z", "object_updated": "2023-06-12T17:09:33.345Z",
+        "object_id": "89a883a237434257916948bb85392efa", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:09:19.940Z", "object_updated": "2023-06-12T17:09:20.662Z",
+        "object_id": "b468d9a9037d4f7985205d676bff80e6", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:09:11.206Z", "object_updated": "2023-06-12T17:09:11.958Z",
+        "object_id": "81eabe4442104798a5455c74a5be7f72", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:09:01.226Z", "object_updated": "2023-06-12T17:09:01.955Z",
+        "object_id": "9135ef07aea4457e8984c85eb5cd4c01", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:08:51.994Z", "object_updated": "2023-06-12T17:08:52.780Z",
+        "object_id": "a71de93d470d4c1a8409bd50156c2e4a", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:08:44.258Z", "object_updated": "2023-06-12T17:08:45.007Z",
+        "object_id": "03dcc4909b824f9489bce6ac1158ab80", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:08:34.661Z", "object_updated": "2023-06-12T17:08:35.386Z",
+        "object_id": "bc94241b167647408ec1a512e4c28b9f", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:08:26.674Z", "object_updated": "2023-06-12T17:08:27.485Z",
+        "object_id": "50812079ca66470dbafbd764e3a06d87", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:08:23.843Z", "object_updated": "2023-06-12T17:08:23.843Z",
+        "object_id": "c5a590fd50bd4a8ebba08d8cb570fc77", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:07:02.218Z", "object_updated": "2023-06-12T17:07:02.218Z",
+        "object_id": "b62961e80a6c4960b36d16e4d6982814", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:06:46.100Z", "object_updated": "2023-06-12T17:06:46.831Z",
+        "object_id": "edd42abaa1bc40dfa7c1c77ed420bfa8", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T17:06:08.787Z", "object_updated": "2023-06-12T17:06:09.543Z",
+        "object_id": "5ab58a2209854e02a8a507eb329edabb", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}, {"object_state": "VALID", "object_created":
+        "2023-06-12T16:24:08.683Z", "object_updated": "2023-06-12T16:24:08.838Z",
+        "object_id": "af592185851b45f7ab047d9d81ac93c4", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "12.0000", "width": "7.2500", "height": "0.5000",
+        "distance_unit": "in", "weight": "0.2800", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "", "extra": {}, "line_items": [],
+        "test": true}, {"object_state": "VALID", "object_created": "2023-06-12T16:24:05.127Z",
+        "object_updated": "2023-06-12T16:24:05.211Z", "object_id": "c806034ecd384755b1900be65f166f8a",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "6.5000",
+        "width": "4.5000", "height": "3.0000", "distance_unit": "in", "weight": "0.8600",
+        "mass_unit": "lb", "value_amount": null, "value_currency": null, "metadata":
+        "", "extra": {}, "line_items": [], "test": true}, {"object_state": "VALID",
+        "object_created": "2023-06-12T16:24:01.820Z", "object_updated": "2023-06-12T16:24:01.865Z",
+        "object_id": "548fca3ac6f64bc9966f199c4d8f7db5", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "13.0000", "width": "6.5000", "height": "3.0000",
+        "distance_unit": "in", "weight": "2.3900", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "", "extra": {}, "line_items": [],
+        "test": true}, {"object_state": "VALID", "object_created": "2023-06-12T16:23:55.211Z",
+        "object_updated": "2023-06-12T16:23:55.274Z", "object_id": "eb300412e7284c468feb312d0d5059f5",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "6.5000",
+        "width": "4.5000", "height": "3.0000", "distance_unit": "in", "weight": "0.8600",
+        "mass_unit": "lb", "value_amount": null, "value_currency": null, "metadata":
+        "", "extra": {}, "line_items": [], "test": true}, {"object_state": "VALID",
+        "object_created": "2023-06-12T16:23:52.615Z", "object_updated": "2023-06-12T16:23:52.667Z",
+        "object_id": "3bdcd49cd0614669ab78b8b275eda5d2", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "6.5000", "width": "4.5000", "height": "3.0000",
+        "distance_unit": "in", "weight": "1.2000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "", "extra": {}, "line_items": [],
+        "test": true}, {"object_state": "VALID", "object_created": "2023-06-12T16:23:48.944Z",
+        "object_updated": "2023-06-12T16:23:48.994Z", "object_id": "4f3953db8dc94bd6b9f1ba3e782febca",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "13.0000",
+        "width": "6.5000", "height": "3.0000", "distance_unit": "in", "weight": "2.3900",
+        "mass_unit": "lb", "value_amount": null, "value_currency": null, "metadata":
+        "", "extra": {}, "line_items": [], "test": true}, {"object_state": "VALID",
+        "object_created": "2023-06-12T16:23:46.219Z", "object_updated": "2023-06-12T16:23:46.273Z",
+        "object_id": "4143ed32832c4fc5b9e0fa8b3294e667", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "6.5000", "width": "4.5000", "height": "3.0000",
+        "distance_unit": "in", "weight": "1.2000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "", "extra": {}, "line_items": [],
+        "test": true}, {"object_state": "VALID", "object_created": "2023-06-12T16:23:29.628Z",
+        "object_updated": "2023-06-12T16:23:29.689Z", "object_id": "65787d5aa35e44019d37201396520a0c",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "13.0000",
+        "width": "6.5000", "height": "3.0000", "distance_unit": "in", "weight": "2.3900",
+        "mass_unit": "lb", "value_amount": null, "value_currency": null, "metadata":
+        "", "extra": {}, "line_items": [], "test": true}, {"object_state": "VALID",
+        "object_created": "2023-06-12T16:23:25.627Z", "object_updated": "2023-06-12T16:23:25.679Z",
+        "object_id": "499dbcd3b2a24c13ac7a49682e8ccc73", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "6.5000", "width": "4.5000", "height": "3.0000",
+        "distance_unit": "in", "weight": "0.8600", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "", "extra": {}, "line_items": [],
+        "test": true}, {"object_state": "VALID", "object_created": "2023-06-12T16:23:23.729Z",
+        "object_updated": "2023-06-12T16:23:23.813Z", "object_id": "0092d270bcbe4f61ac83f391e7cba39a",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "13.0000",
+        "width": "6.5000", "height": "3.0000", "distance_unit": "in", "weight": "2.3900",
+        "mass_unit": "lb", "value_amount": null, "value_currency": null, "metadata":
+        "", "extra": {}, "line_items": [], "test": true}, {"object_state": "VALID",
+        "object_created": "2023-06-12T16:23:21.738Z", "object_updated": "2023-06-12T16:23:21.810Z",
+        "object_id": "9a2e8763e4e44faba248f5c20642b20b", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "12.0000", "width": "7.2500", "height": "0.5000",
+        "distance_unit": "in", "weight": "0.2800", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "", "extra": {}, "line_items": [],
+        "test": true}, {"object_state": "VALID", "object_created": "2023-06-12T16:23:20.937Z",
+        "object_updated": "2023-06-12T16:23:20.992Z", "object_id": "05342ea51da146f5a398a8a66504a811",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "6.5000",
+        "width": "4.5000", "height": "3.0000", "distance_unit": "in", "weight": "0.8600",
+        "mass_unit": "lb", "value_amount": null, "value_currency": null, "metadata":
+        "", "extra": {}, "line_items": [], "test": true}]}'
     headers:
-      allow: [OPTIONS]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['512']
-      content-type: [application/json]
-      date: ['Mon, 10 Apr 2017 21:03:07 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie, Accept-Encoding']
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:16:30 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=5f9f6a84de8e413880ba04a6d3ff1341; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '5159'
+    status:
+      code: 200
+      message: OK
 version: 1

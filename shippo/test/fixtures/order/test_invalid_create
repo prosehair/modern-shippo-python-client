@@ -15,27 +15,23 @@ interactions:
       Shippo-API-Version:
       - '2018-02-08'
       User-Agent:
-      - Shippo/v1 PythonBindings/2.0.2
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
       X-Shippo-Client-User-Agent:
-      - '{"bindings_version": "2.0.2", "lang": "python", "publisher": "shippo", "httplib":
-        "requests", "lang_version": "3.7.9", "platform": "Darwin-21.2.0-x86_64-i386-64bit",
-        "uname": "Darwin Mac-mini.local 21.2.0 Darwin Kernel Version
-        21.2.0: Sun Nov 28 20:28:54 PST 2021; root:xnu-8019.61.5~1/RELEASE_X86_64
-        x86_64 i386"}'
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: POST
     uri: https://api.goshippo.com/orders/
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA6pWKshJTE5NiU8sUbJSiFYKycgsVkjLTM1JUQAyilILSzOLUlP0lGJ1FJRK8uMT
-        U1KKUouLCSotT81MzyiJL83LJGwsRC1+ZbUAAAAA//8DADERpouoAAAA
+      string: '{"placed_at": ["This field is required."], "to_address": ["This field
+        is required."], "weight_unit": ["This field is required."], "weight": ["This
+        field is required."]}'
     headers:
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Mon, 10 Jan 2022 17:18:42 GMT
+      - Mon, 12 Jun 2023 17:06:57 GMT
       Transfer-Encoding:
       - chunked
       allow:
@@ -49,12 +45,12 @@ interactions:
       server:
       - istio-envoy
       set-cookie:
-      - tracker_sessionid=f7b4524436b842528dcd5b97a348a906; Domain=.goshippo.com;
+      - tracker_sessionid=6f3c2fd1755c49829b1a093e84386730; Domain=.goshippo.com;
         Path=/
       vary:
       - Accept-Language, Host, Cookie, Accept-Encoding
       x-envoy-upstream-service-time:
-      - '19'
+      - '16'
     status:
       code: 400
       message: Bad Request

@@ -1,12 +1,16 @@
 import datetime
+import logging
 import os
 from unittest import TestCase
-from unittest.mock import patch, Mock
 
 import vcr
 
 import shippo
 from shippo.config import config
+
+vcr_log = logging.getLogger("vcr")
+vcr_log.setLevel(config.vcr_logging_level)
+shippo_vcr = vcr.VCR(filter_headers=["Authorization"], record_mode=config.vcr_record_mode)
 
 NOW = datetime.datetime.now()
 
@@ -60,11 +64,26 @@ DUMMY_PARCEL = {
     "metadata": "Customer ID 123456",
 }
 
-INVALID_PARCEL = {"length": "5", "width": "5", "distance_unit": "cm", "weight": "2", "template": "", "metadata": "Customer ID 123456"}
+INVALID_PARCEL = {
+    "length": "5",
+    "width": "5",
+    "distance_unit": "cm",
+    "weight": "2",
+    "template": "",
+    "metadata": "Customer ID 123456",
+}
 
-DUMMY_MANIFEST = {"provider": "USPS", "shipment_date": "2017-03-31T17:37:59.817Z", "address_from": "28828839a2b04e208ac2aa4945fbca9a"}
+DUMMY_MANIFEST = {
+    "provider": "USPS",
+    "shipment_date": "2017-03-31T17:37:59.817Z",
+    "address_from": "28828839a2b04e208ac2aa4945fbca9a",
+}
 
-INVALID_MANIFEST = {"provider": "RANDOM_INVALID_PROVIDER", "shipment_date": "2014-05-16T23:59:59Z", "address_from": "EXAMPLE_OF_INVALID_ADDRESS"}
+INVALID_MANIFEST = {
+    "provider": "RANDOM_INVALID_PROVIDER",
+    "shipment_date": "2014-05-16T23:59:59Z",
+    "address_from": "EXAMPLE_OF_INVALID_ADDRESS",
+}
 
 DUMMY_CUSTOMS_ITEM = {
     "description": "T-Shirt",
@@ -78,7 +97,12 @@ DUMMY_CUSTOMS_ITEM = {
     "metadata": "Order ID #123123",
 }
 
-INVALID_CUSTOMS_ITEM = {"value_currency": "USD", "tariff_number": "", "origin_country": "US", "metadata": "Order ID #123123"}
+INVALID_CUSTOMS_ITEM = {
+    "value_currency": "USD",
+    "tariff_number": "",
+    "origin_country": "US",
+    "metadata": "Order ID #123123",
+}
 
 DUMMY_CUSTOMS_DECLARATION = {
     "exporter_reference": "",
@@ -154,7 +178,15 @@ DUMMY_SHIPMENT = {
     "submission_type": "PICKUP",
     "insurance_amount": "200",
     "insurance_currency": "USD",
-    "extra": {"signature_confirmation": True, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency": "USD"}},
+    "extra": {
+        "signature_confirmation": True,
+        "reference_1": "",
+        "reference_2": "",
+        "insurance": {
+            "amount": "200",
+            "currency": "USD",
+        },
+    },
     "metadata": "Customer ID 123456",
 }
 
@@ -165,7 +197,15 @@ DUMMY_INTERNATIONAL_SHIPMENT = {
     "submission_type": "PICKUP",
     "insurance_amount": "200",
     "insurance_currency": "USD",
-    "extra": {"signature_confirmation": True, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency": "USD"}},
+    "extra": {
+        "signature_confirmation": True,
+        "reference_1": "",
+        "reference_2": "",
+        "insurance": {
+            "amount": "200",
+            "currency": "USD",
+        },
+    },
     "metadata": "Customer ID 123456",
 }
 
@@ -173,17 +213,30 @@ INVALID_SHIPMENT = {
     "address_from": "4f406a13253945a8bc8deb0f8266b245",
     "submission_type": "PICKUP",
     "shipment_date": "2017-03-31T17:37:59.817Z",
-    "extra": {"signature_confirmation": True, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency": "USD"}},
+    "extra": {
+        "signature_confirmation": True,
+        "reference_1": "",
+        "reference_2": "",
+        "insurance": {
+            "amount": "200",
+            "currency": "USD",
+        },
+    },
     "customs_declaration": "b741b99f95e841639b54272834bc478c",
     "metadata": "Customer ID 123456",
 }
 
-DUMMY_TRANSACTION = {"rate": "67891d0ebaca4973ae2569d759da6139", "metadata": "Customer ID 123456"}
+DUMMY_TRANSACTION = {
+    "rate": "67891d0ebaca4973ae2569d759da6139",
+    "metadata": "Customer ID 123456",
+}
 
-INVALID_TRANSACTION = {"metadata": "Customer ID 123456"}
+INVALID_TRANSACTION = {
+    "metadata": "Customer ID 123456",
+}
 
 DUMMY_BATCH = {
-    "default_carrier_account": "e68e95b95e33431a87bdecdd2b891c2b",
+    "default_carrier_account": "572b28b2973f469b8cdaf1f5c992fc43",
     "default_servicelevel_token": "usps_priority",
     "label_filetype": "PDF_4x6",
     "metadata": "BATCH #170",
@@ -211,7 +264,16 @@ DUMMY_BATCH = {
                     "country": "US",
                     "phone": "4151234567",
                 },
-                "parcels": [{"length": "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit": "oz"}],
+                "parcels": [
+                    {
+                        "length": "5",
+                        "width": "5",
+                        "height": "5",
+                        "distance_unit": "in",
+                        "weight": "2",
+                        "mass_unit": "oz",
+                    }
+                ],
             }
         },
         {
@@ -236,7 +298,16 @@ DUMMY_BATCH = {
                     "country": "US",
                     "phone": "4151234567",
                 },
-                "parcels": [{"length": "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit": "oz"}],
+                "parcels": [
+                    {
+                        "length": "5",
+                        "width": "5",
+                        "height": "5",
+                        "distance_unit": "in",
+                        "weight": "2",
+                        "mass_unit": "oz",
+                    }
+                ],
             }
         },
     ],
@@ -287,7 +358,15 @@ DUMMY_ORDER = {
         "zip": "94117",
     },
     "line_items": [
-        {"quantity": 1, "sku": "HM-123", "title": "Hippo Magazines", "total_price": "12.10", "currency": "USD", "weight": "0.40", "weight_unit": "lb"}
+        {
+            "quantity": 1,
+            "sku": "HM-123",
+            "title": "Hippo Magazines",
+            "total_price": "12.10",
+            "currency": "USD",
+            "weight": "0.40",
+            "weight_unit": "lb",
+        }
     ],
     "placed_at": "2022-01-01T00:00:00.000Z",
     "order_number": "#1068",
@@ -304,16 +383,16 @@ DUMMY_ORDER = {
 }
 
 
-def create_mock_shipment(asynchronous=False, api_key=None):
-    to_address = shippo.Address.create(api_key=api_key, **TO_ADDRESS)
-    from_address = shippo.Address.create(api_key=api_key, **FROM_ADDRESS)
-    parcel = shippo.Parcel.create(api_key=api_key, **DUMMY_PARCEL)
+def create_mock_shipment():
+    to_address = shippo.Address.create(**TO_ADDRESS)
+    from_address = shippo.Address.create(**FROM_ADDRESS)
+    parcel = shippo.Parcel.create(**DUMMY_PARCEL)
     SHIPMENT = DUMMY_SHIPMENT.copy()
     SHIPMENT["address_from"] = from_address.object_id
     SHIPMENT["address_to"] = to_address.object_id
     SHIPMENT["parcels"] = [parcel.object_id]
-    SHIPMENT["asynchronous"] = asynchronous
-    shipment = shippo.Shipment.create(api_key=api_key, **SHIPMENT)
+    SHIPMENT["asynchronous"] = False
+    shipment = shippo.Shipment.create(**SHIPMENT)
     return shipment
 
 
@@ -324,18 +403,18 @@ def create_mock_manifest(transaction=None):
     shipment = shippo.Shipment.retrieve(rate.shipment)
     MANIFEST = DUMMY_MANIFEST.copy()
     MANIFEST["address_from"] = shipment.address_from
-    MANIFEST["async"] = False
+    MANIFEST["asynchronous"] = False
     manifest = shippo.Manifest.create(**MANIFEST)
     return manifest
 
 
-def create_mock_transaction(asynchronous=False):
-    shipment = create_mock_shipment(asynchronous)
+def create_mock_transaction():
+    shipment = create_mock_shipment()
     rates = shipment.rates
     usps_rate = list(x for x in rates if x.servicelevel.token == "usps_priority")[0]
     t = DUMMY_TRANSACTION.copy()
     t["rate"] = usps_rate.object_id
-    t["asynchronous"] = asynchronous
+    t["asynchronous"] = False
     txn = shippo.Transaction.create(**t)
     return txn
 
@@ -351,27 +430,21 @@ def create_mock_international_shipment():
     return shipment
 
 
-def create_mock_international_transaction(asynchronous=False):
-    shipment = create_mock_shipment(asynchronous)
+def create_mock_international_transaction():
+    shipment = create_mock_shipment()
     rates = shipment.rates
     usps_rate = list(x for x in rates if x.servicelevel.token == "usps_priority")[0]
     t = DUMMY_TRANSACTION.copy()
     t["rate"] = usps_rate.object_id
-    t["asynchronous"] = asynchronous
+    t["asynchronous"] = False
     txn = shippo.Transaction.create(**t)
     return txn, usps_rate.carrier_account
 
 
 class ShippoTestCase(TestCase):
-    RESTORE_ATTRIBUTES = ("api_version", "api_key")
-
     def setUp(self):
         super().setUp()
 
-        self._shippo_original_attributes = {}
-
-        for attr in self.RESTORE_ATTRIBUTES:
-            self._shippo_original_attributes[attr] = getattr(config, attr)
         api_base = os.environ.get("SHIPPO_API_BASE")
         if api_base:
             config.api_base = api_base
@@ -380,50 +453,3 @@ class ShippoTestCase(TestCase):
         config.api_version = os.environ.get("SHIPPO_API_VERSION", "2018-02-08")
         config.app_name = os.environ.get("APP_NAME", "MyAwesomeApp")
         config.app_version = os.environ.get("APP_VERSION", "1.0.0")
-
-    def tearDown(self):
-        super().tearDown()
-
-        for attr in self.RESTORE_ATTRIBUTES:
-            setattr(config, attr, self._shippo_original_attributes[attr])
-
-
-class ShippoUnitTestCase(ShippoTestCase):
-    REQUEST_LIBRARIES = ["urlfetch", "requests"]
-
-    def setUp(self):
-        super().setUp()
-
-        self.request_patchers = {}
-        self.request_mocks = {}
-        for lib in self.REQUEST_LIBRARIES:
-            patcher = patch("shippo.http_client.%s" % (lib,))
-
-            self.request_mocks[lib] = patcher.start()
-            self.request_patchers[lib] = patcher
-
-    def tearDown(self):
-        super().tearDown()
-
-        for patcher in list(self.request_patchers.values()):
-            patcher.stop()
-
-
-class ShippoApiTestCase(ShippoTestCase):
-    def setUp(self):
-        super().setUp()
-
-        self.requestor_patcher = patch("shippo.api_requestor.APIRequestor")
-        requestor_class_mock = self.requestor_patcher.start()
-        self.requestor_mock = requestor_class_mock.return_value
-
-    def tearDown(self):
-        super().tearDown()
-
-        self.requestor_patcher.stop()
-
-    def mock_response(self, res):
-        self.requestor_mock.request = Mock(return_value=(res, "reskey"))
-
-
-shippo_vcr = vcr.VCR(filter_headers=["Authorization"], record_mode=config.vcr_record_mode)

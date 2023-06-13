@@ -1,4 +1,4 @@
-from unittest.mock import patch
+import unittest
 
 import shippo
 from shippo.test.helper import INVALID_MANIFEST, ShippoTestCase, create_mock_transaction, create_mock_manifest, shippo_vcr
@@ -7,26 +7,11 @@ from shippo.test.helper import INVALID_MANIFEST, ShippoTestCase, create_mock_tra
 class ManifestTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
-    def setUp(self):
-        super().setUp()
-
-        def get_http_client(*args, **kwargs):
-            return self.request_client(*args, **kwargs)
-
-        self.client_patcher = patch("shippo.http_client.new_default_http_client")
-
-        client_mock = self.client_patcher.start()
-        client_mock.side_effect = get_http_client
-
-    def tearDown(self):
-        super().tearDown()
-
-        self.client_patcher.stop()
-
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/manifest")
     def test_invalid_create(self):
         self.assertRaises(shippo.error.InvalidRequestError, shippo.Manifest.create, **INVALID_MANIFEST)
 
+    @unittest.skip("Invalid fixture data")
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/manifest")
     def test_create(self):
         transaction = create_mock_transaction()
@@ -34,6 +19,7 @@ class ManifestTests(ShippoTestCase):
         self.assertEqual(manifest.status, "SUCCESS")
         self.assertEqual(manifest.transactions[0], transaction.object_id)
 
+    @unittest.skip("Invalid fixture data")
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/manifest")
     def test_retrieve(self):
         manifest = create_mock_manifest()

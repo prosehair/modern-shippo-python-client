@@ -2,39 +2,62 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin guozhen-shippo-mbp.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: GET
     uri: https://api.goshippo.com/transactions/?results=1
   response:
     body:
-      string: !!binary |
-        H4sIAEzz61gC/31SyW7bMBD9FUOHnhqLpChKMhC0RZJDgF4KND20CAxyNLbZyKTAxV2C/HtJRXGU
-        S49823Ae+ViAjSYUmxWtxPtVYfB3PhSHEEa/KUs56vXe+oMeR7sGeyxPtAxOGi8haGt8+cGhj0Pw
-        l/TdKPd4yYqUMjo8aRt9SjJxGBIyqxLw47Gw6idC2PogA+Zh3z59vr3OvoxMruLL3c3dzYTNYnCY
-        1H3mGKHNBeEXlHxldEP4hpI1qdrvC3Uc+/+qRbdU60lIAGUlRNs2WHPoKikV1k1fN6TlPfZ0YbC/
-        DLrs2Uf794Dm47KirAvoc43BRczLz3vWDKHqQHW0o1zUtSQ7Khl0RDAFSnST00l40Ga/NfGonoe8
-        gc8VzcWeiYP2wbo/ueH7JR7dsB2dPen+NW1Iqw2ZeQHStY/oQMthq83JasCZnacc0fv0uv4l3brn
-        tDMdZCpc5rirmO6Rwla31yvKKl6L6UdIBziN23GoeYuK807wiinVyKqVrKctZbDjffF0//QP6YVT
-        u5YCAAA=
+      string: '{"next": "https://api.goshippo.com/transactions/?results=1&page=2",
+        "previous": null, "results": [{"object_state": "VALID", "status": "SUCCESS",
+        "object_created": "2023-06-12T17:09:27.660Z", "object_updated": "2023-06-12T17:09:28.689Z",
+        "object_id": "25ab3d4508084bf0a2aeaf1167b6c46e", "object_owner": "shipping@prosehair.com",
+        "test": true, "rate": "eb9ab472b4024f95bbf6b3dd10ad2d46", "tracking_number":
+        "92615901755477000000000011", "tracking_status": "UNKNOWN", "eta": null, "tracking_url_provider":
+        "https://tools.usps.com/go/TrackConfirmAction_input?origTrackNum=92615901755477000000000011",
+        "label_url": "https://deliver.goshippo.com/25ab3d4508084bf0a2aeaf1167b6c46e.pdf?Expires=1718125768&Signature=PQgCX5BYAtmjbdRTzFp57sV2dXI1Es2TIVmdp4p2tVKNmnSDn8jW2o~PzzEDtDCeNrL3E4uZOmuuDXGLLMJMTnHFyPi~c5NH-WJ33z5hkTK5J-RiSkh~-rnb44dJY8a6bUi-fKiiL~0PW5-F6YrviE0cYQWDPaqeU5tOIHwB1Gtq~WoBIP2W~7gvW4H5urPwbN1J8x-4AMpGXv~hP8VOPKiNtQcpXyVIBp6IboUuVbXrCCTygGExm2m11ZjCbYTgNSMd5PpEhqUovUZtvBJyD9ml9TSYDpeMR49KWsx2M6ynvw~lmaREUEL5bgiKJeXHqpXwD8fSSPafuD02ILA2JQ__&Key-Pair-Id=APKAJRICFXQ2S4YUQRSQ",
+        "commercial_invoice_url": null, "messages": [], "order": null, "metadata":
+        "Customer ID 123456", "parcel": "b468d9a9037d4f7985205d676bff80e6", "billing":
+        {"payments": []}, "qr_code_url": null}]}'
     headers:
-      allow: [OPTIONS]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['404']
-      content-type: [application/json]
-      date: ['Mon, 10 Apr 2017 21:04:12 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie, Accept-Encoding']
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:09:30 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=d6489871ea584526b7b27e196e60d778; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '54'
+    status:
+      code: 200
+      message: OK
 version: 1

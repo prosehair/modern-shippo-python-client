@@ -1,71 +1,112 @@
 interactions:
 - request:
-    body: !!python/unicode '{}'
+    body: '{}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['2']
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin Thiagos-MacBook-Pro.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: POST
     uri: https://api.goshippo.com/batches/
   response:
     body:
-      string: !!binary |
-        H4sIAPxQ3VgC/1WPwU7EMAxEf8UKF1ZaWi3HnhHS3rhxiYTc1N0EpXaJXWCF+HeaLiA4+82b8Ycb
-        yDBl14E78ivmNEAohEZQ6GUhtcbzQyZUAmJdCoFFglHKhAYywlmW8oNCL8MZkkKQUijU6P0GWuIT
-        yGxJWDvPhwYek0VInBMTaEzzXInLFIXraDZr17Yn2W7SBJnaQYK2hUYqxIHaHjVe9Wghkt5cJu88
-        336r6T3p1vorl/55nQTHO92D4kSAa9Fht4d+sfWBOWMg8G4zPtXURGzqHbxVH0JehfXhf+bK/DF7
-        dp9fgu4EXVIBAAA=
+      string: '{"batch_shipments": ["This field is required."]}'
     headers:
-      allow: [OPTIONS]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['239']
-      content-type: [application/json]
-      date: ['Thu, 30 Mar 2017 18:39:56 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie, Accept-Encoding']
-    status: {code: 400, message: BAD REQUEST}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:29:37 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=dca45a15fd13498ab30aa601352f3e47; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '22'
+    status:
+      code: 400
+      message: Bad Request
 - request:
-    body: !!python/unicode '{"label_filetype": "PDF_4x6", "metadata": "teehee", "default_servicelevel_token":
-      "usps_priority", "default_carrier_account": "NOT_VALID", "batch_shipments":
+    body: '{"default_carrier_account": "NOT_VALID", "default_servicelevel_token":
+      "usps_priority", "label_filetype": "PDF_4x6", "metadata": "teehee", "batch_shipments":
       []}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['161']
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin Thiagos-MacBook-Pro.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '161'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: POST
     uri: https://api.goshippo.com/batches/
   response:
-    body: {string: !!python/unicode '{"default_carrier_account": ["Invalid account
-        object_id provided ''NOT_VALID''. Please list the available CarrierAccount
-        objects (/v1/carrier_accounts) to get your valid object_ids."]}'}
+    body:
+      string: '{"default_carrier_account": ["Invalid account object_id provided ''NOT_VALID''.
+        Please list the available CarrierAccount objects (/v1/carrier_accounts) to
+        get your valid object_ids."]}'
     headers:
-      allow: [OPTIONS]
-      connection: [keep-alive]
-      content-length: ['182']
-      content-type: [application/json]
-      date: ['Thu, 30 Mar 2017 18:39:56 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie']
-    status: {code: 400, message: BAD REQUEST}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:29:37 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=f473943dfaf74606b78b5ac0ccda75d5; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '22'
+    status:
+      code: 400
+      message: Bad Request
 version: 1

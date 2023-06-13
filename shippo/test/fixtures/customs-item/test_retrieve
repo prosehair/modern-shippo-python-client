@@ -1,77 +1,118 @@
 interactions:
 - request:
-    body: !!python/unicode '{"origin_country": "US", "description": "T-Shirt", "quantity":
-      2, "mass_unit": "g", "value_currency": "USD", "net_weight": "400", "tariff_number":
-      "", "value_amount": "20", "metadata": "Order ID #123123"}'
+    body: '{"description": "T-Shirt", "quantity": 2, "net_weight": "400", "mass_unit":
+      "g", "value_amount": "20", "value_currency": "USD", "tariff_number": "", "origin_country":
+      "US", "metadata": "Order ID #123123"}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['204']
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin guozhen-shippo-mbp.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '204'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: POST
     uri: https://api.goshippo.com/customs/items/
   response:
     body:
-      string: !!binary |
-        H4sIAPDy61gC/5WQPU/DMBCG/0oUVlrZJi1NJ5C6VEJiaGFgifxxTQyNHewzFSD+O74U1IoNyYuf
-        e+78nj9Lr55BY6MDSARTLotSMH49YdWEs63gSyaWFZvOZ7On8rL4tdNg/mHbUZS14IYtpK44rxRj
-        qpqb2oh5rbTiQi3OGvzBQaCeNvmPDtxN62Nnh8FPte/PvIg5BXmPt3frFRUMRB3sgNY74tvJprMB
-        qfKapEOL7xmLfHWAzQFs2yF5FWPk9DLGJjk7spbIm9wnaGTvk8PjtieqUwjgNE0sHzbj8z7Y1rpG
-        kx5+CsRRBrvbNS716rgYwS5m0VB+l/b7DOJL+kN6QJl/WlLLfTAQivWquODiKp9xLkSKhSHB1zds
-        r5DHywEAAA==
+      string: '{"object_created": "2023-06-12T17:06:06.084Z", "object_updated": "2023-06-12T17:06:06.084Z",
+        "object_id": "0360c99b36db4cb8bfd8f7192395f2a2", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400", "mass_unit": "g", "value_amount": "20", "value_currency": "USD", "origin_country":
+        "US", "tariff_number": "", "hs_code": "", "sku_code": null, "eccn_ear99":
+        "", "metadata": "Order ID #123123", "test": true}'
     headers:
-      allow: [OPTIONS]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['292']
-      content-type: [application/json]
-      date: ['Mon, 10 Apr 2017 21:02:40 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie, Accept-Encoding']
-    status: {code: 201, message: CREATED}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:06:06 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=fefe065c43bd4c74b4f0f018cbac75f0; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '40'
+    status:
+      code: 201
+      message: Created
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin guozhen-shippo-mbp.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: GET
-    uri: https://api.goshippo.com/customs/items/a921d08ac4114b00b46d9d269bcb12b8
+    uri: https://api.goshippo.com/customs/items/0360c99b36db4cb8bfd8f7192395f2a2
   response:
     body:
-      string: !!binary |
-        H4sIAPHy61gC/5WQzU7DMBCEXyUKVxrZJi1tTyD1UgmJQwsHLpF/tomhsYO9pgLEu+NNQKq4Yfni
-        mW9WO/4svXoGjY0OIBFMuS5Kwfj1jNUzzvaCr5lY16xazOdP5WXxS6fB/IO2IyhXghu2lLrmvFaM
-        qXphVkYsVkorLtTyLOBPDgJl2uQ/OnA3rY+dHQZfad+fcRHzFsQ93t5tN2QYiDrYAa13pO9nu84G
-        JOc1SYcW37Ms8tMBNiewbYfE1YxVLB8Cexljk5wdjZaUN3lM0MjeJ4dT5WpCJ0OnEMBpmlw+7MY1
-        fLCtdY2mRPgxSEcZ7OHQuNSrqSCJXcygoR4uHY9ZiC/pj9IDyvzjkiL3wUAotpvigourfMe5EGkz
-        DAm+vgHVIZ5N0wEAAA==
+      string: '{"object_created": "2023-06-12T17:06:06.084Z", "object_updated": "2023-06-12T17:06:06.084Z",
+        "object_id": "0360c99b36db4cb8bfd8f7192395f2a2", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}'
     headers:
-      allow: [OPTIONS]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['298']
-      content-type: [application/json]
-      date: ['Mon, 10 Apr 2017 21:02:41 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie, Accept-Encoding']
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:06:06 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=0ee365921605497e9a82de123c4d8599; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '17'
+    status:
+      code: 200
+      message: OK
 version: 1

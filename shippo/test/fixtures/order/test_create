@@ -5,7 +5,7 @@ interactions:
       "state": "CA", "street1": "215 Clayton St.", "zip": "94117"}, "line_items":
       [{"quantity": 1, "sku": "HM-123", "title": "Hippo Magazines", "total_price":
       "12.10", "currency": "USD", "weight": "0.40", "weight_unit": "lb"}], "placed_at":
-      "2022-01-10T09:12:10.727100Z", "order_number": "#1068", "order_status": "PAID",
+      "2023-06-12T19:06:56.266404Z", "order_number": "#1068", "order_status": "PAID",
       "shipping_cost": "12.83", "shipping_cost_currency": "USD", "shipping_method":
       "USPS First Class Package", "subtotal_price": "12.10", "total_price": "24.93",
       "total_tax": "0.00", "currency": "USD", "weight": "0.40", "weight_unit": "lb"}'
@@ -23,37 +23,38 @@ interactions:
       Shippo-API-Version:
       - '2018-02-08'
       User-Agent:
-      - Shippo/v1 PythonBindings/2.0.2
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
       X-Shippo-Client-User-Agent:
-      - '{"bindings_version": "2.0.2", "lang": "python", "publisher": "shippo", "httplib":
-        "requests", "lang_version": "3.7.9", "platform": "Darwin-21.2.0-x86_64-i386-64bit",
-        "uname": "Darwin Mac-mini.local 21.2.0 Darwin Kernel Version
-        21.2.0: Sun Nov 28 20:28:54 PST 2021; root:xnu-8019.61.5~1/RELEASE_X86_64
-        x86_64 i386"}'
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: POST
     uri: https://api.goshippo.com/orders/
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA5RTy24bIRT9ldF02caCeZNVo1RRu4gUye2mVYXuALZJGJgCk6fy7wXGru2kjdQl
-        595zH+cennLTXwvmqeT5aZZ3uG3asu+7BpqKtDWpUblqa1x20LBVXeUfstxYLizV09ALGznvMGq6
-        fcB58JOLgauzL58iPipgglPwESxQUZwgfILRV0ROcXGK0aIt2u+pwDyKudNzZTUxcO+v4RY+ro3b
-        yHE0C2aGmOoNBc6tcLHT047JrAAv+Is+uE198KKqm8M+08jfzG66w+xZIESg4qTibduTiuBVxzBB
-        /Yo0zYp0Td9EgnQ0TDkq4UWgeDuJAN6CkqGdNJqGqSfl0+DP/7e1hiGWzC9t9jniEYutQD9EeLnZ
-        gc5bITzVJsJ7AKddcZ2dK3jwRmdLv9hHi+Pkcvdk0s/lQWcXFjSTjm27QFoxPz+Lz0c5xgepMG7n
-        ySbtbaJ+W0ZAGb2WfuKRoyelIhQkOUbGjdGpKK7ruqwwKUkZyWIAqSI+S+KVeCVPED5oK7nQXoLa
-        lxyEh6A97BbywvntZeIBVtYMB27aktzGjBTG8VjYOyHXm2RktKjQHqGTlglWfeoQZHLA4rljyR8/
-        k2U9KOrhfmYjlP8BRytZ2rmoFvO2bupfhHCxwInCJmuFZltd0w9LMki9pmHTjeFz5GqZXUjrfDy2
-        c9kVsBtYi6N0ZpIQsXZXvorQv3RSUgsqvRjSWk/Hn0M0VVGVpGoJqirU465suwIXLS857ruSpIVl
-        uFxMTgbOLmENj6Gmy9MfsRK0p7uc3SVupkS4PMFFmvLXFLJmU+LXGr4l1PH50L8POICeVuGAkxV0
-        7+Odn+CeRqXCoIM4hrlQ8lbYhxchLhyzcox+2ILP0RLaBCvusw59+RsAAP//AwD2JrK0mQUAAA==
+      string: '{"object_id": "f8b0111af15c44cebab910e88be1593f", "order_number": "#1068",
+        "order_status": "PAID", "placed_at": "2023-06-12T19:06:56.266Z", "object_owner":
+        "shipping@prosehair.com", "to_address": {"object_created": "2023-06-12T17:06:56.905Z",
+        "object_updated": "2023-06-12T17:06:56.916Z", "object_id": "af083e32c5e848b8a92e261935436639",
+        "is_complete": true, "validation_results": {}, "object_owner": "shipping@prosehair.com",
+        "name": "Mr Hippo", "company": "Shippo", "street_no": "", "street1": "215
+        Clayton St.", "street2": "", "street3": "", "city": "San Francisco", "state":
+        "CA", "zip": "94117", "country": "US", "longitude": null, "latitude": null,
+        "phone": "15553419393", "email": "shippotle@goshippo.com", "is_residential":
+        null, "metadata": "", "test": true}, "from_address": null, "shop_app": "Shippo",
+        "weight": "0.40", "weight_unit": "lb", "transactions": [], "total_tax": "0.00",
+        "total_price": "24.93", "subtotal_price": "12.10", "currency": "USD", "shipping_method":
+        "USPS First Class Package", "shipping_cost": "12.83", "shipping_cost_currency":
+        "USD", "line_items": [{"object_id": "83d357d28406465fbf4d7c7ee6c2f2ed", "title":
+        "Hippo Magazines", "variant_title": null, "sku": "HM-123", "quantity": 1,
+        "total_price": "12.10", "currency": "USD", "weight": "0.4000", "weight_unit":
+        "lb", "manufacture_country": null, "max_ship_time": null, "max_delivery_time":
+        null, "description": null}], "notes": null, "test": true}'
     headers:
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Mon, 10 Jan 2022 17:12:11 GMT
+      - Mon, 12 Jun 2023 17:06:56 GMT
       Transfer-Encoding:
       - chunked
       allow:
@@ -67,12 +68,12 @@ interactions:
       server:
       - istio-envoy
       set-cookie:
-      - tracker_sessionid=c9e0a1f10d4f4ec295a13062f98d453d; Domain=.goshippo.com;
+      - tracker_sessionid=97b42bde06664c19b109f9a8fc97793f; Domain=.goshippo.com;
         Path=/
       vary:
       - Accept-Language, Host, Cookie, Accept-Encoding
       x-envoy-upstream-service-time:
-      - '120'
+      - '88'
     status:
       code: 201
       message: Created

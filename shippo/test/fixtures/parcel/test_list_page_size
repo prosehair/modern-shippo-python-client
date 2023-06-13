@@ -2,38 +2,64 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin guozhen-shippo-mbp.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: GET
     uri: https://api.goshippo.com/parcels/?results=2
   response:
     body:
-      string: !!binary |
-        H4sIAAvz61gC/+2SP2/bMBDFv4qhoVMjkSJFWQKCtmiWAB2DDikCg6LPEguJJPjHbmrku4dUBMcN
-        MtToWm1697s7vXs6ZkIH5bN2hRmqPq4yBb/SWzZ4b1xbFNzIvNdukMboXOip2OPCcCtgdMUnCy6M
-        3l2XHwzv4brM4gBjYS91cHGICuMYlYWKwo9jprufIPzGee4h7fn+5dvtTepbCsJCrGxTqUS4vkL0
-        CqO7EreItIjmdcXuz+hgthfQcgZ51+1Yg5umAqCYACeCUI5rQUhTIQZnDfqgwKaePujfA6jP55dI
-        nIfJjC9OFrMjqN4PqafKUXwSdZDbt9IAsh/8n9pWxqsoAZug5FwS847DCS1P6MSdO2Fjl6Q9HwNs
-        +LTEuXzOiyqCtaDE46s+gefxdDz1fw3O6wns6vZmhUtCK5bmxf/ApvLxKbmSCjYyup1TfJidu7TG
-        2wAR+Jdcy7aqc8T+MteZrsk7uTJed3RNEVpHDztEeUMEsF3XIVqiNbD/uV6a68PTMzX6GQ4fBAAA
+      string: '{"next": "https://api.goshippo.com/parcels/?results=2&page=2", "previous":
+        null, "results": [{"object_state": "VALID", "object_created": "2023-06-12T17:07:02.218Z",
+        "object_updated": "2023-06-12T17:07:02.218Z", "object_id": "b62961e80a6c4960b36d16e4d6982814",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "5.0000",
+        "width": "5.0000", "height": "5.0000", "distance_unit": "cm", "weight": "2.0000",
+        "mass_unit": "lb", "value_amount": null, "value_currency": null, "metadata":
+        "Customer ID 123456", "extra": {}, "line_items": [], "test": true}, {"object_state":
+        "VALID", "object_created": "2023-06-12T17:06:46.100Z", "object_updated": "2023-06-12T17:06:46.831Z",
+        "object_id": "edd42abaa1bc40dfa7c1c77ed420bfa8", "object_owner": "shipping@prosehair.com",
+        "template": null, "length": "5.0000", "width": "5.0000", "height": "5.0000",
+        "distance_unit": "cm", "weight": "2.0000", "mass_unit": "lb", "value_amount":
+        null, "value_currency": null, "metadata": "Customer ID 123456", "extra": {},
+        "line_items": [], "test": true}]}'
     headers:
-      allow: [OPTIONS]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['399']
-      content-type: [application/json]
-      date: ['Mon, 10 Apr 2017 21:03:07 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie, Accept-Encoding']
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:08:23 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=d4bcf8c72bdc4a8a8b6bdd7d8f350365; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '18238'
+    status:
+      code: 200
+      message: OK
 version: 1

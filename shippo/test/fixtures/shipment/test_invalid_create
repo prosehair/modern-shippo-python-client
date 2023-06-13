@@ -1,37 +1,62 @@
 interactions:
 - request:
-    body: !!python/unicode '{"customs_declaration": "b741b99f95e841639b54272834bc478c",
-      "address_from": "4f406a13253945a8bc8deb0f8266b245", "extra": {"signature_confirmation":
-      true, "reference_1": "", "insurance": {"currency": "USD", "amount": "200"},
-      "reference_2": ""}, "shipment_date": "2017-03-31T17:37:59.817Z", "submission_type":
-      "PICKUP", "metadata": "Customer ID 123456"}'
+    body: '{"address_from": "4f406a13253945a8bc8deb0f8266b245", "submission_type":
+      "PICKUP", "shipment_date": "2017-03-31T17:37:59.817Z", "extra": {"signature_confirmation":
+      true, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency":
+      "USD"}}, "customs_declaration": "b741b99f95e841639b54272834bc478c", "metadata":
+      "Customer ID 123456"}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['351']
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin guozhen-shippo-mbp.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '351'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: POST
     uri: https://api.goshippo.com/shipments/
   response:
-    body: {string: !!python/unicode '{"customs_declaration": ["CustomsDeclaration
-        with supplied object_id b741b99f95e841639b54272834bc478c not found."], "parcels":
-        ["This field is required."], "address_to": ["This field is required."]}'}
+    body:
+      string: '{"customs_declaration": ["CustomsDeclaration with supplied object_id
+        b741b99f95e841639b54272834bc478c not found."], "shipment_date": ["''shipment_date''
+        cannot be older than NOW - 1 DAY"], "parcels": ["This field is required."],
+        "address_to": ["This field is required."]}'
     headers:
-      allow: [OPTIONS]
-      connection: [keep-alive]
-      content-length: ['198']
-      content-type: [application/json]
-      date: ['Mon, 10 Apr 2017 21:03:41 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie']
-    status: {code: 400, message: BAD REQUEST}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:09:06 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=f6fe78637d5e4beba39abb4831439781; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '42'
+    status:
+      code: 400
+      message: Bad Request
 version: 1

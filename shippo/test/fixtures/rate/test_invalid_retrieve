@@ -2,33 +2,51 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Shippo-API-Version: ['2017-03-29']
-      User-Agent: [Shippo/v1 PythonBindings/1.4.0]
-      X-Shippo-Client-User-Agent: ['{"lang": "python", "publisher": "shippo", "httplib":
-          "requests", "uname": "Darwin guozhen-shippo-mbp.local 16.4.0 Darwin Kernel
-          Version 16.4.0: Thu Dec 22 22:53:21 PST 2016; root:xnu-3789.41.3~3/RELEASE_X86_64
-          x86_64 i386", "lang_version": "2.7.10", "platform": "Darwin-16.4.0-x86_64-i386-64bit",
-          "bindings_version": "1.4.0"}']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
     method: GET
     uri: https://api.goshippo.com/rates/EXAMPLE_OF_INVALID_ID
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAAxXMQQqDMBAF0Kv8E3RwHwKCCoHUlqLSXRCckm4SzSR6fXX5Nk/5Svcxo4slLIou
-        qVUPnpF4KyyZF4wfC9orSnNmofZbP9+2da/OmX6qrWmcaXDMgnA1v7tBDMj+LxBOO6eHolWf8hqv
-        SWgAAAA=
+      string: <h1>Not Found</h1><p>The requested URL /rates/EXAMPLE_OF_INVALID_ID
+        was not found on this server.</p>
     headers:
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['119']
-      content-type: [text/html]
-      date: ['Mon, 10 Apr 2017 21:03:09 GMT']
-      p3p: [CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"]
-      server: [nginx/1.8.0]
-      vary: ['Host, Cookie']
-    status: {code: 404, message: NOT FOUND}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Mon, 12 Jun 2023 17:08:32 GMT
+      Transfer-Encoding:
+      - chunked
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=3268c93a9dec4e7d98bad01744492b6a; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '7'
+    status:
+      code: 404
+      message: Not Found
 version: 1
