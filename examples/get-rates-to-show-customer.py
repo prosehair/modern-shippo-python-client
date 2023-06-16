@@ -82,12 +82,12 @@ transaction = shippo.Transaction.create(rate=selected_rate_object_id, asynchrono
 # print the shipping label from label_url
 # Get the tracking number from tracking_number
 if transaction.status == "SUCCESS":
-    print("Purchased label with tracking number %s" % transaction.tracking_number)
-    print("The label can be downloaded at %s" % transaction.label_url)
+    print(f"Purchased label with tracking number {transaction.tracking_number}")
+    print(f"The label can be downloaded at {transaction.label_url}")
 else:
     print("Failed purchasing the label due to:")
     for message in transaction.messages:
-        print("- %s" % message["text"])
+        print(f"- {message['text']}")
 
 # For more tutorals of address validation, tracking, returns, refunds, and other functionality, check out our
 # complete documentation: https://goshippo.com/docs/

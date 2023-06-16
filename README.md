@@ -73,7 +73,6 @@ python setup.py test --test-suite=shippo
 #### Using the API:
 
 ```python
-
 import shippo
 shippo.config.api_key = "<API-KEY>"
 
@@ -90,8 +89,7 @@ address1 = shippo.Address.create(
     metadata='Customer ID 123456'
 )
 
-print 'Success with Address 1 : %r' % (address1, )
-
+print f'Success with Address 1: {address1!r}'
 ```
 
 We've created a number of examples to cover the most common use cases. You can find the sample code files in the [examples folder](examples/).

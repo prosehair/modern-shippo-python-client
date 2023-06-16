@@ -105,7 +105,7 @@ transaction_international = shippo.Transaction.create(rate=rate_international.ob
 if transaction_international.status != "SUCCESS":
     print("Failed purchasing the label due to:")
     for message in transaction_international.messages:
-        print("- %s" % message["text"])
+        print(f"- {message['text']}")
 
 # $pickupTimeStart = date('Y-m-d H:i:s', time());
 # $pickupTimeEnd = date('Y-m-d H:i:s', time() + 60*60*24);
@@ -134,7 +134,7 @@ else:
     else:
         print("Failed scheduling a pickup:")
         for message in pickup.messages:
-            print("- %s" % message["text"])
+            print(f"- {message['text']}")
 
 # For more tutorials of address validation, tracking, returns, refunds, and other functionality, check out our
 # complete documentation: https://goshippo.com/docs/

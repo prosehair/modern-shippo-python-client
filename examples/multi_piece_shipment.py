@@ -90,15 +90,12 @@ transaction = shippo.Transaction.create(rate=rate.object_id, label_file_type="PD
 # Get the tracking number from tracking_number
 if transaction.status == "QUEUED":
     print("the_return_response async {}".format(transaction))
-    # print("Purchased label with tracking number %s" %
-    #      transaction.tracking_number)
-    # print("The FIRST label can be downloaded at %s" % transaction.label_url)
-    #
-
+    # print(f"Purchased label with tracking number {transaction.tracking_number}")
+    # print(f"The FIRST label can be downloaded at {transaction.label_url}")
 else:
     print("Failed purchasing the label due to:")
     for message in transaction.messages:
-        print("- %s" % message["text"])
+        print(f"- {message['text']}")
 
 print("This is async so we need to get the transaction + rate_id once queded has changed (to retrieve the remaining labels)")
 

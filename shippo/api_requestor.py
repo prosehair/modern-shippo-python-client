@@ -25,29 +25,29 @@ def _encode_datetime(dttime):
 
 
 def _api_encode(data):
-    for key, value in list(data.items()):
+    for key, value in data.items():
         if value is None:
             continue
         if hasattr(value, "shippo_id"):
-            yield (key, value.shippo_id)
+            yield key, value.shippo_id
         elif isinstance(value, (list, tuple)):
             for subvalue in value:
-                yield ("%s[]" % (key,), subvalue)
+                yield f"{key}[]", subvalue
         elif isinstance(value, dict):
-            subdict = dict(("%s[%s]" % (key, subkey), subvalue) for subkey, subvalue in list(value.items()))
+            subdict = {f"{key}[{subkey}]": subvalue for subkey, subvalue in value.items()}
             for subkey, subvalue in _api_encode(subdict):
-                yield (subkey, subvalue)
+                yield subkey, subvalue
         elif isinstance(value, datetime.datetime):
-            yield (key, _encode_datetime(value))
+            yield key, _encode_datetime(value)
         else:
-            yield (key, value)
+            yield key, value
 
 
 def _build_api_url(url, query):
     scheme, netloc, path, base_query, fragment = urllib.parse.urlsplit(url)
 
     if base_query:
-        query = "%s&%s" % (base_query, query)
+        query = f"{base_query}&{query}"
 
     return urllib.parse.urlunsplit((scheme, netloc, path, query, fragment))
 
@@ -112,7 +112,7 @@ class APIRequestor:
         if my_api_key.startswith("oauth."):
             token_type = "Bearer"
 
-        abs_url = "%s%s" % (config.api_base, url)
+        abs_url = f"{config.api_base}{url}"
 
         if method in ("get", "delete"):
             if params:
@@ -123,9 +123,9 @@ class APIRequestor:
             post_data = json.dumps(params)
         else:
             raise error.APIConnectionError(
-                "Unrecognized HTTP method %r.  This may indicate a bug in the "
+                f"Unrecognized HTTP method {method!r}.  This may indicate a bug in the "
                 "Shippo bindings.  Please contact support@goshippo.com for "
-                "assistance." % (method,)
+                "assistance."
             )
 
         shippo_user_agent = APIRequestor.get_shippo_user_agent_header(config)
@@ -133,17 +133,8 @@ class APIRequestor:
         headers = {
             "Content-Type": "application/json",
             "X-Shippo-Client-User-Agent": shippo_user_agent,
-            "User-Agent": "%s/%s ShippoPythonSDK/%s"
-            % (
-                config.app_name,
-                config.app_version,
-                config.sdk_version,
-            ),
-            "Authorization": "%s %s"
-            % (
-                token_type,
-                my_api_key,
-            ),
+            "User-Agent": f"{config.app_name}/{config.app_version} ShippoPythonSDK/{config.sdk_version}",
+            "Authorization": f"{ token_type } {my_api_key}",
             "Shippo-API-Version": config.api_version,
         }
 
@@ -157,7 +148,7 @@ class APIRequestor:
                 rbody = '{"msg": "empty_response"}'
             resp = json.loads(rbody)
         except Exception as err:
-            raise error.APIError("Invalid response body from API: %s (HTTP response code was %d)" % (rbody, rcode), rbody, rcode) from err
+            raise error.APIError(f"Invalid response body from API: {rbody} (HTTP response code was {rcode})", rbody, rcode) from err
         if not 200 <= rcode < 300:
             self.handle_api_error(rbody, rcode, resp)
         return resp

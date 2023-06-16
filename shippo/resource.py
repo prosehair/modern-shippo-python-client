@@ -51,9 +51,9 @@ class ShippoObject(dict):
     def __setitem__(self, k, v):
         if v == "":
             raise ValueError(
-                "You cannot set %s to an empty string. "
+                f"You cannot set {k} to an empty string. "
                 "We interpret empty strings as None in requests."
-                "You may set %s.%s = None to delete the property" % (k, str(self), k)
+                f"You may set {str(self)}.{k} = None to delete the property"
             )
 
         super().__setitem__(k, v)
@@ -69,12 +69,13 @@ class ShippoObject(dict):
             return super().__getitem__(k)
         except KeyError as err:
             if k in self._transient_values:
+                avail_attrs = ", ".join(list(self.keys()))
                 raise KeyError(
-                    "%r.  HINT: The %r attribute was set in the past."
+                    f"{k!r}.  HINT: The {k!r} attribute was set in the past."
                     "It was then wiped when refreshing the object with "
                     "the result returned by Shippo's API, probably as a "
                     "result of a save().  The attributes currently "
-                    "available on this object are: %s" % (k, k, ", ".join(list(self.keys())))
+                    f"available on this object are: {avail_attrs}"
                 ) from err
             raise err
 
@@ -123,9 +124,10 @@ class ShippoObject(dict):
             ident_parts.append(self.get("object"))
 
         if isinstance(self.get("object_id"), str):
-            ident_parts.append("object_id=%s" % (self.get("object_id"),))
+            ident_parts.append(f"object_id={self.get('object_id')}")
 
-        return "<%s at %s> JSON: %s" % (" ".join(ident_parts), hex(id(self)), str(self))
+        ident_parts = " ".join(ident_parts)
+        return f"<{ident_parts} at {hex(id(self))}> JSON: {self}"
 
     def __str__(self):
         return json.dumps(self, sort_keys=True, indent=2)
@@ -149,17 +151,17 @@ class APIResource(ShippoObject):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss" % (cls_name,)
+        return f"{cls_name}s"
 
     def instance_url(self):
         object_id = self.get("object_id")
         if not object_id:
             raise error.InvalidRequestError(
-                "Could not determine which URL to request: %s instance has invalid ID: %r" % (type(self).__name__, object_id), "object_id"
+                f"Could not determine which URL to request: {type(self).__name__} instance has invalid ID: {object_id!r}", "object_id"
             )
         base = self.class_url()
         extn = urllib.parse.quote_plus(object_id)
-        return "%s/%s" % (base, extn)
+        return f"{base}/{extn}"
 
 
 class CreateableAPIResource(APIResource):
@@ -232,7 +234,7 @@ class Address(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ses/" % (cls_name,)
+        return f"{cls_name}es/"
 
 
 class CustomsItem(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
@@ -251,7 +253,7 @@ class Parcel(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class Pickup(CreateableAPIResource):
@@ -262,7 +264,7 @@ class Pickup(CreateableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class Manifest(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
@@ -274,7 +276,7 @@ class Manifest(CreateableAPIResource, ListableAPIResource, FetchableAPIResource)
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class Refund(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
@@ -285,7 +287,7 @@ class Refund(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class Shipment(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
@@ -315,7 +317,7 @@ class Shipment(CreateableAPIResource, ListableAPIResource, FetchableAPIResource)
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class Transaction(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
@@ -336,7 +338,7 @@ class Transaction(CreateableAPIResource, ListableAPIResource, FetchableAPIResour
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class Rate(ListableAPIResource, FetchableAPIResource):
@@ -348,7 +350,7 @@ class Rate(ListableAPIResource, FetchableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class CarrierAccount(CreateableAPIResource, ListableAPIResource, FetchableAPIResource, UpdateableAPIResource):
@@ -368,7 +370,7 @@ class Webhook(CreateableAPIResource, ListableAPIResource, FetchableAPIResource, 
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
     @classmethod
     def list_webhooks(cls, api_key=None, **params):
@@ -478,7 +480,7 @@ class Track(CreateableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class Batch(CreateableAPIResource, FetchableAPIResource):
@@ -583,7 +585,7 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ses/" % (cls_name,)
+        return f"{cls_name}es/"
 
 
 class Order(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
@@ -594,7 +596,7 @@ class Order(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"
 
 
 class LineItem(ListableAPIResource, FetchableAPIResource):
@@ -605,4 +607,4 @@ class LineItem(ListableAPIResource, FetchableAPIResource):
     @classmethod
     def class_url(cls):
         cls_name = cls.class_name()
-        return "%ss/" % (cls_name,)
+        return f"{cls_name}s/"

@@ -30,7 +30,7 @@ class FunctionalTests(ShippoTestCase):
             address_validated = shippo.Address.validate(address.object_id)
             self.assertEqual(address_validated.is_complete, True)
         except Exception as inst:
-            self.fail("Test failed with exception %s" % inst)
+            self.fail(f"Test failed with exception {inst}")
 
     def test_list_accessors(self):
         address = shippo.Address.create(**DUMMY_ADDRESS)
@@ -49,5 +49,5 @@ class FunctionalTests(ShippoTestCase):
         except shippo.error.InvalidRequestError:
             pass
         except Exception as inst:
-            self.fail("Test failed with exception %s" % inst)
+            self.fail(f"Test failed with exception {inst}")
         self.assertTrue("results" in rates)
