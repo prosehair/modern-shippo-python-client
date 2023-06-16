@@ -1,8 +1,8 @@
+import json
 import urllib.parse
-import sys
 import time
 import warnings
-from shippo import api_requestor, error, util
+from shippo import api_requestor, error
 from shippo.config import config
 
 
@@ -128,7 +128,7 @@ class ShippoObject(dict):
         return "<%s at %s> JSON: %s" % (" ".join(ident_parts), hex(id(self)), str(self))
 
     def __str__(self):
-        return util.json.dumps(self, sort_keys=True, indent=2)
+        return json.dumps(self, sort_keys=True, indent=2)
 
     @property
     def shippo_id(self):

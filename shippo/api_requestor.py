@@ -1,5 +1,7 @@
 import calendar
 import datetime
+import json
+import logging
 import os
 import socket
 import ssl
@@ -7,8 +9,10 @@ import time
 import urllib.parse
 import warnings
 import sys
-from shippo import error, http_client, util, certificate_blacklist
+from shippo import error, http_client, certificate_blacklist
 from shippo.config import config, Configuration
+
+logger = logging.getLogger(__name__)
 
 
 def _encode_datetime(dttime):
@@ -116,7 +120,7 @@ class APIRequestor:
                 abs_url = _build_api_url(abs_url, encoded_params)
             post_data = None
         elif method in ("post", "put"):
-            post_data = util.json.dumps(params)
+            post_data = json.dumps(params)
         else:
             raise error.APIConnectionError(
                 "Unrecognized HTTP method %r.  This may indicate a bug in the "

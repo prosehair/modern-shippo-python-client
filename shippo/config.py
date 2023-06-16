@@ -1,7 +1,10 @@
+import logging
 import os
 from typing import Optional
 
 from shippo.version import VERSION
+
+logging.basicConfig()
 
 
 class Configuration:

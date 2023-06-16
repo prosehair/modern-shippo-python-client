@@ -19,7 +19,6 @@ setup(
     package_data={'shippo': ['../VERSION']},
     install_requires=[
         'requests>=0.9.0',
-        'simplejson',
     ],
     test_suite='shippo.test.all',
     tests_require=['vcrpy'],
