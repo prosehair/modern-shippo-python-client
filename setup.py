@@ -18,9 +18,8 @@ setup(
     packages=['shippo', 'shippo.test', 'shippo.test.integration'],
     package_data={'shippo': ['../VERSION']},
     install_requires=[
-        'chardet',
-        'requests',
-        'simplejson >= 3.16.0, <= 3.17.2',
+        'requests>=0.9.0',
+        'simplejson',
     ],
     test_suite='shippo.test.all',
     tests_require=['vcrpy'],

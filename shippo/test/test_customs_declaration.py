@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 import shippo
 from shippo.test.helper import (
     DUMMY_CUSTOMS_DECLARATION,
@@ -13,22 +11,6 @@ from shippo.test.helper import shippo_vcr
 
 class CustomsDeclarationTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
-
-    def setUp(self):
-        super().setUp()
-
-        def get_http_client(*args, **kwargs):
-            return self.request_client(*args, **kwargs)
-
-        self.client_patcher = patch("shippo.http_client.new_default_http_client")
-
-        client_mock = self.client_patcher.start()
-        client_mock.side_effect = get_http_client
-
-    def tearDown(self):
-        super().tearDown()
-
-        self.client_patcher.stop()
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/customs-declaration")
     def test_invalid_create(self):

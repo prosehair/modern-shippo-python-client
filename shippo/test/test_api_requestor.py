@@ -29,13 +29,13 @@ class APIRequestorTests(TestCase):
         mock_client.request.return_value = ('{"status": "ok"}', 200)
 
         requestor = api_requestor.APIRequestor(key="oauth.mocktoken.mocksig", client=mock_client)
-        requestor.request("GET", "/v1/echo")
+        requestor.request(method="GET", url="/v1/echo")
 
-        args, _ = mock_client.request.call_args
-        _, _, headers, _ = args
+        headers = mock_client.request.call_args.kwargs["headers"]
 
-        expected = {"Authorization": "Bearer oauth.mocktoken.mocksig"}
-        self.assertEqual(headers, headers | expected, "Expect correct token type to used for authorization with oauth token")
+        self.assertEqual(
+            headers["Authorization"], "Bearer oauth.mocktoken.mocksig", "Expect correct token type to used for authorization with oauth token"
+        )
 
     def test_shippo_token_auth(self):
         config.app_name = "TestApp"
@@ -46,10 +46,9 @@ class APIRequestorTests(TestCase):
         mock_client.request.return_value = ('{"status": "ok"}', 200)
 
         requestor = api_requestor.APIRequestor(key="shippo_test_mocktoken", client=mock_client)
-        requestor.request("GET", "/v1/echo")
+        requestor.request(method="GET", url="/v1/echo")
 
-        args, _ = mock_client.request.call_args
-        _, _, headers, _ = args
+        headers = mock_client.request.call_args.kwargs["headers"]
 
         self.assertEqual(
             headers["Authorization"], "ShippoToken shippo_test_mocktoken", "Expect correct token type to used for authorization with shippo token"

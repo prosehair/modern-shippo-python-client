@@ -1,3 +1,7 @@
 black
 ruff
 pylint
+pytest
+pytest-cov
+requests
+vcrpy

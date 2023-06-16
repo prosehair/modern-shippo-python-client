@@ -54,9 +54,7 @@ class APIRequestor:
     def __init__(self, key=None, client=None):
         self.api_key = key
 
-        self._client = client or http_client.new_default_http_client(
-            verify_ssl_certs=config.verify_ssl_certs, timeout_in_seconds=config.timeout_in_seconds
-        )
+        self._client = client or http_client.RequestsClient(verify_ssl_certs=config.verify_ssl_certs, timeout_in_seconds=config.timeout_in_seconds)
 
     def request(self, method, url, params=None):
         self._check_ssl_cert()
@@ -145,17 +143,15 @@ class APIRequestor:
             "Shippo-API-Version": config.api_version,
         }
 
-        rbody, rcode = self._client.request(method, abs_url, headers, post_data)
-        util.logger.info("API request to %s returned (response code, response body) of (%d, %r)", abs_url, rcode, rbody)
+        rbody, rcode = self._client.request(method=method, url=abs_url, headers=headers, data=post_data)
+        logger.info("API request to %s returned (response code, response body) of (%d, %s)", abs_url, rcode, rbody)
         return rbody, rcode, my_api_key
 
     def interpret_response(self, rbody, rcode):
         try:
-            if hasattr(rbody, "decode"):
-                rbody = rbody.decode("utf-8")
-                if rbody == "":
-                    rbody = '{"msg": "empty_response"}'
-            resp = util.json.loads(rbody)
+            if rbody == "":
+                rbody = '{"msg": "empty_response"}'
+            resp = json.loads(rbody)
         except Exception as err:
             raise error.APIError("Invalid response body from API: %s (HTTP response code was %d)" % (rbody, rcode), rbody, rcode) from err
         if not 200 <= rcode < 300:

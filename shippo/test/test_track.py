@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 import shippo
 from shippo.test.helper import ShippoTestCase, shippo_vcr
 
@@ -8,22 +6,6 @@ class TrackTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
     tracking_no = "SHIPPO_TRANSIT"
     carrier_token = "shippo"
-
-    def setUp(self):
-        super().setUp()
-
-        def get_http_client(*args, **kwargs):
-            return self.request_client(*args, **kwargs)
-
-        self.client_patcher = patch("shippo.http_client.new_default_http_client")
-
-        client_mock = self.client_patcher.start()
-        client_mock.side_effect = get_http_client
-
-    def tearDown(self):
-        super().tearDown()
-
-        self.client_patcher.stop()
 
     @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/track")
     def test_get_status(self):
