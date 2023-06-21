@@ -2,14 +2,10 @@ import calendar
 import datetime
 import json
 import logging
-import os
-import socket
-import ssl
 import time
 import urllib.parse
-import warnings
 import sys
-from shippo import error, http_client, certificate_blacklist
+from shippo import error, http_client
 from shippo.config import config, Configuration
 
 logger = logging.getLogger(__name__)
@@ -53,15 +49,12 @@ def _build_api_url(url, query):
 
 
 class APIRequestor:
-    _CERTIFICATE_VERIFIED = False
-
     def __init__(self, key=None, client=None):
         self.api_key = key
 
         self._client = client or http_client.RequestsClient(verify_ssl_certs=config.verify_ssl_certs, timeout_in_seconds=config.timeout_in_seconds)
 
     def request(self, method, url, params=None):
-        self._check_ssl_cert()
         if params is not None and isinstance(params, dict):
             params = {("async" if k == "asynchronous" else k): v for k, v in params.items()}
 
@@ -152,38 +145,3 @@ class APIRequestor:
         if not 200 <= rcode < 300:
             self.handle_api_error(rbody, rcode, resp)
         return resp
-
-    def _check_ssl_cert(self):
-        """Preflight the SSL certificate presented by the backend.
-
-        This isn't 100% bulletproof, in that we're not actually validating the
-        transport used to communicate with Shippo, merely that the first
-        attempt to does not use a revoked certificate.
-
-        Unfortunately the interface to OpenSSL doesn't make it easy to check
-        the certificate before sending potentially sensitive data on the wire.
-        This approach raises the bar for an attacker significantly."""
-
-        if config.verify_ssl_certs and not self._CERTIFICATE_VERIFIED:
-            uri = urllib.parse.urlparse(config.api_base)
-            try:
-                certificate = ssl.get_server_certificate((uri.hostname, uri.port or 443))
-                der_cert = ssl.PEM_cert_to_DER_cert(certificate)
-            except socket.error as e:
-                raise error.APIConnectionError(e)
-            except TypeError:
-                # The Google App Engine development server blocks the C socket
-                # module which causes a type error when using the SSL library
-                if "APPENGINE_RUNTIME" in os.environ and "Dev" in os.environ.get("SERVER_SOFTWARE", ""):
-                    self._CERTIFICATE_VERIFIED = True
-                    warnings.warn(
-                        "We were unable to verify Shippo's SSL certificate "
-                        "due to a bug in the Google App Engine development "
-                        "server. Please alert us immediately at "
-                        "suppgoshippo.compo.com if this message appears in your "
-                        "production logs."
-                    )
-                    return
-                raise
-
-            self._CERTIFICATE_VERIFIED = certificate_blacklist.verify(uri.hostname, der_cert)
