@@ -9,17 +9,17 @@ from shippo.config import config
 warnings.filterwarnings("always", category=DeprecationWarning, module="shippo")
 
 
-def convert_to_shippo_object(resp, api_key):
+def convert_to_shippo_object(resp):
     if isinstance(resp, list):
-        return [convert_to_shippo_object(i, api_key) for i in resp]
+        return [convert_to_shippo_object(i) for i in resp]
     if isinstance(resp, dict) and not isinstance(resp, ShippoObject):
         resp = resp.copy()
-        return ShippoObject.construct_from(resp, api_key)
+        return ShippoObject.construct_from(resp)
     return resp
 
 
 class ShippoObject(dict):
-    def __init__(self, id=None, api_key=None, **params):
+    def __init__(self, id=None, **params):
         super().__init__()
 
         self._unsaved_values = set()
@@ -27,8 +27,6 @@ class ShippoObject(dict):
 
         self._retrieve_params = params
         self._previous_metadata = None
-
-        object.__setattr__(self, "api_key", api_key)
 
         if id:
             self["object_id"] = id
@@ -83,14 +81,12 @@ class ShippoObject(dict):
         raise TypeError("You cannot delete attributes on a ShippoObject  To unset a property, set it to None.")
 
     @classmethod
-    def construct_from(cls, values, api_key):
-        instance = cls(values.get("object_id"), api_key)
-        instance.refresh_from(values, api_key)
+    def construct_from(cls, values):
+        instance = cls(id=values.get("object_id"))
+        instance.refresh_from(values)
         return instance
 
-    def refresh_from(self, values, api_key=None, partial=False):
-        self.api_key = api_key or getattr(values, "api_key", None)
-
+    def refresh_from(self, values, partial=False):
         # Wipe old state before setting new.
         if partial:
             self._unsaved_values = self._unsaved_values - set(values)
@@ -104,7 +100,7 @@ class ShippoObject(dict):
         self._transient_values = self._transient_values - set(values)
 
         for k, v in list(values.items()):
-            super().__setitem__(k, convert_to_shippo_object(v, api_key))
+            super().__setitem__(k, convert_to_shippo_object(v))
 
         self._previous_metadata = values.get("metadata")
 
@@ -112,10 +108,10 @@ class ShippoObject(dict):
         if params is None:
             params = self._retrieve_params
 
-        requestor = api_requestor.APIRequestor(self.api_key)
-        response, api_key = requestor.request(method=method, url=url, params=params)
+        requestor = api_requestor.APIRequestor()
+        response = requestor.request(method=method, url=url, params=params)
 
-        return convert_to_shippo_object(response, api_key)
+        return convert_to_shippo_object(response)
 
     def __repr__(self):
         ident_parts = [type(self).__name__]
@@ -166,54 +162,54 @@ class APIResource(ShippoObject):
 
 class CreateableAPIResource(APIResource):
     @classmethod
-    def create(cls, api_key=None, **params):
-        requestor = api_requestor.APIRequestor(api_key)
+    def create(cls, **params):
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url()
-        response, api_key = requestor.request(method="post", url=url, params=params)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="post", url=url, params=params)
+        return convert_to_shippo_object(response)
 
 
 class ListableAPIResource(APIResource):
     @classmethod
-    def all(cls, api_key=None, size=None, page=None, **params):
+    def all(cls, size=None, page=None, **params):
         """
         To retrieve a list of all the objects in a class. The size of page and
             the page number can be specified respectively cls.all(<size>,<page>)
             **NOTE: To specify a page number, the page size must also be provided
         """
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url()
         if size:
             url = url + "?results=" + urllib.parse.quote_plus(str(size))
         if page:
             url = url + "&page=" + urllib.parse.quote_plus(str(page))
-        response, api_key = requestor.request(method="get", url=url, params=params)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="get", url=url, params=params)
+        return convert_to_shippo_object(response)
 
 
 class FetchableAPIResource(APIResource):
     @classmethod
-    def retrieve(cls, object_id, api_key=None):
+    def retrieve(cls, object_id):
         extn = urllib.parse.quote_plus(object_id)
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url() + extn
-        response, api_key = requestor.request(method="get", url=url)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="get", url=url)
+        return convert_to_shippo_object(response)
 
 
 class UpdateableAPIResource(APIResource):
     @classmethod
-    def update(cls, object_id, api_key=None, **params):
+    def update(cls, object_id, **params):
         extn = urllib.parse.quote_plus(object_id)
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url() + extn
-        response, api_key = requestor.request(method="put", url=url, params=params)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="put", url=url, params=params)
+        return convert_to_shippo_object(response)
 
     @classmethod
-    def remove(cls, object_id, api_key=None, **params):
+    def remove(cls, object_id, **params):
         extn = urllib.parse.quote_plus(object_id)
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url() + extn
         requestor.request(method="delete", url=url, params=params)
         return "Deleted the webhook"
@@ -224,12 +220,12 @@ class UpdateableAPIResource(APIResource):
 
 class Address(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
     @classmethod
-    def validate(cls, object_id, api_key=None):
+    def validate(cls, object_id):
         extn = urllib.parse.quote_plus(object_id)
         url = cls.class_url() + extn + "/validate"
-        requestor = api_requestor.APIRequestor(api_key)
-        response, api_key = requestor.request(method="get", url=url)
-        return convert_to_shippo_object(response, api_key)
+        requestor = api_requestor.APIRequestor()
+        response = requestor.request(method="get", url=url)
+        return convert_to_shippo_object(response)
 
     @classmethod
     def class_url(cls):
@@ -297,22 +293,22 @@ class Shipment(CreateableAPIResource, ListableAPIResource, FetchableAPIResource)
     """
 
     @classmethod
-    def get_rates(cls, object_id, asynchronous=False, api_key=None, currency=None, **params):
+    def get_rates(cls, object_id, asynchronous=False, currency=None, **params):
         """
         Given a valid shipment object_id, all possible rates are calculated and returned.
         """
         if not asynchronous:
             timeout = time.time() + config.rates_req_timeout
-            while cls.retrieve(object_id, api_key=api_key).status in ("QUEUED", "WAITING") and time.time() < timeout:
+            while cls.retrieve(object_id).status in ("QUEUED", "WAITING") and time.time() < timeout:
                 continue
 
         shipment_id = urllib.parse.quote_plus(object_id)
         url = cls.class_url() + shipment_id + "/rates/"
         if currency:
             url = url + "" + urllib.parse.quote_plus(currency)
-        requestor = api_requestor.APIRequestor(api_key)
-        response, api_key = requestor.request(method="get", url=url)
-        return convert_to_shippo_object(response, api_key)
+        requestor = api_requestor.APIRequestor()
+        response = requestor.request(method="get", url=url)
+        return convert_to_shippo_object(response)
 
     @classmethod
     def class_url(cls):
@@ -327,13 +323,13 @@ class Transaction(CreateableAPIResource, ListableAPIResource, FetchableAPIResour
     """
 
     @classmethod
-    def create(cls, api_key=None, **params):
+    def create(cls, **params):
         """
         Creates a new transaction object, given a valid rate ID.
         Takes the parameters as a dictionary instead of key word arguments.
         """
         # will be removed in the next major version
-        return super().create(api_key, **params)
+        return super().create(**params)
 
     @classmethod
     def class_url(cls):
@@ -373,12 +369,12 @@ class Webhook(CreateableAPIResource, ListableAPIResource, FetchableAPIResource, 
         return f"{cls_name}s/"
 
     @classmethod
-    def list_webhooks(cls, api_key=None, **params):
+    def list_webhooks(cls, **params):
         """List all the webhooks associated with the account"""
-        return super().all(api_key, **params)
+        return super().all(**params)
 
     @classmethod
-    def create(cls, api_key=None, **params):
+    def create(cls, **params):
         """Create a Webhook to push events from Shippo (i.e tracking,transations)
 
         Arguments:
@@ -387,37 +383,31 @@ class Webhook(CreateableAPIResource, ListableAPIResource, FetchableAPIResource, 
                                   endpoint must return 200 when it receives a POST
                 event (str) -- any valid webhook event as listed here https://goshippo.com/docs/webhooks.
                 is_test (str) -- set the webhook object to test or live mode
-        Keyword Arguments:
-            api_key (str) -- an api key, if not specified here it will default to the key
-                             set in your environment var or by shippo.api_key = "..."
 
         Returns:
             (ShippoObject) -- The server response
         """
 
-        return super().create(api_key, **params)
+        return super().create(**params)
 
     @classmethod
-    def update_webhook(cls, object_id, api_key=None, **params):
+    def update_webhook(cls, object_id, **params):
         """
         Update webhook's url, is_test, and/or event
         """
-        return super().update(api_key, **params)
+        return super().update(**params)
 
     @classmethod
-    def delete(cls, object_id, api_key=None, **params):
+    def delete(cls, object_id, **params):
         """Remove webhook
 
         Arguments:
             object_id (str) -- object_id of webhook
-        Keyword Arguments:
-            api_key (str) -- an api key, if not specified here it will default to the key
-                             set in your environment var or by shippo.api_key = "..."
 
         Returns:
             (ShippoObject) -- The server response
         """
-        return super().remove(object_id, api_key, **params)
+        return super().remove(object_id, **params)
 
 
 class Track(CreateableAPIResource):
@@ -430,7 +420,7 @@ class Track(CreateableAPIResource):
     """
 
     @classmethod
-    def get_status(cls, carrier_token, tracking_number, api_key=None):
+    def get_status(cls, carrier_token, tracking_number):
         """
         A custom get method for tracking based on carrier and tracking number
         Written because the endpoint for tracking is different from our standard endpoint
@@ -440,23 +430,19 @@ class Track(CreateableAPIResource):
                                     see https://goshippo.com/docs/reference#carriers
             tracking_number (str) -- tracking number to track
 
-        Keyword Arguments:
-            api_key (str) -- an api key, if not specified here it will default to the key
-                             set in your environment var or by shippo.api_key = "..."
-
         Returns:
             (ShippoObject) -- The server response
         """
         carrier_token = urllib.parse.quote_plus(carrier_token)
         tracking_number = urllib.parse.quote_plus(tracking_number)
         urllib.parse.quote_plus(tracking_number)
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url() + carrier_token + "/" + tracking_number
-        response, api_key = requestor.request(method="get", url=url)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="get", url=url)
+        return convert_to_shippo_object(response)
 
     @classmethod
-    def create(cls, api_key=None, **params):
+    def create(cls, **params):
         """
         Creates a webhook to keep track of the shipping status of a specific package
 
@@ -468,14 +454,10 @@ class Track(CreateableAPIResource):
                 metadata (str) -- A string of up to 100 characters that can be filled with any
                                    additional information you want to attach to the object
 
-        Keyword Arguments:
-            api_key (str) -- an api key, if not specified here it will default to the key
-                             set in your environment var or by shippo.api_key = "..."
-
         Returns:
             (ShippoObject) -- The server response
         """
-        return super().create(api_key, **params)
+        return super().create(**params)
 
     @classmethod
     def class_url(cls):
@@ -489,7 +471,7 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
     """
 
     @classmethod
-    def retrieve(cls, object_id, api_key=None, **params):
+    def retrieve(cls, object_id, **params):
         """
         Retrieve a batch, customized to allow the addition of url parameters
 
@@ -503,20 +485,16 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
                                             "purchase_succeeded"
                                             "purchase_failed"
 
-        Keyword Arguments:
-            api_key (str) -- an api key, if not specified here it will default to the key
-                             set in your environment var or by shippo.api_key = "..."
-
         Returns:
             (ShippoObject) -- The server response
         """
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url() + urllib.parse.quote_plus(object_id) + "?" + urllib.parse.urlencode(params)
-        response, api_key = requestor.request(method="get", url=url)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="get", url=url)
+        return convert_to_shippo_object(response)
 
     @classmethod
-    def add(cls, object_id, shipments_to_add, api_key=None):
+    def add(cls, object_id, shipments_to_add):
         """
         Add shipments to a batch
 
@@ -525,21 +503,17 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
             shipments_to_add (list of dict) -- list of shipments to add, must be in the format
                 [{'shipment': <shipment 1 object id>}, {'shipment': <shipment 2 object id>}, ...]
 
-        Keyword Arguments:
-            api_key (str) -- an api key, if not specified here it will default to the key
-                             set in your environment var or by shippo.api_key = "..."
-
         Returns:
             (ShippoObject) -- The server response
         """
         extn = urllib.parse.quote_plus(object_id)
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url() + extn + "/add_shipments"
-        response, api_key = requestor.request(method="post", url=url, params=shipments_to_add)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="post", url=url, params=shipments_to_add)
+        return convert_to_shippo_object(response)
 
     @classmethod
-    def remove(cls, object_id, shipments_to_remove, api_key=None):
+    def remove(cls, object_id, shipments_to_remove):
         """
         Remove shipments from a batch
 
@@ -548,39 +522,31 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
             shipments_to_remove (list of str) -- list of shipments to remove, must be in the format
                 [<shipment 1 object id>, <shipment 2 object id>, ...]
 
-        Keyword Arguments:
-            api_key (str) -- an api key, if not specified here it will default to the key
-                             set in your environment var or by shippo.api_key = "..."
-
         Returns:
             (ShippoObject) -- The server response
         """
         extn = urllib.parse.quote_plus(object_id)
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url() + extn + "/remove_shipments"
-        response, api_key = requestor.request(method="post", url=url, params=shipments_to_remove)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="post", url=url, params=shipments_to_remove)
+        return convert_to_shippo_object(response)
 
     @classmethod
-    def purchase(cls, object_id, api_key=None):
+    def purchase(cls, object_id):
         """
         Purchase batch of shipments
 
         Arguments:
             object_id (str) -- the batch object id
 
-        Keyword Arguments:
-            api_key (str) -- an api key, if not specified here it will default to the key
-                             set in your environment var or by shippo.api_key = "..."
-
         Returns:
             (ShippoObject) -- The server response
         """
         extn = urllib.parse.quote_plus(object_id)
-        requestor = api_requestor.APIRequestor(api_key)
+        requestor = api_requestor.APIRequestor()
         url = cls.class_url() + extn + "/purchase"
-        response, api_key = requestor.request(method="post", url=url)
-        return convert_to_shippo_object(response, api_key)
+        response = requestor.request(method="post", url=url)
+        return convert_to_shippo_object(response)
 
     @classmethod
     def class_url(cls):

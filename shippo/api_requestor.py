@@ -43,10 +43,8 @@ def _api_encode(data):
 
 def _build_api_url(url, query):
     scheme, netloc, path, base_query, fragment = urllib.parse.urlsplit(url)
-
     if base_query:
         query = f"{base_query}&{query}"
-
     return urllib.parse.urlunsplit((scheme, netloc, path, query, fragment))
 
 
@@ -63,13 +61,12 @@ class APIRequestor:
         )
 
     def request(self, method, url, params=None):
-        if params is not None and isinstance(params, dict):
-            params = {("async" if k == "asynchronous" else k): v for k, v in params.items()}
+        if isinstance(params, dict) and "asynchronous" in params:
+            params["async"] = params.pop("asynchronous")
 
-        rbody, rcode, my_api_key = self.request_raw(method.lower(), url, params)
-
+        rbody, rcode = self.request_raw(method.lower(), url, params)
         resp = self.interpret_response(rbody, rcode)
-        return resp, my_api_key
+        return resp
 
     def handle_api_error(self, rbody, rcode, resp):
         if rcode in (400, 404):
@@ -100,7 +97,7 @@ class APIRequestor:
 
         rbody, rcode = self._client.request(method=method, url=abs_url, data=post_data)
         logger.info("API request to %s returned (response code, response body) of (%d, %s)", abs_url, rcode, rbody)
-        return rbody, rcode, config.api_key
+        return rbody, rcode
 
     def interpret_response(self, rbody, rcode):
         try:
