@@ -2,12 +2,15 @@
 - Requests is the preferred HTTP library
 - Google App Engine has urlfetch, we use request_toolbelt to monkey patch and keep the same signature
 """
+import sys
 import textwrap
 
 from requests import Session
+from requests.auth import AuthBase
 from requests.exceptions import RequestException
 
 from shippo import error
+from shippo.config import config, Configuration
 
 DEFAULT_TIMEOUT = 80
 
@@ -20,12 +23,42 @@ else:
     DEFAULT_TIMEOUT = 55
 
 
+def _get_shippo_user_agent_header(configuration: Configuration) -> str:
+    python_version = sys.version.split(" ", maxsplit=1)[0]
+    key_value_pairs = []
+    key_value_pairs.append("/".join([configuration.app_name, configuration.app_version]))
+    key_value_pairs.append("/".join([configuration.sdk_name, configuration.sdk_version]))
+    key_value_pairs.append("/".join([configuration.language, python_version]))
+    return " ".join(key_value_pairs)
+
+
+class ShippoAuth(AuthBase):
+    def __init__(self, api_key=None):
+        self.api_key = api_key or config.api_key
+        self.token_type = "Bearer" if self.api_key.startswith("oauth.") else  "ShippoToken"
+
+    def __call__(self, r):
+        r.headers["Authorization"] = f"{self.token_type} {self.api_key}"
+        return r
+
+
 class RequestsClient(Session):
-    def __init__(self, verify_ssl_certs=True, timeout_in_seconds=None):
+    def __init__(self, api_key=None, verify_ssl_certs=True, timeout_in_seconds=None):
         super().__init__()
         if verify_ssl_certs is None:
             raise ValueError("`verify_ssl_certs` cannot be None")
+        self.auth = ShippoAuth(api_key)
         self.verify = verify_ssl_certs
+        self._set_default_headers()
+
+    def _set_default_headers(self):
+        self.headers = self.headers or {}
+        self.headers.update({
+            "Content-Type": "application/json",
+            "X-Shippo-Client-User-Agent": _get_shippo_user_agent_header(config),
+            "User-Agent": f"{config.app_name}/{config.app_version} ShippoPythonSDK/{config.sdk_version}",
+            "Shippo-API-Version": config.api_version,
+        })
 
     def request(self, *args, timeout=None, **kwargs):
         timeout = timeout or DEFAULT_TIMEOUT

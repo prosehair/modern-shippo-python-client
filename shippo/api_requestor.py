@@ -2,11 +2,13 @@ import calendar
 import datetime
 import json
 import logging
+import os.path
 import time
 import urllib.parse
-import sys
+import warnings
+
 from shippo import error, http_client
-from shippo.config import config, Configuration
+from shippo.config import config
 
 logger = logging.getLogger(__name__)
 
@@ -49,10 +51,16 @@ def _build_api_url(url, query):
 
 
 class APIRequestor:
-    def __init__(self, key=None, client=None):
-        self.api_key = key
+    def __init__(self, api_key=None, client=None, **kwargs):
+        if "key" in kwargs:
+            warnings.warn("key parameter has been renamed to api_key", DeprecationWarning)
+            if api_key:
+                raise ValueError("key parameter is deprecated, and cannot be used with api_key")
+            api_key = kwargs.pop("key")
 
-        self._client = client or http_client.RequestsClient(verify_ssl_certs=config.verify_ssl_certs, timeout_in_seconds=config.timeout_in_seconds)
+        self._client = client or http_client.RequestsClient(
+            api_key=api_key, verify_ssl_certs=config.verify_ssl_certs, timeout_in_seconds=config.timeout_in_seconds
+        )
 
     def request(self, method, url, params=None):
         if params is not None and isinstance(params, dict):
@@ -70,44 +78,13 @@ class APIRequestor:
             raise error.AuthenticationError(rbody, rcode, resp)
         raise error.APIError(rbody, rcode, resp)
 
-    @staticmethod
-    def get_python_version() -> str:
-        return sys.version.split(" ", maxsplit=1)[0]
-
-    @staticmethod
-    def get_shippo_user_agent_header(configuration: Configuration) -> str:
-        key_value_pairs = []
-        key_value_pairs.append("/".join([configuration.app_name, configuration.app_version]))
-        key_value_pairs.append("/".join([configuration.sdk_name, configuration.sdk_version]))
-        key_value_pairs.append("/".join([configuration.language, APIRequestor.get_python_version()]))
-        return " ".join(key_value_pairs)
-
     def request_raw(self, method, url, params=None):
         """
         Mechanism for issuing an API call
         """
+        abs_url = os.path.join(config.api_base, url)
 
-        if self.api_key:
-            my_api_key = self.api_key
-        else:
-            my_api_key = config.api_key
-
-        if my_api_key is None:
-            raise error.AuthenticationError(
-                "No API key provided. (HINT: set your API key using "
-                '"shippo.config.api_key = shippo_test_d90f00698a0a8def0495fddb4212bb08051469d3"). You can generate API keys '
-                "from the Shippo web interface.  See https://goshippo.com/api "
-                "for details, or email support@goshippo.com if you have any "
-                "questions."
-            )
-
-        token_type = "ShippoToken"
-        if my_api_key.startswith("oauth."):
-            token_type = "Bearer"
-
-        abs_url = f"{config.api_base}{url}"
-
-        if method in ("get", "delete"):
+        if method.lower() in ("get", "delete"):
             if params:
                 encoded_params = urllib.parse.urlencode(list(_api_encode(params or {})))
                 abs_url = _build_api_url(abs_url, encoded_params)
@@ -121,19 +98,9 @@ class APIRequestor:
                 "assistance."
             )
 
-        shippo_user_agent = APIRequestor.get_shippo_user_agent_header(config)
-
-        headers = {
-            "Content-Type": "application/json",
-            "X-Shippo-Client-User-Agent": shippo_user_agent,
-            "User-Agent": f"{config.app_name}/{config.app_version} ShippoPythonSDK/{config.sdk_version}",
-            "Authorization": f"{ token_type } {my_api_key}",
-            "Shippo-API-Version": config.api_version,
-        }
-
-        rbody, rcode = self._client.request(method=method, url=abs_url, headers=headers, data=post_data)
+        rbody, rcode = self._client.request(method=method, url=abs_url, data=post_data)
         logger.info("API request to %s returned (response code, response body) of (%d, %s)", abs_url, rcode, rbody)
-        return rbody, rcode, my_api_key
+        return rbody, rcode, config.api_key
 
     def interpret_response(self, rbody, rcode):
         try:
