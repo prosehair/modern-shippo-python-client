@@ -3,6 +3,7 @@ import urllib.parse
 import time
 import warnings
 from shippo import api_requestor, error
+from shippo.api_requestor import urljoin
 from shippo.config import config
 
 
@@ -163,8 +164,8 @@ class APIResource(ShippoObject):
 class CreateableAPIResource(APIResource):
     @classmethod
     def create(cls, **params):
-        requestor = api_requestor.APIRequestor()
         url = cls.class_url()
+        requestor = api_requestor.APIRequestor()
         response = requestor.request(method="post", url=url, params=params)
         return convert_to_shippo_object(response)
 
@@ -177,12 +178,12 @@ class ListableAPIResource(APIResource):
             the page number can be specified respectively cls.all(<size>,<page>)
             **NOTE: To specify a page number, the page size must also be provided
         """
-        requestor = api_requestor.APIRequestor()
         url = cls.class_url()
         if size:
-            url = url + "?results=" + urllib.parse.quote_plus(str(size))
+            params['results'] = str(size)
         if page:
-            url = url + "&page=" + urllib.parse.quote_plus(str(page))
+            params['page'] = str(page)
+        requestor = api_requestor.APIRequestor()
         response = requestor.request(method="get", url=url, params=params)
         return convert_to_shippo_object(response)
 
@@ -191,8 +192,8 @@ class FetchableAPIResource(APIResource):
     @classmethod
     def retrieve(cls, object_id):
         extn = urllib.parse.quote_plus(object_id)
+        url = urljoin(cls.class_url(), extn)
         requestor = api_requestor.APIRequestor()
-        url = cls.class_url() + extn
         response = requestor.request(method="get", url=url)
         return convert_to_shippo_object(response)
 
@@ -201,16 +202,16 @@ class UpdateableAPIResource(APIResource):
     @classmethod
     def update(cls, object_id, **params):
         extn = urllib.parse.quote_plus(object_id)
+        url = urljoin(cls.class_url(), extn)
         requestor = api_requestor.APIRequestor()
-        url = cls.class_url() + extn
         response = requestor.request(method="put", url=url, params=params)
         return convert_to_shippo_object(response)
 
     @classmethod
     def remove(cls, object_id, **params):
         extn = urllib.parse.quote_plus(object_id)
+        url = urljoin(cls.class_url(), extn)
         requestor = api_requestor.APIRequestor()
-        url = cls.class_url() + extn
         requestor.request(method="delete", url=url, params=params)
         return "Deleted the webhook"
 
@@ -222,7 +223,7 @@ class Address(CreateableAPIResource, ListableAPIResource, FetchableAPIResource):
     @classmethod
     def validate(cls, object_id):
         extn = urllib.parse.quote_plus(object_id)
-        url = cls.class_url() + extn + "/validate"
+        url = urljoin(cls.class_url(), extn, "/validate")
         requestor = api_requestor.APIRequestor()
         response = requestor.request(method="get", url=url)
         return convert_to_shippo_object(response)
@@ -303,9 +304,9 @@ class Shipment(CreateableAPIResource, ListableAPIResource, FetchableAPIResource)
                 continue
 
         shipment_id = urllib.parse.quote_plus(object_id)
-        url = cls.class_url() + shipment_id + "/rates/"
+        url = urljoin(cls.class_url(), shipment_id, "/rates/")
         if currency:
-            url = url + "" + urllib.parse.quote_plus(currency)
+            url = urljoin(url, urllib.parse.quote_plus(currency))
         requestor = api_requestor.APIRequestor()
         response = requestor.request(method="get", url=url)
         return convert_to_shippo_object(response)
@@ -435,9 +436,8 @@ class Track(CreateableAPIResource):
         """
         carrier_token = urllib.parse.quote_plus(carrier_token)
         tracking_number = urllib.parse.quote_plus(tracking_number)
-        urllib.parse.quote_plus(tracking_number)
+        url = urljoin(cls.class_url(), carrier_token, tracking_number)
         requestor = api_requestor.APIRequestor()
-        url = cls.class_url() + carrier_token + "/" + tracking_number
         response = requestor.request(method="get", url=url)
         return convert_to_shippo_object(response)
 
@@ -488,9 +488,9 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
         Returns:
             (ShippoObject) -- The server response
         """
+        url = urljoin(cls.class_url(), urllib.parse.quote_plus(object_id))
         requestor = api_requestor.APIRequestor()
-        url = cls.class_url() + urllib.parse.quote_plus(object_id) + "?" + urllib.parse.urlencode(params)
-        response = requestor.request(method="get", url=url)
+        response = requestor.request(method="get", url=url, params=params)
         return convert_to_shippo_object(response)
 
     @classmethod
@@ -507,8 +507,8 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
             (ShippoObject) -- The server response
         """
         extn = urllib.parse.quote_plus(object_id)
+        url = urljoin(cls.class_url(), extn, "/add_shipments")
         requestor = api_requestor.APIRequestor()
-        url = cls.class_url() + extn + "/add_shipments"
         response = requestor.request(method="post", url=url, params=shipments_to_add)
         return convert_to_shippo_object(response)
 
@@ -526,8 +526,8 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
             (ShippoObject) -- The server response
         """
         extn = urllib.parse.quote_plus(object_id)
+        url = urljoin(cls.class_url(), extn, "/remove_shipments")
         requestor = api_requestor.APIRequestor()
-        url = cls.class_url() + extn + "/remove_shipments"
         response = requestor.request(method="post", url=url, params=shipments_to_remove)
         return convert_to_shippo_object(response)
 
@@ -543,8 +543,8 @@ class Batch(CreateableAPIResource, FetchableAPIResource):
             (ShippoObject) -- The server response
         """
         extn = urllib.parse.quote_plus(object_id)
+        url = urljoin(cls.class_url(), extn, "/purchase")
         requestor = api_requestor.APIRequestor()
-        url = cls.class_url() + extn + "/purchase"
         response = requestor.request(method="post", url=url)
         return convert_to_shippo_object(response)
 

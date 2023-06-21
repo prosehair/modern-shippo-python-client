@@ -2,7 +2,6 @@ import calendar
 import datetime
 import json
 import logging
-import os.path
 import time
 import urllib.parse
 import warnings
@@ -11,6 +10,12 @@ from shippo import error, http_client
 from shippo.config import config
 
 logger = logging.getLogger(__name__)
+
+
+def urljoin(base, *parts):
+    *parts, last_part = parts
+    stripped_parts = (part.strip("/") for part in parts)
+    return "/".join((base.rstrip("/"), *stripped_parts, last_part.lstrip('/')) )
 
 
 def _encode_datetime(dttime):
@@ -79,7 +84,7 @@ class APIRequestor:
         """
         Mechanism for issuing an API call
         """
-        abs_url = os.path.join(config.api_base, url)
+        abs_url = urljoin(config.api_base, url)
 
         if method.lower() in ("get", "delete"):
             if params:
