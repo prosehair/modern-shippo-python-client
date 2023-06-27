@@ -4,9 +4,9 @@ from unittest.mock import Mock, patch
 from requests.exceptions import RequestException
 
 from shippo import http_client
-from shippo.config import Configuration
+from shippo.config import config, Configuration
 from shippo.error import APIConnectionError
-from shippo.test.helper import ShippoTestCase
+from tests.helper import ShippoTestCase
 
 
 class ShippoAuthTest(ShippoTestCase):
@@ -16,9 +16,7 @@ class ShippoAuthTest(ShippoTestCase):
         mock_request = Mock()
         mock_request.headers = {}
         actual = auth(mock_request)
-        self.assertEqual(
-            actual.headers["Authorization"], f"Bearer {api_key}", "Expect correct token type to used for authorization with oauth token"
-        )
+        self.assertEqual(actual.headers["Authorization"], f"Bearer {api_key}", "Expect correct token type to used for authorization with oauth token")
 
     def test_shippo_token_auth(self):
         api_key = "shippo_test_mocktoken"
@@ -53,10 +51,10 @@ class RequestsClientTests(ShippoTestCase):
         with patch("requests.Session.request") as mock:
             client = http_client.RequestsClient()
             client.request(url=self.valid_url)
-            mock.assert_called_with(url=self.valid_url, timeout=http_client.DEFAULT_TIMEOUT)
+            mock.assert_called_with(url=self.valid_url, timeout=config.default_timeout)
 
     def test_custom_timeout(self):
-        timeout = http_client.DEFAULT_TIMEOUT + 1  # Make sure we test over a different value than the default
+        timeout = config.default_timeout + 1  # Make sure we test over a different value than the default
 
         with patch("requests.Session.request") as mock:
             client = http_client.RequestsClient()

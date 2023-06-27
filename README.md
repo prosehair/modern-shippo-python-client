@@ -1,79 +1,54 @@
 # Shippo API Python wrapper
 
-[![PyPI version](https://badge.fury.io/py/shippo.svg)](https://badge.fury.io/py/shippo)
-[![Build Status](https://travis-ci.org/goshippo/shippo-python-client.svg?branch=helper-merge-steveByerly-fork-2)](https://travis-ci.org/goshippo/shippo-python-client)
+Modern [Shippo](https://goshippo.com) API client implementation.
 
-Shippo is a shipping API that connects you with [multiple shipping carriers](https://goshippo.com/carriers/) (such as USPS, UPS, DHL, Canada Post, Australia Post, UberRUSH and many others) through one interface.
+> This implementation is not maintained by Shippo, and is a modern rewrite of their Python client.
+> Shippo's documentation specifies that their default implementation is not actively maintained and could be
+> used as a starting point if required. (see https://docs.goshippo.com/docs/guides_general/clientlibraries/)
+> The goal of this project is to fix some issues with the default implementation (mostly obsolete dependencies).
+> We would be happy with the Shippo team taking over this repository and officially maintain it.
 
-Print a shipping label in 10 mins using our default USPS and DHL Express accounts. No need to register for a carrier account to get started.
+
+## About Shippo
+
+Connect with multiple different carriers, get discounted shipping labels, track parcels, and much more with just one integration.
+You can use your own carrier accounts or take advantage of Shippo's discounted rates with the USPS and DHL Express.
+Using Shippo makes it easy to deal with multiple carrier integrations, rate shopping, tracking and other parts of the shipping workflow.
+Shippo provide the API and dashboard for all your shipping needs.
 
 You will first need to [register for a Shippo account](https://goshippo.com/) to use our API. It's free to sign up, free to use the API. Only pay to print a live label, test labels are free.
 
-### Migrating to V2
+### Shippo API Documentation
 
-#### Configuration
+Please see [https://goshippo.com/docs](https://goshippo.com/docs) for complete up-to-date documentation.
 
-Configurable variables previously available in the main module (ex: `shippo.api_key`) have been moved to the `shippo.config` module.
+### Supported Shippo Features
 
-```python
+The Shippo API provides in depth support of carrier and shipping functionalities. Here are just some of the features we support through the API:
 
-import shippo
+- Shipping rates & labels - [Docs](https://goshippo.com/docs/first-shipment)
+- Tracking for any shipment with just the tracking number - [Docs](https://goshippo.com/docs/tracking)
+- Batch label generation - [Docs](https://goshippo.com/docs/batch)
+- Multi-piece shipments - [Docs](https://goshippo.com/docs/multipiece)
+- Manifests and SCAN forms - [Docs](https://goshippo.com/docs/manifests)
+- Customs declaration and commercial invoicing - [Docs](https://goshippo.com/docs/international)
+- Address verification - [Docs](https://goshippo.com/docs/address-validation)
+- Consolidator support including:
+  - DHL eCommerce
+  - UPS Mail Innovations
+  - FedEx Smartpost
+- Additional services: cash-on-delivery, certified mail, delivery confirmation, and more - [Docs](https://goshippo.com/docs/reference#shipment-extras)
 
-shippo.config.api_key = "<API-KEY>"
-shippo.config.api_version = "2018-02-08"
-shippo.config.verify_ssl_certs = True
-shippo.config.rates_req_timeout = 30.0
-shippo.config.timeout_in_seconds = None
-# default timeout set in the above line is:
-# 80 seconds for RequestsClient
-# 55 seconds for UrlFetchClient
-shippo.config.app_name = "Name of your Application" # Not required
-shippo.config.app_version = "Version of Application" # Not required
+
+## How to use
+
+```bash
+pip install modern-shippo
 ```
-
-
-
-### How do I get set up?
-
-#### To install from the source file:
-
-```
-#!shell
-python setup.py install
-```
-
-or pip (https://pip.pypa.io/en/latest/index.html):
-
-```
-#!shell
-sudo pip install shippo
-```
-
-#### To test:
-
-Set your `SHIPPO_API_KEY` as an environment variable.
-e.g. on OSX:
-
-`export SHIPPO_API_KEY="<MY-API-KEY>"`
-
-Optionally, set your `APP_NAME` and `APP_VERSION` as environment variables, e.g.:
-
-```
-export APP_NAME=MyAwesomeApp
-export APP_VERSION=1.0.0
-```
-
-Run the test with the following command:
-
-```
-#!shell
-python setup.py test --test-suite=shippo
-```
-
-#### Using the API:
 
 ```python
 import shippo
+
 shippo.config.api_key = "<API-KEY>"
 
 address1 = shippo.Address.create(
@@ -89,7 +64,7 @@ address1 = shippo.Address.create(
     metadata='Customer ID 123456'
 )
 
-print f'Success with Address 1: {address1!r}'
+print(f'Success with Address 1: {address1!r}')
 ```
 
 We've created a number of examples to cover the most common use cases. You can find the sample code files in the [examples folder](examples/).
@@ -102,26 +77,67 @@ Some of the use cases we covered include:
 - [Retrieve rates, purchase label for fastest delivery option](examples/purchase-fastest-service.py)
 - [Retrieve rates so customer can pick preferred shipping method, purchase label](examples/get-rates-to-show-customer.py)
 
-## Documentation
 
-Please see [https://goshippo.com/docs](https://goshippo.com/docs) for complete up-to-date documentation.
+### Configuration
 
-## About Shippo
+```python
+import shippo
 
-Connect with multiple different carriers, get discounted shipping labels, track parcels, and much more with just one integration. You can use your own carrier accounts or take advantage of our discounted rates with the USPS and DHL Express. Using Shippo makes it easy to deal with multiple carrier integrations, rate shopping, tracking and other parts of the shipping workflow. We provide the API and dashboard for all your shipping needs.
+shippo.config.api_key = "<API-KEY>"
+shippo.config.api_version = "2018-02-08"
+shippo.config.verify_ssl_certs = True
+shippo.config.rates_req_timeout = 30.0
+shippo.config.default_timeout = 80
 
-## Supported Features
+shippo.config.app_name = "Name of your Application" # Not required
+shippo.config.app_version = "Version of Application" # Not required
+```
 
-The Shippo API provides in depth support of carrier and shipping functionalities. Here are just some of the features we support through the API:
+> Configuration is read from the environement with the SHIPPO_ prefix
+> See shippo/config.py for details.
 
-- Shipping rates & labels - [Docs](https://goshippo.com/docs/first-shipment)
-- Tracking for any shipment with just the tracking number - [Docs](https://goshippo.com/docs/tracking)
-- Batch label generation - [Docs](https://goshippo.com/docs/batch)
-- Multi-piece shipments - [Docs](https://goshippo.com/docs/multipiece)
-- Manifests and SCAN forms - [Docs](https://goshippo.com/docs/manifests)
-- Customs declaration and commercial invoicing - [Docs](https://goshippo.com/docs/international)
-- Address verification - [Docs](https://goshippo.com/docs/address-validation)
-- Consolidator support including:
-  _ DHL eCommerce
-  _ UPS Mail Innovations \* FedEx Smartpost
-- Additional services: cash-on-delivery, certified mail, delivery confirmation, and more - [Docs](https://goshippo.com/docs/reference#shipment-extras)
+### Use with Google AppEngine
+
+Google AppEngine applications should use UrlFetch to perform HTTP requests.
+The Requests module can be monkey-patched to use this HTTP client.
+The modern-shippo API client checks for requests_toolbelt availability and properly monkey-patch Requests.
+
+```shell
+pip install requests_toolbelt
+```
+
+```python
+import shippo
+import requests_toolbelt.adapters.appengine
+
+requests_toolbelt.adapters.appengine.monkeypatch()
+shippo.config.default_timeout = 55  # AppEngine timeout is 60s
+```
+
+> This was supported by the original Shippo client implementation, with a much complex http client abstraction.
+> Modern-shippo relies entirely on Python Requests to greatly simplify the code base, and rely on requests-toolbelt
+> to still support AppEngine.
+
+
+## How to setup a development environment
+
+Make sure an Python 3.10+ interpretor is installed and available.
+
+Install [hatchling](https://hatch.pypa.io/) to manage environments, run scripts and build the library.
+
+```bash
+pip install hatch
+```
+
+With hatchling installed, use the integrated CLI to manage environments, run tests and more:
+
+```shell
+hatch run test
+hatch run lint:style
+```
+
+Available environments and commands are available with:
+
+```shell
+hatch env show
+```

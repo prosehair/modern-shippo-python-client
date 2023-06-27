@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 import shippo
 from shippo.config import config
-from shippo.test.helper import (
+from tests.helper import (
     create_mock_shipment,
     DUMMY_ADDRESS,
     ShippoTestCase,

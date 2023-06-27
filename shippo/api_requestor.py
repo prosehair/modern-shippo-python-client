@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def urljoin(base, *parts):
     *parts, last_part = parts
     stripped_parts = (part.strip("/") for part in parts)
-    return "/".join((base.rstrip("/"), *stripped_parts, last_part.lstrip('/')) )
+    return "/".join((base.rstrip("/"), *stripped_parts, last_part.lstrip("/")))
 
 
 def _encode_datetime(dttime):
@@ -62,7 +62,7 @@ class APIRequestor:
             api_key = kwargs.pop("key")
 
         self._client = client or http_client.RequestsClient(
-            api_key=api_key, verify_ssl_certs=config.verify_ssl_certs, timeout_in_seconds=config.timeout_in_seconds
+            api_key=api_key, verify_ssl_certs=config.verify_ssl_certs, timeout=config.default_timeout
         )
 
     def request(self, method, url, params=None):

@@ -1,7 +1,7 @@
 import unittest
 
 import shippo
-from shippo.test.helper import ShippoTestCase, DUMMY_BATCH, INVALID_BATCH, create_mock_shipment, shippo_vcr
+from tests.helper import ShippoTestCase, DUMMY_BATCH, INVALID_BATCH, create_mock_shipment, shippo_vcr
 
 BATCH_ADD_SIZE = 4
 
@@ -9,13 +9,13 @@ BATCH_ADD_SIZE = 4
 class BatchTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_create(self):
         BATCH = DUMMY_BATCH.copy()
         batch = shippo.Batch.create(**BATCH)
         self.assertEqual(batch.status, "VALIDATING")
 
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_invalid_create(self):
         with self.assertRaises(shippo.error.InvalidRequestError):
             shippo.Batch.create()
@@ -24,7 +24,7 @@ class BatchTests(ShippoTestCase):
             shippo.Batch.create(**INVALID)
 
     @unittest.skip("Invalid fixture data")
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_retrieve(self):
         BATCH = DUMMY_BATCH.copy()
         batch = shippo.Batch.create(**BATCH)
@@ -34,13 +34,13 @@ class BatchTests(ShippoTestCase):
         retrieve = shippo.Batch.retrieve(batch.object_id, **{"object_results": "creation_succeeded"})
         self.assertGreater(len(retrieve["batch_shipments"]["results"]), 0)
 
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_invalid_retrieve(self):
         with self.assertRaises(shippo.error.APIError):
             shippo.Batch.retrieve("EXAMPLE_OF_INVALID_ID")
 
     @unittest.skip("Invalid fixture data")
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_add(self):
         BATCH = DUMMY_BATCH.copy()
         batch = shippo.Batch.create(**BATCH)
@@ -56,7 +56,7 @@ class BatchTests(ShippoTestCase):
         added_size = len(added.batch_shipments.results)
         self.assertEqual(batch_size + len(addon), added_size)
 
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_invalid_add(self):
         BATCH = DUMMY_BATCH.copy()
         batch = shippo.Batch.create(**BATCH)
@@ -66,7 +66,7 @@ class BatchTests(ShippoTestCase):
             shippo.Batch.add("INVALID_OBJECT_KEY", [{"shipment": [mock_shipment]}])
 
     @unittest.skip("Invalid fixture data")
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_remove(self):
         BATCH = DUMMY_BATCH.copy()
         batch = shippo.Batch.create(**BATCH)
@@ -87,7 +87,7 @@ class BatchTests(ShippoTestCase):
         removed = shippo.Batch.remove(batch.object_id, to_remove)
         self.assertEqual(len(removed.batch_shipments.results), 0)
 
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_invalid_remove(self):
         BATCH = DUMMY_BATCH.copy()
         batch = shippo.Batch.create(**BATCH)
@@ -100,7 +100,7 @@ class BatchTests(ShippoTestCase):
             shippo.Batch.add("INVALID_OBJECT_KEY", to_remove)
 
     @unittest.skip("Invalid fixture data")
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_purchase(self):
         BATCH = DUMMY_BATCH.copy()
         batch = shippo.Batch.create(**BATCH)
@@ -109,7 +109,7 @@ class BatchTests(ShippoTestCase):
         purchase = shippo.Batch.purchase(batch.object_id)
         self.assertEqual(purchase.status, "PURCHASING")
 
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/batch")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/batch")
     def test_invalid_purchase(self):
         with self.assertRaises(shippo.error.APIError):
             shippo.Batch.purchase("INVALID_OBJECT_ID")

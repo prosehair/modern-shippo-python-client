@@ -180,9 +180,9 @@ class ListableAPIResource(APIResource):
         """
         url = cls.class_url()
         if size:
-            params['results'] = str(size)
+            params["results"] = str(size)
         if page:
-            params['page'] = str(page)
+            params["page"] = str(page)
         requestor = api_requestor.APIRequestor()
         response = requestor.request(method="get", url=url, params=params)
         return convert_to_shippo_object(response)

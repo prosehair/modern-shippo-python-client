@@ -12,16 +12,6 @@ from requests.exceptions import RequestException
 from shippo import error
 from shippo.config import config, Configuration
 
-DEFAULT_TIMEOUT = 80
-
-try:
-    import requests_toolbelt.adapters.appengine
-except ImportError:
-    pass
-else:
-    requests_toolbelt.adapters.appengine.monkeypatch()
-    DEFAULT_TIMEOUT = 55
-
 
 def _get_shippo_user_agent_header(configuration: Configuration) -> str:
     python_version = sys.version.split(" ", maxsplit=1)[0]
@@ -35,7 +25,7 @@ def _get_shippo_user_agent_header(configuration: Configuration) -> str:
 class ShippoAuth(AuthBase):
     def __init__(self, api_key=None):
         self.api_key = api_key or config.api_key
-        self.token_type = "Bearer" if self.api_key.startswith("oauth.") else  "ShippoToken"
+        self.token_type = "Bearer" if self.api_key.startswith("oauth.") else "ShippoToken"
 
     def __call__(self, r):
         r.headers["Authorization"] = f"{self.token_type} {self.api_key}"
@@ -43,7 +33,7 @@ class ShippoAuth(AuthBase):
 
 
 class RequestsClient(Session):
-    def __init__(self, api_key=None, verify_ssl_certs=True, timeout_in_seconds=None):
+    def __init__(self, api_key=None, verify_ssl_certs=True, timeout=None):
         super().__init__()
         if verify_ssl_certs is None:
             raise ValueError("`verify_ssl_certs` cannot be None")
@@ -53,15 +43,17 @@ class RequestsClient(Session):
 
     def _set_default_headers(self):
         self.headers = self.headers or {}
-        self.headers.update({
-            "Content-Type": "application/json",
-            "X-Shippo-Client-User-Agent": _get_shippo_user_agent_header(config),
-            "User-Agent": f"{config.app_name}/{config.app_version} ShippoPythonSDK/{config.sdk_version}",
-            "Shippo-API-Version": config.api_version,
-        })
+        self.headers.update(
+            {
+                "Content-Type": "application/json",
+                "X-Shippo-Client-User-Agent": _get_shippo_user_agent_header(config),
+                "User-Agent": f"{config.app_name}/{config.app_version} ShippoPythonSDK/{config.sdk_version}",
+                "Shippo-API-Version": config.api_version,
+            }
+        )
 
     def request(self, *args, timeout=None, **kwargs):
-        timeout = timeout or DEFAULT_TIMEOUT
+        timeout = timeout or config.default_timeout
         try:
             response = super().request(*args, timeout=timeout, **kwargs)
         except Exception as err:

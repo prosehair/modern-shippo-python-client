@@ -1,13 +1,13 @@
 from datetime import datetime, timedelta
 
 import shippo
-from shippo.test.helper import create_mock_international_transaction, ShippoTestCase, DUMMY_PICKUP, shippo_vcr
+from tests.helper import create_mock_international_transaction, ShippoTestCase, DUMMY_PICKUP, shippo_vcr
 
 
 class PickupTests(ShippoTestCase):
     request_client = shippo.http_client.RequestsClient
 
-    @shippo_vcr.use_cassette(cassette_library_dir="shippo/test/fixtures/pickup")
+    @shippo_vcr.use_cassette(cassette_library_dir="tests/fixtures/pickup")
     def test_create(self):
         transaction, carrier_account = create_mock_international_transaction()
         PICKUP = DUMMY_PICKUP

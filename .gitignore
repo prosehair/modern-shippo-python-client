@@ -9,7 +9,7 @@
 .venv
 .vscode
 .idea
-shippo/test/shippo
+tests/shippo
 venv
 .python-version
 
