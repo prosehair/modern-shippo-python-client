@@ -1,0 +1,94 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/addresses/
+  response:
+    body:
+      string: '{"next": "https://api.goshippo.com/addresses/?page=2", "previous":
+        null, "results": [{"object_created": "2023-06-12T17:13:37.755Z", "object_updated":
+        "2023-06-12T17:13:38.293Z", "object_id": "9e90c8d1460a4dfdb5b2c45c5950aa75",
+        "is_complete": false, "validation_results": {"is_valid": false, "messages":
+        [{"source": "Shippo Address Validator", "code": "Address Not Found", "type":
+        "address_error", "text": "The address as submitted could not be found. Please
+        check for excessive abbreviations in the street address line or in the City
+        name."}]}, "object_owner": "shipping@prosehair.com", "name": "Laura Behrens
+        Wu", "company": "Shippo", "street_no": "0798987987987", "street1": "0798987987987
+        CLAYTONKLJLKJL ST.", "street2": "", "street3": "", "city": "SAN FRANCISCO",
+        "state": "CA", "zip": "74338", "country": "US", "longitude": null, "latitude":
+        null, "phone": "0015553419393", "email": "", "is_residential": null, "metadata":
+        "Customer ID 123456", "test": true}, {"object_created": "2023-06-12T17:13:36.540Z",
+        "object_updated": "2023-06-12T17:13:38.286Z", "object_id": "d0d120286c2e49eb97664e7e37e88fc6",
+        "is_complete": true, "validation_results": {}, "object_owner": "shipping@prosehair.com",
+        "name": "Laura Behrens Wu", "company": "Shippo", "street_no": "0798987987987",
+        "street1": "ClaytonKLJLKJL St.", "street2": "", "street3": "", "city": "San
+        Francisco", "state": "CA", "zip": "74338", "country": "US", "longitude": null,
+        "latitude": null, "phone": "0015553419393", "email": "", "is_residential":
+        null, "metadata": "Customer ID 123456", "test": true}, {"object_created":
+        "2023-06-12T17:13:35.123Z", "object_updated": "2023-06-12T17:13:35.135Z",
+        "object_id": "1f80b640a1ab46dfa64caeb29f8bad27", "is_complete": false, "validation_results":
+        {}, "object_owner": "shipping@prosehair.com", "name": "Laura Behrens Wu",
+        "company": "Shippo", "street_no": "", "street1": "", "street2": "", "street3":
+        "", "city": "San Francisco", "state": "CA", "zip": "", "country": "US", "longitude":
+        null, "latitude": null, "phone": "0015553419393", "email": "", "is_residential":
+        null, "metadata": "Customer ID 123456", "test": true}, {"object_created":
+        "2023-06-12T17:13:34.412Z", "object_updated": "2023-06-12T17:13:34.433Z",
+        "object_id": "ad58c3d63cae4e2382368fe20b42be12", "is_complete": true, "validation_results":
+        {}, "object_owner": "shipping@prosehair.com", "name": "Laura Behrens Wu",
+        "company": "Shippo", "street_no": "215", "street1": "Clayton St.", "street2":
+        "", "street3": "", "city": "San Francisco", "state": "CA", "zip": "94117",
+        "country": "US", "longitude": null, "latitude": null, "phone": "0015553419393",
+        "email": "", "is_residential": null, "metadata": "Customer ID 123456", "test":
+        true}, {"object_created": "2023-06-12T17:09:51.754Z", "object_updated": "2023-06-12T17:09:51.782Z",
+        "object_id": "c1b2dd4c57164d318c0a9b102f0c42e8", "is_complete": true, "validation_results":
+        {"is_valid": true, "messages": []}, "object_owner": "shipping@prosehair.com",
+        "name": "Laura Behrens Wu", "company": "Shippo", "street_no": "", "street1":
+        "215 Clayton St", "street2": "", "street3": "", "city": "San Francisco", "state":
+        "CA", "zip": "94117-1913", "country": "US", "longitude": "-122.4493400000",
+        "latitude": "37.7730300000", "phone": "0015553419393", "email": "", "is_residential":
+        true, "metadata": "", "test": true}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:14:05 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=42cf1c7d3f3f4ecb8dcf6d624b2b1c9d; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '8557'
+    status:
+      code: 200
+      message: OK
+version: 1

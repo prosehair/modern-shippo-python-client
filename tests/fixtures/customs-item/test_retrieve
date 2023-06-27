@@ -1,0 +1,118 @@
+interactions:
+- request:
+    body: '{"description": "T-Shirt", "quantity": 2, "net_weight": "400", "mass_unit":
+      "g", "value_amount": "20", "value_currency": "USD", "tariff_number": "", "origin_country":
+      "US", "metadata": "Order ID #123123"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '204'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/customs/items/
+  response:
+    body:
+      string: '{"object_created": "2023-06-12T17:06:06.084Z", "object_updated": "2023-06-12T17:06:06.084Z",
+        "object_id": "0360c99b36db4cb8bfd8f7192395f2a2", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400", "mass_unit": "g", "value_amount": "20", "value_currency": "USD", "origin_country":
+        "US", "tariff_number": "", "hs_code": "", "sku_code": null, "eccn_ear99":
+        "", "metadata": "Order ID #123123", "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:06:06 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=fefe065c43bd4c74b4f0f018cbac75f0; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '40'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/customs/items/0360c99b36db4cb8bfd8f7192395f2a2
+  response:
+    body:
+      string: '{"object_created": "2023-06-12T17:06:06.084Z", "object_updated": "2023-06-12T17:06:06.084Z",
+        "object_id": "0360c99b36db4cb8bfd8f7192395f2a2", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:06:06 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=0ee365921605497e9a82de123c4d8599; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '17'
+    status:
+      code: 200
+      message: OK
+version: 1

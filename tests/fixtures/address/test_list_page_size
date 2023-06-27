@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/addresses/?results=1
+  response:
+    body:
+      string: '{"next": "https://api.goshippo.com/addresses/?results=1&page=2", "previous":
+        null, "results": [{"object_created": "2023-06-13T12:14:53.429Z", "object_updated":
+        "2023-06-13T12:14:53.429Z", "object_id": "f6db72b049864fffad6f9713abe860fb",
+        "is_complete": true, "validation_results": {}, "object_owner": "shipping@prosehair.com",
+        "name": "Cypress Hill", "company": "", "street_no": "", "street1": "1455 Massachusetts
+        Avenue", "street2": "", "street3": "", "city": "Lexington", "state": "MA",
+        "zip": "02420", "country": "US", "longitude": null, "latitude": null, "phone":
+        "0011231231234", "email": "", "is_residential": null, "metadata": "", "test":
+        true}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 13 Jun 2023 12:18:24 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=f71e164d6a9b4129a9cec8e887059ba5; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '11868'
+    status:
+      code: 200
+      message: OK
+version: 1

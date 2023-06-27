@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/shipments/EXAMPLE_OF_INVALID_ID
+  response:
+    body:
+      string: <h1>Not Found</h1><p>The requested URL /shipments/EXAMPLE_OF_INVALID_ID
+        was not found on this server.</p>
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Mon, 12 Jun 2023 17:09:07 GMT
+      Transfer-Encoding:
+      - chunked
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=257017d3e81c4101a8ceac8ceabb319e; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '7'
+    status:
+      code: 404
+      message: Not Found
+version: 1

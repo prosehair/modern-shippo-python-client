@@ -1,3 +1,5 @@
+# ruff: noqa
+
 from shippo.resource import (
     Address,
     Batch,

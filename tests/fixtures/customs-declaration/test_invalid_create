@@ -1,0 +1,59 @@
+interactions:
+- request:
+    body: '{"exporter_reference": "", "importer_reference": "", "contents_type": "MERCHANDISE",
+      "contents_explanation": "T-Shirt purchase", "invoice": "#123123", "license":
+      "", "certificate": "", "notes": "", "eel_pfc": "NOEEI_30_37_a", "aes_itn": "",
+      "non_delivery_option": "ABANDON", "cerfy": true, "certify_signer": "Laura Behrens
+      Wu", "disclaimer": "", "incoterm": "", "metadata": "Order ID #123123"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '393'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/customs/declarations/
+  response:
+    body:
+      string: '{"items": ["This field is required."]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:04:26 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=0555f4a0568146a7ab578522ae383277; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '15'
+    status:
+      code: 400
+      message: Bad Request
+version: 1

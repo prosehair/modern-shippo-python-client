@@ -1,0 +1,123 @@
+interactions:
+- request:
+    body: '{"name": "Laura Behrens Wu", "company": "Shippo", "street1": "Clayton St.",
+      "street_no": "215", "street2": "", "city": "San Francisco", "state": "CA", "zip":
+      "94117", "country": "US", "phone": "+1 555 341 9393", "metadata": "Customer
+      ID 123456"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '245'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/addresses/
+  response:
+    body:
+      string: '{"object_created": "2023-06-12T17:04:15.426Z", "object_updated": "2023-06-12T17:04:15.432Z",
+        "object_id": "e15aa789f1e44346b81ec3a99e3e88b4", "is_complete": true, "validation_results":
+        {}, "object_owner": "shipping@prosehair.com", "name": "Laura Behrens Wu",
+        "company": "Shippo", "street_no": "215", "street1": "Clayton St.", "street2":
+        "", "street3": "", "city": "San Francisco", "state": "CA", "zip": "94117",
+        "country": "US", "longitude": null, "latitude": null, "phone": "0015553419393",
+        "email": "", "is_residential": null, "metadata": "Customer ID 123456", "test":
+        true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:04:15 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=5db9554508a7448b9117462165d6bb6f; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '30'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/addresses/e15aa789f1e44346b81ec3a99e3e88b4/validate
+  response:
+    body:
+      string: '{"object_created": "2023-06-12T17:04:16.405Z", "object_updated": "2023-06-12T17:04:16.442Z",
+        "object_id": "cd1d63f4b3cb454f9e0f189e1f4abf6b", "is_complete": true, "validation_results":
+        {"is_valid": true, "messages": []}, "object_owner": "shipping@prosehair.com",
+        "name": "Laura Behrens Wu", "company": "Shippo", "street_no": "", "street1":
+        "215 Clayton St", "street2": "", "street3": "", "city": "San Francisco", "state":
+        "CA", "zip": "94117-1913", "country": "US", "longitude": -122.44934, "latitude":
+        37.77303, "phone": "0015553419393", "email": "", "is_residential": true, "metadata":
+        "", "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:04:16 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=aac7db9143d3427fb5a721ceca1e1b02; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '391'
+    status:
+      code: 200
+      message: OK
+version: 1

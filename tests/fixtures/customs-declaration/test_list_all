@@ -1,0 +1,106 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/customs/declarations/
+  response:
+    body:
+      string: '{"next": "https://api.goshippo.com/customs/declarations/?page=2", "previous":
+        null, "results": [{"object_created": "2023-06-12T17:04:25.869Z", "object_updated":
+        "2023-06-12T17:04:25.869Z", "object_id": "b58d65752caa4013955798f5cb9ba2dd",
+        "object_owner": "shipping@prosehair.com", "object_state": "VALID", "address_importer":
+        null, "certify_signer": "Laura Behrens Wu", "certify": true, "items": ["90da25021d264c2195fa275fadca7343"],
+        "non_delivery_option": "ABANDON", "contents_type": "MERCHANDISE", "contents_explanation":
+        "T-Shirt purchase", "exporter_reference": "", "importer_reference": "", "invoice":
+        "#123123", "commercial_invoice": false, "license": "", "certificate": "",
+        "notes": "", "eel_pfc": "NOEEI_30_37_a", "aes_itn": "", "disclaimer": "",
+        "incoterm": "", "metadata": "Order ID #123123", "test": true, "duties_payor":
+        null, "b13a_filing_option": "", "b13a_number": "", "invoiced_charges": null,
+        "exporter_identification": null, "is_vat_collected": null}, {"object_created":
+        "2023-05-24T09:31:38.333Z", "object_updated": "2023-05-24T09:31:38.333Z",
+        "object_id": "8de65a4d323e4eecaec4f737505e39c8", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "address_importer": null, "certify_signer": "dev",
+        "certify": true, "items": ["42f1e19974974d23bb88baf7aea73e39"], "non_delivery_option":
+        "ABANDON", "contents_type": "MERCHANDISE", "contents_explanation": "", "exporter_reference":
+        "", "importer_reference": "", "invoice": "", "commercial_invoice": false,
+        "license": "", "certificate": "", "notes": "", "eel_pfc": "", "aes_itn": "",
+        "disclaimer": "", "incoterm": "DDP", "metadata": "", "test": true, "duties_payor":
+        null, "b13a_filing_option": "", "b13a_number": "", "invoiced_charges": null,
+        "exporter_identification": null, "is_vat_collected": false}, {"object_created":
+        "2023-05-24T09:31:37.358Z", "object_updated": "2023-05-24T09:31:37.358Z",
+        "object_id": "42b0d417e8714af8a4e3918179fca319", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "address_importer": null, "certify_signer": "dev",
+        "certify": true, "items": ["42f1e19974974d23bb88baf7aea73e39"], "non_delivery_option":
+        "ABANDON", "contents_type": "MERCHANDISE", "contents_explanation": "", "exporter_reference":
+        "", "importer_reference": "", "invoice": "", "commercial_invoice": false,
+        "license": "", "certificate": "", "notes": "", "eel_pfc": "", "aes_itn": "",
+        "disclaimer": "", "incoterm": "DDP", "metadata": "", "test": true, "duties_payor":
+        null, "b13a_filing_option": "", "b13a_number": "", "invoiced_charges": null,
+        "exporter_identification": null, "is_vat_collected": null}, {"object_created":
+        "2023-05-17T08:37:16.666Z", "object_updated": "2023-05-17T08:37:16.666Z",
+        "object_id": "243d3085720240799a3a5557adea460d", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "address_importer": null, "certify_signer": "Prose
+        Preprod", "certify": true, "items": ["a5275190c8d342d586f5ef6b9d1ff234", "d9f72118f7e4433baa4e8ea5380f2000",
+        "86975a4d999040d68a1be5ae6f10307d", "20dcddeee1c74ce48d11ffc7f34a2562", "80d60062b5dc4df19aa5e9b1837372a8"],
+        "non_delivery_option": "ABANDON", "contents_type": "MERCHANDISE", "contents_explanation":
+        "", "exporter_reference": "", "importer_reference": "", "invoice": "", "commercial_invoice":
+        false, "license": "", "certificate": "", "notes": "", "eel_pfc": "", "aes_itn":
+        "", "disclaimer": "", "incoterm": "DDP", "metadata": "", "test": true, "duties_payor":
+        null, "b13a_filing_option": "", "b13a_number": "", "invoiced_charges": null,
+        "exporter_identification": null, "is_vat_collected": false}, {"object_created":
+        "2023-05-17T08:37:16.494Z", "object_updated": "2023-05-17T08:37:16.494Z",
+        "object_id": "d1741e0ad65f403d92facf74726b5d24", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "address_importer": null, "certify_signer": "Prose
+        Preprod", "certify": true, "items": ["a5275190c8d342d586f5ef6b9d1ff234", "d9f72118f7e4433baa4e8ea5380f2000",
+        "86975a4d999040d68a1be5ae6f10307d", "20dcddeee1c74ce48d11ffc7f34a2562", "80d60062b5dc4df19aa5e9b1837372a8"],
+        "non_delivery_option": "ABANDON", "contents_type": "MERCHANDISE", "contents_explanation":
+        "", "exporter_reference": "", "importer_reference": "", "invoice": "", "commercial_invoice":
+        false, "license": "", "certificate": "", "notes": "", "eel_pfc": "", "aes_itn":
+        "", "disclaimer": "", "incoterm": "DDP", "metadata": "", "test": true, "duties_payor":
+        null, "b13a_filing_option": "", "b13a_number": "", "invoiced_charges": null,
+        "exporter_identification": null, "is_vat_collected": null}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:04:59 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=1df1f9ebb8674a3c901bb067c6feabf4; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '31249'
+    status:
+      code: 200
+      message: OK
+version: 1

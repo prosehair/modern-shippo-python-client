@@ -1,0 +1,115 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/customs/items/?results=10&page=1
+  response:
+    body:
+      string: '{"next": "https://api.goshippo.com/customs/items/?results=10&page=2",
+        "previous": null, "results": [{"object_created": "2023-06-21T14:11:22.373Z",
+        "object_updated": "2023-06-21T14:11:22.373Z", "object_id": "d1a586c0a89240a59a5b30d17515acf7",
+        "object_owner": "shipping@prosehair.com", "object_state": "VALID", "description":
+        "Vegan hair supplement capsules", "quantity": 1, "net_weight": "0.6000", "mass_unit":
+        "lb", "value_amount": "79.00", "value_currency": "CAD", "origin_country":
+        "US", "tariff_number": "2106909998", "hs_code": "2106909998", "sku_code":
+        "DS0002", "eccn_ear99": "", "metadata": "", "test": true}, {"object_created":
+        "2023-06-21T12:56:29.246Z", "object_updated": "2023-06-21T12:56:29.246Z",
+        "object_id": "04537e83240d44d98fb24b49bf257eec", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "Vegan hair supplement capsules",
+        "quantity": 1, "net_weight": "0.6000", "mass_unit": "lb", "value_amount":
+        "79.00", "value_currency": "CAD", "origin_country": "US", "tariff_number":
+        "2106909998", "hs_code": "2106909998", "sku_code": "DS0002", "eccn_ear99":
+        "", "metadata": "", "test": true}, {"object_created": "2023-06-21T12:55:09.164Z",
+        "object_updated": "2023-06-21T12:55:09.164Z", "object_id": "c301b79f582940a0be1a1e1f855f2a65",
+        "object_owner": "shipping@prosehair.com", "object_state": "VALID", "description":
+        "Vegan hair supplement capsules", "quantity": 1, "net_weight": "0.6000", "mass_unit":
+        "lb", "value_amount": "79.00", "value_currency": "CAD", "origin_country":
+        "US", "tariff_number": "2106909998", "hs_code": "2106909998", "sku_code":
+        "DS0002", "eccn_ear99": "", "metadata": "", "test": true}, {"object_created":
+        "2023-06-13T10:27:13.202Z", "object_updated": "2023-06-13T10:27:13.202Z",
+        "object_id": "cdf69095ea9e4af2a66636585765a9b1", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}, {"object_created":
+        "2023-06-13T10:26:09.639Z", "object_updated": "2023-06-13T10:26:09.639Z",
+        "object_id": "cbea500f3c74466382e90369aac87f79", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}, {"object_created":
+        "2023-06-13T10:26:07.619Z", "object_updated": "2023-06-13T10:26:07.619Z",
+        "object_id": "724ea39967df43a3a8d554827a06fad9", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}, {"object_created":
+        "2023-06-13T10:25:37.780Z", "object_updated": "2023-06-13T10:25:37.780Z",
+        "object_id": "a3e51f12fbfb413483f132fc1e5bec2d", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}, {"object_created":
+        "2023-06-12T17:06:06.084Z", "object_updated": "2023-06-12T17:06:06.084Z",
+        "object_id": "0360c99b36db4cb8bfd8f7192395f2a2", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}, {"object_created":
+        "2023-06-12T17:05:02.592Z", "object_updated": "2023-06-12T17:05:02.592Z",
+        "object_id": "65d8452c70cc4e5182727b8629c345e7", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}, {"object_created":
+        "2023-06-12T17:05:00.476Z", "object_updated": "2023-06-12T17:05:00.476Z",
+        "object_id": "961b888e03094598bfbf0e34ae46faa2", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400.0000", "mass_unit": "g", "value_amount": "20.00", "value_currency": "USD",
+        "origin_country": "US", "tariff_number": "", "hs_code": "", "sku_code": null,
+        "eccn_ear99": "", "metadata": "Order ID #123123", "test": true}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 21 Jun 2023 16:18:50 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=53a7a730bc6142ce8ef505372173459f; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '16185'
+    status:
+      code: 200
+      message: OK
+version: 1

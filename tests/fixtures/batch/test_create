@@ -1,0 +1,76 @@
+interactions:
+- request:
+    body: '{"default_carrier_account": "572b28b2973f469b8cdaf1f5c992fc43", "default_servicelevel_token":
+      "usps_priority", "label_filetype": "PDF_4x6", "metadata": "BATCH #170", "batch_shipments":
+      [{"shipment": {"address_from": {"name": "Mr Hippo", "street1": "965 Mission
+      St", "street2": "Ste 201", "city": "San Francisco", "state": "CA", "zip": "94103",
+      "country": "US", "phone": "4151234567"}, "address_to": {"name": "Mrs Hippo",
+      "company": "", "street1": "Broadway 1", "street2": "", "city": "New York", "state":
+      "NY", "zip": "10007", "country": "US", "phone": "4151234567"}, "parcels": [{"length":
+      "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit":
+      "oz"}]}}, {"shipment": {"address_from": {"name": "Mr Hippo", "street1": "1092
+      Indian Summer Ct", "city": "San Jose", "state": "CA", "zip": "95122", "country":
+      "US", "phone": "4151234567"}, "address_to": {"name": "Mrs Hippo", "company":
+      "", "street1": "Broadway 1", "street2": "", "city": "New York", "state": "NY",
+      "zip": "10007", "country": "US", "phone": "4151234567"}, "parcels": [{"length":
+      "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit":
+      "oz"}]}}]}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1166'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/batches/
+  response:
+    body:
+      string: '{"object_id": "381f85e80d0f4c8b9539acfd36d269a3", "object_owner": "shipping@prosehair.com",
+        "status": "VALIDATING", "object_created": "2023-06-26T12:29:33.250Z", "object_updated":
+        "2023-06-26T12:29:33.250Z", "metadata": "BATCH #170", "default_carrier_account":
+        "572b28b2973f469b8cdaf1f5c992fc43", "default_servicelevel_token": "usps_priority",
+        "label_filetype": "PDF_4x6", "batch_shipments": {"count": 0, "next": null,
+        "previous": null, "results": []}, "object_results": {"purchase_succeeded":
+        0, "purchase_failed": 0, "creation_failed": 0, "creation_succeeded": 0}, "label_url":
+        [], "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:29:33 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=248c27a0344f4c2bbbc0763a6a4dd70d; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '49'
+    status:
+      code: 201
+      message: Created
+version: 1

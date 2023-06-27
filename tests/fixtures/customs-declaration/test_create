@@ -1,0 +1,130 @@
+interactions:
+- request:
+    body: '{"description": "T-Shirt", "quantity": 2, "net_weight": "400", "mass_unit":
+      "g", "value_amount": "20", "value_currency": "USD", "tariff_number": "", "origin_country":
+      "US", "metadata": "Order ID #123123"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '204'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/customs/items/
+  response:
+    body:
+      string: '{"object_created": "2023-06-12T17:04:25.206Z", "object_updated": "2023-06-12T17:04:25.206Z",
+        "object_id": "90da25021d264c2195fa275fadca7343", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "description": "T-Shirt", "quantity": 2, "net_weight":
+        "400", "mass_unit": "g", "value_amount": "20", "value_currency": "USD", "origin_country":
+        "US", "tariff_number": "", "hs_code": "", "sku_code": null, "eccn_ear99":
+        "", "metadata": "Order ID #123123", "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:04:25 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=d57c9efdfb84403e8d575e4a4340c4e7; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '33'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"exporter_reference": "", "importer_reference": "", "contents_type": "MERCHANDISE",
+      "contents_explanation": "T-Shirt purchase", "invoice": "#123123", "license":
+      "", "certificate": "", "notes": "", "eel_pfc": "NOEEI_30_37_a", "aes_itn": "",
+      "non_delivery_option": "ABANDON", "certify": true, "certify_signer": "Laura
+      Behrens Wu", "disclaimer": "", "incoterm": "", "items": ["90da25021d264c2195fa275fadca7343"],
+      "metadata": "Order ID #123123"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '442'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/customs/declarations/
+  response:
+    body:
+      string: '{"object_created": "2023-06-12T17:04:25.869Z", "object_updated": "2023-06-12T17:04:25.869Z",
+        "object_id": "b58d65752caa4013955798f5cb9ba2dd", "object_owner": "shipping@prosehair.com",
+        "object_state": "VALID", "address_importer": null, "certify_signer": "Laura
+        Behrens Wu", "certify": true, "items": ["90da25021d264c2195fa275fadca7343"],
+        "non_delivery_option": "ABANDON", "contents_type": "MERCHANDISE", "contents_explanation":
+        "T-Shirt purchase", "exporter_reference": "", "importer_reference": "", "invoice":
+        "#123123", "commercial_invoice": false, "license": "", "certificate": "",
+        "notes": "", "eel_pfc": "NOEEI_30_37_a", "aes_itn": "", "disclaimer": "",
+        "incoterm": "", "metadata": "Order ID #123123", "test": true, "duties_payor":
+        null, "b13a_filing_option": "", "b13a_number": "", "invoiced_charges": null,
+        "exporter_identification": null, "is_vat_collected": null}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:04:25 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=44bcab7eeeec4c238f45cddcb7601a79; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '55'
+    status:
+      code: 201
+      message: Created
+version: 1

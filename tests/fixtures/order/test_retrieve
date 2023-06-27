@@ -1,0 +1,148 @@
+interactions:
+- request:
+    body: '{"to_address": {"city": "San Francisco", "company": "Shippo", "country":
+      "US", "email": "shippotle@goshippo.com", "name": "Mr Hippo", "phone": "15553419393",
+      "state": "CA", "street1": "215 Clayton St.", "zip": "94117"}, "line_items":
+      [{"quantity": 1, "sku": "HM-123", "title": "Hippo Magazines", "total_price":
+      "12.10", "currency": "USD", "weight": "0.40", "weight_unit": "lb"}], "placed_at":
+      "2023-06-12T19:07:00.194629Z", "order_number": "#1068", "order_status": "PAID",
+      "shipping_cost": "12.83", "shipping_cost_currency": "USD", "shipping_method":
+      "USPS First Class Package", "subtotal_price": "12.10", "total_price": "24.93",
+      "total_tax": "0.00", "currency": "USD", "weight": "0.40", "weight_unit": "lb"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '708'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/orders/
+  response:
+    body:
+      string: '{"object_id": "753eec8270cd4ab8bb7c9aa06100c4c7", "order_number": "#1068",
+        "order_status": "PAID", "placed_at": "2023-06-12T19:07:00.194Z", "object_owner":
+        "shipping@prosehair.com", "to_address": {"object_created": "2023-06-12T17:07:00.829Z",
+        "object_updated": "2023-06-12T17:07:00.840Z", "object_id": "19539256af544ee187ee6b87262e27e6",
+        "is_complete": true, "validation_results": {}, "object_owner": "shipping@prosehair.com",
+        "name": "Mr Hippo", "company": "Shippo", "street_no": "", "street1": "215
+        Clayton St.", "street2": "", "street3": "", "city": "San Francisco", "state":
+        "CA", "zip": "94117", "country": "US", "longitude": null, "latitude": null,
+        "phone": "15553419393", "email": "shippotle@goshippo.com", "is_residential":
+        null, "metadata": "", "test": true}, "from_address": null, "shop_app": "Shippo",
+        "weight": "0.40", "weight_unit": "lb", "transactions": [], "total_tax": "0.00",
+        "total_price": "24.93", "subtotal_price": "12.10", "currency": "USD", "shipping_method":
+        "USPS First Class Package", "shipping_cost": "12.83", "shipping_cost_currency":
+        "USD", "line_items": [{"object_id": "78596546030c4015834d1ad24c90a636", "title":
+        "Hippo Magazines", "variant_title": null, "sku": "HM-123", "quantity": 1,
+        "total_price": "12.10", "currency": "USD", "weight": "0.4000", "weight_unit":
+        "lb", "manufacture_country": null, "max_ship_time": null, "max_delivery_time":
+        null, "description": null}], "notes": null, "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:07:00 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=9f78c0f40e0b46d7a83229df2444c6a5; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '90'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/orders/753eec8270cd4ab8bb7c9aa06100c4c7
+  response:
+    body:
+      string: '{"object_id": "753eec8270cd4ab8bb7c9aa06100c4c7", "order_number": "#1068",
+        "order_status": "PAID", "errors": [], "validation_status": null, "placed_at":
+        "2023-06-12T19:07:00.194Z", "object_owner": "shipping@prosehair.com", "to_address":
+        {"object_created": "2023-06-12T17:07:00.829Z", "object_updated": "2023-06-12T17:07:00.829Z",
+        "object_id": "19539256af544ee187ee6b87262e27e6", "is_complete": true, "validation_results":
+        {}, "object_owner": "shipping@prosehair.com", "name": "Mr Hippo", "company":
+        "Shippo", "street_no": "", "street1": "215 Clayton St.", "street2": "", "street3":
+        "", "city": "San Francisco", "state": "CA", "zip": "94117", "country": "US",
+        "longitude": null, "latitude": null, "phone": "15553419393", "email": "shippotle@goshippo.com",
+        "is_residential": null, "metadata": "", "test": true}, "from_address": null,
+        "shop_app": "Shippo", "weight": "0.40", "weight_unit": "lb", "transactions":
+        [], "total_tax": "0.00", "total_price": "24.93", "subtotal_price": "12.10",
+        "currency": "USD", "shipping_method": "USPS First Class Package", "shipping_cost":
+        "12.83", "shipping_cost_currency": "USD", "line_items": [{"object_id": "78596546030c4015834d1ad24c90a636",
+        "title": "Hippo Magazines", "variant_title": null, "sku": "HM-123", "quantity":
+        1, "total_price": "12.10", "currency": "USD", "weight": "0.4000", "weight_unit":
+        "lb", "manufacture_country": null, "max_ship_time": null, "max_delivery_time":
+        null, "description": null}], "notes": null, "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 17:07:01 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=88eaecc96e90458c97a69b3dbff54444; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '35'
+    status:
+      code: 200
+      message: OK
+version: 1

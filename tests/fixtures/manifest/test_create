@@ -1,0 +1,551 @@
+interactions:
+- request:
+    body: '{"name": "John Smith", "company": "Initech", "street1": "965 Mission Street",
+      "street_no": "", "street2": "Ste 480", "city": "San Francisco", "state": "CA",
+      "zip": "94103", "country": "US", "phone": "+1 630 333 7333", "metadata": "Customer
+      ID 123456"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '251'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/addresses/
+  response:
+    body:
+      string: '{"object_created": "2023-06-26T12:06:20.308Z", "object_updated": "2023-06-26T12:06:20.320Z",
+        "object_id": "432969e1572943f8a2e9cde580c3bb64", "is_complete": true, "validation_results":
+        {}, "object_owner": "shipping@prosehair.com", "name": "John Smith", "company":
+        "Initech", "street_no": "", "street1": "965 Mission Street", "street2": "Ste
+        480", "street3": "", "city": "San Francisco", "state": "CA", "zip": "94103",
+        "country": "US", "longitude": null, "latitude": null, "phone": "0016303337333",
+        "email": "", "is_residential": null, "metadata": "Customer ID 123456", "test":
+        true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:06:20 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=6899e6f55bef4a7b90587494e533cf41; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '45'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"name": "Laura Behrens Wu", "company": "Shippo", "street1": "Clayton St.",
+      "street_no": "215", "street2": "", "city": "San Francisco", "state": "CA", "zip":
+      "94117", "country": "US", "phone": "+1 555 341 9393", "metadata": "Customer
+      ID 123456"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '245'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/addresses/
+  response:
+    body:
+      string: '{"object_created": "2023-06-26T12:06:20.944Z", "object_updated": "2023-06-26T12:06:20.953Z",
+        "object_id": "d8f806e99e904fca83ebd1c6fecae8e2", "is_complete": true, "validation_results":
+        {}, "object_owner": "shipping@prosehair.com", "name": "Laura Behrens Wu",
+        "company": "Shippo", "street_no": "215", "street1": "Clayton St.", "street2":
+        "", "street3": "", "city": "San Francisco", "state": "CA", "zip": "94117",
+        "country": "US", "longitude": null, "latitude": null, "phone": "0015553419393",
+        "email": "", "is_residential": null, "metadata": "Customer ID 123456", "test":
+        true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:06:20 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=a7978cd83c444352aef5a5c5e47f5ad8; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '38'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"length": "5", "width": "5", "height": "5", "distance_unit": "cm", "weight":
+      "2", "mass_unit": "lb", "template": "", "metadata": "Customer ID 123456"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '151'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/parcels/
+  response:
+    body:
+      string: '{"object_state": "VALID", "object_created": "2023-06-26T12:06:21.696Z",
+        "object_updated": "2023-06-26T12:06:21.696Z", "object_id": "05968fbb485d43e1abd55378965bd240",
+        "object_owner": "shipping@prosehair.com", "template": null, "length": "5",
+        "width": "5", "height": "5", "distance_unit": "cm", "weight": "2", "mass_unit":
+        "lb", "value_amount": null, "value_currency": null, "metadata": "Customer
+        ID 123456", "extra": {}, "line_items": [], "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:06:21 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=02b8cae7ebf74225857db35dcf477311; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '28'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"address_from": "d8f806e99e904fca83ebd1c6fecae8e2", "address_to": "432969e1572943f8a2e9cde580c3bb64",
+      "parcels": ["05968fbb485d43e1abd55378965bd240"], "submission_type": "PICKUP",
+      "insurance_amount": "200", "insurance_currency": "USD", "extra": {"signature_confirmation":
+      true, "reference_1": "", "reference_2": "", "insurance": {"amount": "200", "currency":
+      "USD"}}, "metadata": "Customer ID 123456", "async": false}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '418'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/shipments/
+  response:
+    body:
+      string: "{\"carrier_accounts\": [], \"object_created\": \"2023-06-26T12:06:22.244Z\",
+        \"object_updated\": \"2023-06-26T12:06:22.327Z\", \"object_id\": \"84374cbd21d941518b14f251d0cc7820\",
+        \"object_owner\": \"shipping@prosehair.com\", \"status\": \"SUCCESS\", \"address_from\":
+        {\"object_id\": \"d8f806e99e904fca83ebd1c6fecae8e2\", \"is_complete\": true,
+        \"name\": \"Laura Behrens Wu\", \"company\": \"Shippo\", \"street_no\": \"215\",
+        \"street1\": \"Clayton St.\", \"validation_results\": {}, \"street2\": \"\",
+        \"street3\": \"\", \"city\": \"San Francisco\", \"state\": \"CA\", \"zip\":
+        \"94117\", \"country\": \"US\", \"phone\": \"0015553419393\", \"email\": \"\",
+        \"is_residential\": null, \"test\": true}, \"address_to\": {\"object_id\":
+        \"432969e1572943f8a2e9cde580c3bb64\", \"is_complete\": true, \"name\": \"John
+        Smith\", \"company\": \"Initech\", \"street_no\": \"\", \"street1\": \"965
+        Mission Street\", \"validation_results\": {}, \"street2\": \"Ste 480\", \"street3\":
+        \"\", \"city\": \"San Francisco\", \"state\": \"CA\", \"zip\": \"94103\",
+        \"country\": \"US\", \"phone\": \"0016303337333\", \"email\": \"\", \"is_residential\":
+        null, \"test\": true}, \"parcels\": [{\"object_state\": \"VALID\", \"object_created\":
+        \"2023-06-26T12:06:21.696Z\", \"object_updated\": \"2023-06-26T12:06:22.261Z\",
+        \"object_id\": \"05968fbb485d43e1abd55378965bd240\", \"object_owner\": \"shipping@prosehair.com\",
+        \"template\": null, \"extra\": {}, \"length\": \"5.0000\", \"width\": \"5.0000\",
+        \"height\": \"5.0000\", \"distance_unit\": \"cm\", \"weight\": \"2.0000\",
+        \"mass_unit\": \"lb\", \"value_amount\": null, \"value_currency\": null, \"metadata\":
+        \"Customer ID 123456\", \"line_items\": [], \"test\": true}], \"shipment_date\":
+        \"2023-06-26T12:06:22.326Z\", \"address_return\": {\"object_id\": \"d8f806e99e904fca83ebd1c6fecae8e2\",
+        \"is_complete\": true, \"name\": \"Laura Behrens Wu\", \"company\": \"Shippo\",
+        \"street_no\": \"215\", \"street1\": \"Clayton St.\", \"validation_results\":
+        {}, \"street2\": \"\", \"street3\": \"\", \"city\": \"San Francisco\", \"state\":
+        \"CA\", \"zip\": \"94117\", \"country\": \"US\", \"phone\": \"0015553419393\",
+        \"email\": \"\", \"is_residential\": null, \"test\": true}, \"alternate_address_to\":
+        null, \"customs_declaration\": null, \"extra\": {\"signature_confirmation\":
+        true, \"reference_1\": \"\", \"insurance\": {\"currency\": \"USD\", \"amount\":
+        \"200\"}, \"reference_2\": \"\"}, \"rates\": [{\"object_created\": \"2023-06-26T12:06:22.529Z\",
+        \"object_id\": \"52646315a66b4867b5fbc67121549451\", \"object_owner\": \"shipping@prosehair.com\",
+        \"shipment\": \"84374cbd21d941518b14f251d0cc7820\", \"attributes\": [\"CHEAPEST\"],
+        \"amount\": \"11.59\", \"currency\": \"USD\", \"amount_local\": \"11.59\",
+        \"currency_local\": \"USD\", \"provider\": \"USPS\", \"provider_image_75\":
+        \"https://shippo-static.s3.amazonaws.com/providers/75/USPS.png\", \"provider_image_200\":
+        \"https://shippo-static.s3.amazonaws.com/providers/200/USPS.png\", \"servicelevel\":
+        {\"name\": \"Parcel Select\", \"token\": \"usps_parcel_select\", \"terms\":
+        \"\", \"extended_token\": \"usps_parcel_select\", \"parent_servicelevel\":
+        null}, \"estimated_days\": 5, \"arrives_by\": null, \"duration_terms\": \"Delivery
+        in 2 to 5 days.\", \"messages\": [], \"carrier_account\": \"bb2b011360f040298b96c6f87d94a7fd\",
+        \"test\": true, \"zone\": \"1\", \"included_insurance_price\": \"2.00\"},
+        {\"object_created\": \"2023-06-26T12:06:22.530Z\", \"object_id\": \"a782d3d1be244bd7b745ada1c9076a4a\",
+        \"object_owner\": \"shipping@prosehair.com\", \"shipment\": \"84374cbd21d941518b14f251d0cc7820\",
+        \"attributes\": [\"BESTVALUE\", \"FASTEST\"], \"amount\": \"12.25\", \"currency\":
+        \"USD\", \"amount_local\": \"12.25\", \"currency_local\": \"USD\", \"provider\":
+        \"USPS\", \"provider_image_75\": \"https://shippo-static.s3.amazonaws.com/providers/75/USPS.png\",
+        \"provider_image_200\": \"https://shippo-static.s3.amazonaws.com/providers/200/USPS.png\",
+        \"servicelevel\": {\"name\": \"Priority Mail\", \"token\": \"usps_priority\",
+        \"terms\": \"\", \"extended_token\": \"usps_priority\", \"parent_servicelevel\":
+        null}, \"estimated_days\": 1, \"arrives_by\": null, \"duration_terms\": \"Delivery
+        within 1, 2,\_or 3 days\_based on where your package started and where it\u2019s
+        being sent.\", \"messages\": [], \"carrier_account\": \"bb2b011360f040298b96c6f87d94a7fd\",
+        \"test\": true, \"zone\": \"1\", \"included_insurance_price\": \"2.00\"},
+        {\"object_created\": \"2023-06-26T12:06:22.530Z\", \"object_id\": \"d648ea24dfdd4518bb1eca22e45e7a0a\",
+        \"object_owner\": \"shipping@prosehair.com\", \"shipment\": \"84374cbd21d941518b14f251d0cc7820\",
+        \"attributes\": [], \"amount\": \"27.65\", \"currency\": \"USD\", \"amount_local\":
+        \"27.65\", \"currency_local\": \"USD\", \"provider\": \"USPS\", \"provider_image_75\":
+        \"https://shippo-static.s3.amazonaws.com/providers/75/USPS.png\", \"provider_image_200\":
+        \"https://shippo-static.s3.amazonaws.com/providers/200/USPS.png\", \"servicelevel\":
+        {\"name\": \"Priority Mail Express\", \"token\": \"usps_priority_express\",
+        \"terms\": \"\", \"extended_token\": \"usps_priority_express\", \"parent_servicelevel\":
+        null}, \"estimated_days\": 2, \"arrives_by\": null, \"duration_terms\": \"Overnight
+        delivery to most U.S. locations.\", \"messages\": [], \"carrier_account\":
+        \"bb2b011360f040298b96c6f87d94a7fd\", \"test\": true, \"zone\": \"1\", \"included_insurance_price\":
+        \"2.00\"}], \"messages\": [{\"source\": \"FedEx\", \"code\": \"803\", \"text\":
+        \"ERROR: Meter number is missing or invalid.  \"}], \"metadata\": \"Customer
+        ID 123456\", \"test\": true, \"order\": null}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:06:23 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=2ee70307c4374de6b294e9606edfe659; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '1474'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"rate": "a782d3d1be244bd7b745ada1c9076a4a", "metadata": "Customer ID 123456",
+      "async": false}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '94'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/transactions/
+  response:
+    body:
+      string: '{"object_state": "VALID", "status": "SUCCESS", "object_created": "2023-06-26T12:06:24.090Z",
+        "object_updated": "2023-06-26T12:06:25.022Z", "object_id": "efac643d7136401da094ae25f3b6bc3b",
+        "object_owner": "shipping@prosehair.com", "test": true, "rate": "a782d3d1be244bd7b745ada1c9076a4a",
+        "tracking_number": "92108901755477000000000018", "tracking_status": "UNKNOWN",
+        "eta": null, "tracking_url_provider": "https://tools.usps.com/go/TrackConfirmAction_input?origTrackNum=92108901755477000000000018",
+        "label_url": "https://deliver.goshippo.com/efac643d7136401da094ae25f3b6bc3b.pdf?Expires=1719317184&Signature=PUts3tACXmNjWxz~aAwdunzcYf4ulV7cD-Q8xbrLf0URb12QfvX9gDHnwA2mxrBK8VI-s2EAm3r1PSYRyhB771v8Z7nR69DWEm8wEZ9YbdZfec~fWZXhxgswnJue55URKJ2UpCOb~GClWGOdbtIeR37eCAGM-7wHBrD3s-Om2ZX-1bIYiIPyVgxAE-dMjuCEQKpr11cIeBr~z-WC6K8aNXEuwfvNrwlbMgCdrnUlu-wvAI62~5lH7o~7quN0Uoj4nFexR9cXTj-GIEwhGHq7aWbwbLAEPLGOKKnA6~l4429NCIL86wkAgfMYB4DreDq7mtq7HYOfsoDRjL8PllKA2A__&Key-Pair-Id=APKAJRICFXQ2S4YUQRSQ",
+        "commercial_invoice_url": null, "messages": [], "order": null, "metadata":
+        "Customer ID 123456", "parcel": "05968fbb485d43e1abd55378965bd240", "billing":
+        {"payments": []}, "qr_code_url": null}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:06:25 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=378465cd414b48c7831cd05ad2bff731; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '1116'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/rates/a782d3d1be244bd7b745ada1c9076a4a
+  response:
+    body:
+      string: "{\"object_created\": \"2023-06-26T12:06:22.530Z\", \"object_id\": \"a782d3d1be244bd7b745ada1c9076a4a\",
+        \"object_owner\": \"shipping@prosehair.com\", \"shipment\": \"84374cbd21d941518b14f251d0cc7820\",
+        \"attributes\": [\"BESTVALUE\", \"FASTEST\"], \"amount\": \"12.25\", \"currency\":
+        \"USD\", \"amount_local\": \"12.25\", \"currency_local\": \"USD\", \"provider\":
+        \"USPS\", \"provider_image_75\": \"https://shippo-static.s3.amazonaws.com/providers/75/USPS.png\",
+        \"provider_image_200\": \"https://shippo-static.s3.amazonaws.com/providers/200/USPS.png\",
+        \"servicelevel\": {\"name\": \"Priority Mail\", \"token\": \"usps_priority\",
+        \"terms\": \"\", \"extended_token\": \"usps_priority\", \"parent_servicelevel\":
+        null}, \"estimated_days\": 1, \"arrives_by\": null, \"duration_terms\": \"Delivery
+        within 1, 2,\_or 3 days\_based on where your package started and where it\u2019s
+        being sent.\", \"messages\": [], \"carrier_account\": \"bb2b011360f040298b96c6f87d94a7fd\",
+        \"test\": true, \"zone\": \"1\", \"included_insurance_price\": \"2.00\"}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:06:25 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=6c2498b832414c948511745a1d39ee37; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '40'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/shipments/84374cbd21d941518b14f251d0cc7820
+  response:
+    body:
+      string: "{\"object_id\":\"84374cbd21d941518b14f251d0cc7820\",\"object_created\":\"2023-06-26T12:06:22.244Z\",\"object_updated\":\"2023-06-26T12:06:23.250Z\",\"object_owner\":\"shipping@prosehair.com\",\"test\":true,\"metadata\":\"Customer
+        ID 123456\",\"messages\":[{\"source\":\"FedEx\",\"code\":\"803\",\"text\":\"ERROR:
+        Meter number is missing or invalid.  \"}],\"extra\":{\"insurance\":{\"amount\":\"200.00\",\"currency\":\"USD\"},\"reference_1\":\"\",\"reference_2\":\"\",\"signature_confirmation\":true},\"order\":null,\"carrier_accounts\":[],\"address_from\":{\"name\":\"Laura
+        Behrens Wu\",\"street1\":\"Clayton St.\",\"street2\":\"\",\"street3\":\"\",\"city\":\"San
+        Francisco\",\"state\":\"CA\",\"zip\":\"94117\",\"country\":\"US\",\"street_no\":\"215\",\"phone\":\"0015553419393\",\"email\":\"\",\"company\":\"Shippo\",\"is_residential\":null,\"test\":true,\"object_id\":\"d8f806e99e904fca83ebd1c6fecae8e2\",\"is_complete\":true,\"validation_results\":{}},\"address_to\":{\"name\":\"John
+        Smith\",\"street1\":\"965 Mission Street\",\"street2\":\"Ste 480\",\"street3\":\"\",\"city\":\"San
+        Francisco\",\"state\":\"CA\",\"zip\":\"94103\",\"country\":\"US\",\"street_no\":\"\",\"phone\":\"0016303337333\",\"email\":\"\",\"company\":\"Initech\",\"is_residential\":null,\"test\":true,\"object_id\":\"432969e1572943f8a2e9cde580c3bb64\",\"is_complete\":true,\"validation_results\":{}},\"parcels\":[{\"object_owner\":\"shipping@prosehair.com\",\"object_state\":\"VALID\",\"mass_unit\":\"lb\",\"template\":null,\"extra\":{},\"metadata\":\"Customer
+        ID 123456\",\"test\":true,\"value_currency\":null,\"object_id\":\"05968fbb485d43e1abd55378965bd240\",\"object_created\":\"2023-06-26T12:06:21.696Z\",\"object_updated\":\"2023-06-26T12:06:22.261Z\",\"length\":\"5.0000\",\"width\":\"5.0000\",\"height\":\"5.0000\",\"distance_unit\":\"cm\",\"weight\":\"2.0000\",\"value_amount\":null,\"line_items\":[]}],\"status\":\"SUCCESS\",\"shipment_date\":\"2023-06-26T12:06:22.344Z\",\"address_return\":{\"name\":\"Laura
+        Behrens Wu\",\"street1\":\"Clayton St.\",\"street2\":\"\",\"street3\":\"\",\"city\":\"San
+        Francisco\",\"state\":\"CA\",\"zip\":\"94117\",\"country\":\"US\",\"street_no\":\"215\",\"phone\":\"0015553419393\",\"email\":\"\",\"company\":\"Shippo\",\"is_residential\":null,\"test\":true,\"object_id\":\"d8f806e99e904fca83ebd1c6fecae8e2\",\"is_complete\":true,\"validation_results\":{}},\"rates\":[{\"object_id\":\"52646315a66b4867b5fbc67121549451\",\"object_created\":\"2023-06-26T12:06:22.529Z\",\"object_owner\":\"shipping@prosehair.com\",\"shipment\":\"84374cbd21d941518b14f251d0cc7820\",\"amount\":\"11.59\",\"currency\":\"USD\",\"amount_local\":\"11.59\",\"currency_local\":\"USD\",\"attributes\":[\"CHEAPEST\"],\"provider\":\"USPS\",\"provider_image_75\":\"https://shippo-static.s3.amazonaws.com/providers/75/USPS.png\",\"provider_image_200\":\"https://shippo-static.s3.amazonaws.com/providers/200/USPS.png\",\"arrives_by\":null,\"duration_terms\":\"Delivery
+        in 2 to 5 days.\",\"messages\":[],\"carrier_account\":\"bb2b011360f040298b96c6f87d94a7fd\",\"zone\":\"1\",\"test\":true,\"servicelevel\":{\"name\":\"Parcel
+        Select\",\"token\":\"usps_parcel_select\",\"terms\":\"\",\"extended_token\":\"usps_parcel_select\",\"parent_servicelevel\":null},\"estimated_days\":5,\"included_insurance_price\":\"2.00\"},{\"object_id\":\"a782d3d1be244bd7b745ada1c9076a4a\",\"object_created\":\"2023-06-26T12:06:22.530Z\",\"object_owner\":\"shipping@prosehair.com\",\"shipment\":\"84374cbd21d941518b14f251d0cc7820\",\"amount\":\"12.25\",\"currency\":\"USD\",\"amount_local\":\"12.25\",\"currency_local\":\"USD\",\"attributes\":[\"BESTVALUE\",\"FASTEST\"],\"provider\":\"USPS\",\"provider_image_75\":\"https://shippo-static.s3.amazonaws.com/providers/75/USPS.png\",\"provider_image_200\":\"https://shippo-static.s3.amazonaws.com/providers/200/USPS.png\",\"arrives_by\":null,\"duration_terms\":\"Delivery
+        within 1, 2,\_or 3 days\_based on where your package started and where it\u2019s
+        being sent.\",\"messages\":[],\"carrier_account\":\"bb2b011360f040298b96c6f87d94a7fd\",\"zone\":\"1\",\"test\":true,\"servicelevel\":{\"name\":\"Priority
+        Mail\",\"token\":\"usps_priority\",\"terms\":\"\",\"extended_token\":\"usps_priority\",\"parent_servicelevel\":null},\"estimated_days\":1,\"included_insurance_price\":\"2.00\"},{\"object_id\":\"d648ea24dfdd4518bb1eca22e45e7a0a\",\"object_created\":\"2023-06-26T12:06:22.530Z\",\"object_owner\":\"shipping@prosehair.com\",\"shipment\":\"84374cbd21d941518b14f251d0cc7820\",\"amount\":\"27.65\",\"currency\":\"USD\",\"amount_local\":\"27.65\",\"currency_local\":\"USD\",\"attributes\":[],\"provider\":\"USPS\",\"provider_image_75\":\"https://shippo-static.s3.amazonaws.com/providers/75/USPS.png\",\"provider_image_200\":\"https://shippo-static.s3.amazonaws.com/providers/200/USPS.png\",\"arrives_by\":null,\"duration_terms\":\"Overnight
+        delivery to most U.S. locations.\",\"messages\":[],\"carrier_account\":\"bb2b011360f040298b96c6f87d94a7fd\",\"zone\":\"1\",\"test\":true,\"servicelevel\":{\"name\":\"Priority
+        Mail Express\",\"token\":\"usps_priority_express\",\"terms\":\"\",\"extended_token\":\"usps_priority_express\",\"parent_servicelevel\":null},\"estimated_days\":2,\"included_insurance_price\":\"2.00\"}],\"alternate_address_to\":null,\"customs_declaration\":null}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 26 Jun 2023 12:06:26 GMT
+      Transfer-Encoding:
+      - chunked
+      content-encoding:
+      - gzip
+      server:
+      - istio-envoy
+      vary:
+      - Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '6'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"provider": "USPS", "shipment_date": "2017-03-31T17:37:59.817Z", "address_from":
+      {"name": "Laura Behrens Wu", "street1": "Clayton St.", "street2": "", "street3":
+      "", "city": "San Francisco", "state": "CA", "zip": "94117", "country": "US",
+      "street_no": "215", "phone": "0015553419393", "email": "", "company": "Shippo",
+      "is_residential": null, "test": true, "object_id": "d8f806e99e904fca83ebd1c6fecae8e2",
+      "is_complete": true, "validation_results": {}}, "async": false}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '470'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/manifests/
+  response:
+    body:
+      string: '{"detail": "No transactions exist for Manifest request, or have already
+        been assigned to an existing Manifest. Check that zip code matches"}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:06:26 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=f7ca356bd45247fdae5307e4782d6b5b; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '317'
+    status:
+      code: 404
+      message: Not Found
+version: 1

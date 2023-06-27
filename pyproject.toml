@@ -1,0 +1,142 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "modern-shippo"
+dynamic = ["version"]
+description = "Shipping API Python library (USPS, FedEx, UPS and more)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+  "requests>=0.9.0",
+]
+authors = [
+  { name = "Nicolas Mussat", email = "nicolas@prose.com" },
+  { name = "Shippo", email = "support@goshippo.com" },
+  { name = "Eyoel Asfaw", email = "eyoela@gmail.com" },
+  { name = "Subhi Beidas", email = "subhi@goshippo.com" },
+  { name = "Matthieu Nowicki", email = "matthieu@goshippo.com" },
+  { name = "Steve Byerly", email = "steven.j.byerly@gmail.com" },
+  { name = "Malcolm Rebughini", email = "malcolm@goshippo.com" },
+  { name = "Matthew Hwang", email = "mhwang@goshippo.com" },
+]
+maintainers = [
+  { name = "Nicolas Mussat", email = "nicolas@prose.com" },
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/prosehair/modern-shippo-python-client"
+"Bug Tracker" = "https://github.com/prosehair/modern-shippo-python-client/issues"
+
+[tool.hatch.version]
+path = "shippo/version.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/shippo",
+]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.10", "3.11"]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "black",
+  "coverage[toml]>=6.5",
+  "ruff",
+  "pylint",
+  "pytest",
+  "vcrpy",
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-cov",
+  "cov-report",
+]
+
+[tool.hatch.envs.lint]
+detached = true
+dependencies = [
+  "black",
+  "ruff",
+]
+
+[tool.hatch.envs.lint.scripts]
+style = [
+  "ruff {args:.}",
+  "black --check --diff {args:.}",
+]
+fmt = [
+  "black {args:.}",
+  "ruff --fix {args:.}",
+  "style",
+]
+all = [
+  "style",
+  "typing",
+]
+
+[tool.black]
+target-version = ["py310"]
+line-length = 150
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 150
+extend-exclude = [".ipython/"]
+
+[tool.ruff.isort]
+known-first-party = ["shippo"]
+
+[tool.ruff.flake8-annotations]
+allow-star-arg-any = true
+
+[tool.ruff.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.coverage.run]
+source_pkgs = ["shippo", "tests"]
+branch = true
+parallel = true
+omit = []
+
+[tool.coverage.paths]
+shippo = ["shippo"]
+tests = ["tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.ruff.pylint]
+max-args = 10
+max-branches = 25
+max-returns = 11
+max-statements = 85

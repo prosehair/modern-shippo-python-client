@@ -1,0 +1,40 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/shipments/EXAMPLE_OF_INVALID_ID/rates/
+  response:
+    body:
+      string: 404 page not found
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '18'
+      Content-Type:
+      - text/plain
+      Date:
+      - Mon, 12 Jun 2023 17:09:07 GMT
+      server:
+      - istio-envoy
+      x-envoy-upstream-service-time:
+      - '1'
+    status:
+      code: 404
+      message: Not Found
+version: 1

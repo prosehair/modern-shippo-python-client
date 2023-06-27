@@ -1,5 +1,3 @@
-import shippo
-
 """
 In this tutorial we have an order with a sender address,
 recipient address and parcel. The shipment is going from the
@@ -9,6 +7,8 @@ In addition to that we know that the customer expects the
 shipment to arrive within 3 days. We now want to purchase
 the cheapest shipping label with a transit time <= 3 days.
 """
+
+import shippo
 
 # replace <API-KEY> with your key
 shippo.config.api_key = "<API-KEY>"
@@ -42,7 +42,7 @@ address_to_international = {
     "country": "CA",
     "phone": "+1 555 341 9393",
     "email": "support@goshippo.com",
-    "metadata": "For Order Number 123"
+    "metadata": "For Order Number 123",
 }
 
 # parcel object dict
@@ -72,12 +72,13 @@ customs_item = {
 # Creating the CustomsDeclaration
 # The details on creating the CustomsDeclaration is here: https://goshippo.com/docs/reference#customsdeclarations
 customs_declaration = shippo.CustomsDeclaration.create(
-    contents_type='MERCHANDISE',
-    contents_explanation='T-Shirt purchase',
-    non_delivery_option='RETURN',
+    contents_type="MERCHANDISE",
+    contents_explanation="T-Shirt purchase",
+    non_delivery_option="RETURN",
     certify=True,
-    certify_signer='Mr Hippo',
-    items=[customs_item])
+    certify_signer="Mr Hippo",
+    items=[customs_item],
+)
 
 # Creating the shipment object. asynchronous=False indicates that the function will wait until all
 # rates are generated before it returns.
@@ -89,7 +90,8 @@ shipment_international = shippo.Shipment.create(
     address_to=address_to_international,
     parcels=[parcel],
     customs_declaration=customs_declaration.object_id,
-    asynchronous=False)
+    asynchronous=False,
+)
 
 # Get the first rate in the rates results for demo purposes.
 # The details on the returned object are here: https://goshippo.com/docs/reference#rates
@@ -97,19 +99,16 @@ rate_international = shipment_international.rates[0]
 
 # Purchase the desired rate.
 # The complete information about purchasing the label: https://goshippo.com/docs/reference#transaction-create
-transaction_international = shippo.Transaction.create(
-    rate=rate_international.object_id, asynchronous=False)
+transaction_international = shippo.Transaction.create(rate=rate_international.object_id, asynchronous=False)
 
 # print label_url and tracking_number
 if transaction_international.status == "SUCCESS":
-    print("Purchased label with tracking number %s" %
-          transaction_international.tracking_number)
-    print("The label can be downloaded at %s" %
-          transaction_international.label_url)
+    print(f"Purchased label with tracking number {transaction_international.tracking_number}")
+    print(f"The label can be downloaded at {transaction_international.label_url}")
 else:
     print("Failed purchasing the label due to:")
     for message in transaction_international.messages:
-        print("- %s" % message['text'])
+        print(f"- {message['text']}")
 
 # For more tutorials of address validation, tracking, returns, refunds, and other functionality, check out our
 # complete documentation: https://goshippo.com/docs/

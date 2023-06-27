@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/manifests/?results=1
+  response:
+    body:
+      string: '{"next": "https://api.goshippo.com/manifests/?results=1&page=2", "previous":
+        null, "results": [{"object_created": "2023-06-25T12:50:08.006Z", "object_updated":
+        "2023-06-25T12:50:17.004Z", "object_id": "faaf02496a1944629954bade733db20b",
+        "object_owner": "shipping@prosehair.com", "status": "SUCCESS", "errors": [],
+        "provider": "dhl_ecommerce", "shipment_date": "2023-06-25T02:59:59.999Z",
+        "address_from": "79722c18f6d04aa090fef4f944f1d97a", "documents": ["https://deliver.goshippo.com/faaf02496a1944629954bade733db20b_USEWR1_53630573062512501360.pdf?Expires=1719233416&Signature=XJ~UYYis5473tGuwo~uJggkmF5aS5ceiNWd65C7hpdPN9~ZRYukcA2vEkCNxxqtisT2p1Hwoiqm-eK7nv3iit3eyKuUpKWb4pQtz0XVmM7RW6Qq1ATEcJVlrvpKOCxsHI0Vvj6GBxaMfmTRtFYbeFsg-2SMU3pXsaA1KWmqE8mALovCVFrWWnXTrlin~wC8ig-ad78Eata76QpuGHDePpTK5H3LBYuL3HX90EWyO6pqCIQxqIzNB3yrSnSjIhY9ZSlcDgn645KXOl9QDiaE1o7Sq~JWBfPGJq-VnXjJPyJuSDA8kC7olYhDnpHG6hJiXy3Yl3IjHBBRxdAqRUZRMGw__&Key-Pair-Id=APKAJRICFXQ2S4YUQRSQ"],
+        "carrier_account": "c709e5bde12f4230aa597d2c69466ab1", "transactions": ["59c8de86df624207b980dc16ed47ec8d",
+        "e2f8cd87d6624cd78ff112677639afdd", "3507276ffd784509aaed1314ebee16a6", "ad9b4a69e25646ca94c72914ed94a731",
+        "74f82330c0494281b174c6b5fb36439c", "982df5b9f46148738d985ccc48d8489d"]}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:06:35 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=ac69af8d835946fca855d5655c4aa3ba; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '55'
+    status:
+      code: 200
+      message: OK
+version: 1

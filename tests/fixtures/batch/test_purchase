@@ -1,0 +1,252 @@
+interactions:
+- request:
+    body: '{"default_carrier_account": "572b28b2973f469b8cdaf1f5c992fc43", "default_servicelevel_token":
+      "usps_priority", "label_filetype": "PDF_4x6", "metadata": "BATCH #170", "batch_shipments":
+      [{"shipment": {"address_from": {"name": "Mr Hippo", "street1": "965 Mission
+      St", "street2": "Ste 201", "city": "San Francisco", "state": "CA", "zip": "94103",
+      "country": "US", "phone": "4151234567"}, "address_to": {"name": "Mrs Hippo",
+      "company": "", "street1": "Broadway 1", "street2": "", "city": "New York", "state":
+      "NY", "zip": "10007", "country": "US", "phone": "4151234567"}, "parcels": [{"length":
+      "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit":
+      "oz"}]}}, {"shipment": {"address_from": {"name": "Mr Hippo", "street1": "1092
+      Indian Summer Ct", "city": "San Jose", "state": "CA", "zip": "95122", "country":
+      "US", "phone": "4151234567"}, "address_to": {"name": "Mrs Hippo", "company":
+      "", "street1": "Broadway 1", "street2": "", "city": "New York", "state": "NY",
+      "zip": "10007", "country": "US", "phone": "4151234567"}, "parcels": [{"length":
+      "5", "width": "5", "height": "5", "distance_unit": "in", "weight": "2", "mass_unit":
+      "oz"}]}}]}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1166'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/batches/
+  response:
+    body:
+      string: '{"object_id": "9241fcec6cc64bfbb54bb060606a65f3", "object_owner": "shipping@prosehair.com",
+        "status": "VALIDATING", "object_created": "2023-06-26T12:35:43.335Z", "object_updated":
+        "2023-06-26T12:35:43.335Z", "metadata": "BATCH #170", "default_carrier_account":
+        "572b28b2973f469b8cdaf1f5c992fc43", "default_servicelevel_token": "usps_priority",
+        "label_filetype": "PDF_4x6", "batch_shipments": {"count": 0, "next": null,
+        "previous": null, "results": []}, "object_results": {"purchase_succeeded":
+        0, "purchase_failed": 0, "creation_failed": 0, "creation_succeeded": 0}, "label_url":
+        [], "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:35:43 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=8064d88af3f046cf8edd79a559ee202e; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '52'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/batches/9241fcec6cc64bfbb54bb060606a65f3
+  response:
+    body:
+      string: '{"object_id": "9241fcec6cc64bfbb54bb060606a65f3", "object_owner": "shipping@prosehair.com",
+        "status": "VALIDATING", "object_created": "2023-06-26T12:35:43.335Z", "object_updated":
+        "2023-06-26T12:35:43.335Z", "metadata": "BATCH #170", "default_carrier_account":
+        "572b28b2973f469b8cdaf1f5c992fc43", "default_servicelevel_token": "usps_priority",
+        "label_filetype": "PDF_4x6", "batch_shipments": {"count": 0, "next": null,
+        "previous": null, "results": []}, "object_results": {"purchase_succeeded":
+        0, "purchase_failed": 0, "creation_failed": 0, "creation_succeeded": 0}, "label_url":
+        [], "test": true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:35:44 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=026ec61df60c4278b0578ed5f58e49e9; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '27'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: GET
+    uri: https://api.goshippo.com/batches/9241fcec6cc64bfbb54bb060606a65f3
+  response:
+    body:
+      string: '{"object_id": "9241fcec6cc64bfbb54bb060606a65f3", "object_owner": "shipping@prosehair.com",
+        "status": "INVALID", "object_created": "2023-06-26T12:35:43.335Z", "object_updated":
+        "2023-06-26T12:35:45.540Z", "metadata": "BATCH #170", "default_carrier_account":
+        "572b28b2973f469b8cdaf1f5c992fc43", "default_servicelevel_token": "usps_priority",
+        "label_filetype": "PDF_4x6", "batch_shipments": {"count": 2, "next": null,
+        "previous": null, "results": [{"metadata": "", "carrier_account": null, "servicelevel_token":
+        null, "shipment": "0155ff024a484ab7ac65a159dbff1aef", "transaction": null,
+        "object_id": "8d1d196399df4ecc9b9ffd7f8a5c072c", "status": "INVALID", "messages":
+        ["Carrier account with the provided object_id does not exist"]}, {"metadata":
+        "", "carrier_account": null, "servicelevel_token": null, "shipment": "748177d87352444aa53a6cc20fd026ac",
+        "transaction": null, "object_id": "45cd875b9e2d40888f53feabd0cd9e96", "status":
+        "INVALID", "messages": ["Carrier account with the provided object_id does
+        not exist"]}]}, "object_results": {"purchase_succeeded": 0, "purchase_failed":
+        0, "creation_failed": 2, "creation_succeeded": 0}, "label_url": [], "test":
+        true}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:35:46 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=a39fd621cd234b7f98af6b1a9cac75f6; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '68'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: 'null'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/batches/9241fcec6cc64bfbb54bb060606a65f3/purchase
+  response:
+    body:
+      string: '{"detail": "Only batches in VALID state can be purchased."}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jun 2023 12:35:48 GMT
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - OPTIONS
+      content-encoding:
+      - gzip
+      content-language:
+      - en-us
+      p3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      server:
+      - istio-envoy
+      set-cookie:
+      - tracker_sessionid=588867b7b5b74200bc6e5e7c564c1717; Domain=.goshippo.com;
+        Path=/
+      vary:
+      - Accept-Language, Host, Cookie, Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '16'
+    status:
+      code: 400
+      message: Bad Request
+version: 1

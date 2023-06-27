@@ -1,0 +1,53 @@
+interactions:
+- request:
+    body: '{"carrier": "shippo", "tracking_number": "SHIPPO_TRANSIT", "metadata":
+      "metadata"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '82'
+      Content-Type:
+      - application/json
+      Shippo-API-Version:
+      - '2018-02-08'
+      User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0
+      X-Shippo-Client-User-Agent:
+      - MyAwesomeApp/1.0.0 ShippoPythonSDK/3.0.0 Python/3.10.5
+    method: POST
+    uri: https://api.goshippo.com/tracks/
+  response:
+    body:
+      string: '{"tracking_number":"SHIPPO_TRANSIT","carrier":"shippo","servicelevel":{"name":"Priority
+        Mail","token":"shippo_priority"},"transaction":null,"address_from":{"city":"San
+        Francisco","state":"CA","zip":"94103","country":"US"},"address_to":{"city":"Chicago","state":"IL","zip":"60611","country":"US"},"eta":"2023-06-21T16:06:23.217Z","original_eta":"2023-06-21T16:06:23.217Z","metadata":"Shippo
+        test tracking","test":true,"tracking_status":{"status_date":"2023-06-18T22:36:37.833Z","status_details":"Your
+        shipment has departed from the origin.","location":{"city":"San Francisco","state":"CA","zip":"94103","country":"US"},"substatus":null,"object_created":"2023-06-18T22:36:37.833Z","object_updated":"2023-06-18T22:36:37.833Z","object_id":"59abb13295624cb59150621254b45975","status":"TRANSIT"},"tracking_history":[{"status_date":"2023-06-17T18:36:37.833Z","status_details":"The
+        carrier has received the electronic shipment information.","location":null,"substatus":null,"object_created":"2023-06-17T18:36:37.833Z","object_updated":"2023-06-17T18:36:37.833Z","object_id":"2df17961051c46548189e4d600e79fc8","status":"UNKNOWN"},{"status_date":"2023-06-18T22:36:37.833Z","status_details":"Your
+        shipment has departed from the origin.","location":{"city":"San Francisco","state":"CA","zip":"94103","country":"US"},"substatus":null,"object_created":"2023-06-18T22:36:37.833Z","object_updated":"2023-06-18T22:36:37.833Z","object_id":"59abb13295624cb59150621254b45975","status":"TRANSIT"}],"messages":[]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 21 Jun 2023 16:06:23 GMT
+      Transfer-Encoding:
+      - chunked
+      content-encoding:
+      - gzip
+      server:
+      - istio-envoy
+      vary:
+      - Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '8'
+    status:
+      code: 200
+      message: OK
+version: 1
