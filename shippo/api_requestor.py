@@ -61,9 +61,7 @@ class APIRequestor:
                 raise ValueError("key parameter is deprecated, and cannot be used with api_key")
             api_key = kwargs.pop("key")
 
-        self._client = client or http_client.RequestsClient(
-            api_key=api_key, verify_ssl_certs=config.verify_ssl_certs, timeout=config.default_timeout
-        )
+        self._client = client or http_client.RequestsClient(api_key=api_key, verify_ssl_certs=config.verify_ssl_certs, timeout=config.default_timeout)
 
     def request(self, method, url, params=None):
         if isinstance(params, dict) and "asynchronous" in params:
