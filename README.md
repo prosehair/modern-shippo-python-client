@@ -67,15 +67,15 @@ address1 = shippo.Address.create(
 print(f'Success with Address 1: {address1!r}')
 ```
 
-We've created a number of examples to cover the most common use cases. You can find the sample code files in the [examples folder](examples/).
+We've created a number of examples to cover the most common use cases. You can find the sample code files in the [examples folder](https://github.com/prosehair/modern-shippo-python-client/tree/main/examples).
 Some of the use cases we covered include:
 
-- [Basic domestic shipment](examples/basic-shipment.py)
-- [International shipment](examples/international-shipment.py) - Custom forms, interntational destinations
-- [Price estimation matrix](examples/estimate-shipping-prices.py)
-- [Retrieve rates, filter by delivery time and purchase cheapest label](examples/filter-by-delivery-time.py)
-- [Retrieve rates, purchase label for fastest delivery option](examples/purchase-fastest-service.py)
-- [Retrieve rates so customer can pick preferred shipping method, purchase label](examples/get-rates-to-show-customer.py)
+- [Basic domestic shipment](https://github.com/prosehair/modern-shippo-python-client/tree/main/examples/basic-shipment.py)
+- [International shipment](https://github.com/prosehair/modern-shippo-python-client/tree/main/examples/international-shipment.py) - Custom forms, interntational destinations
+- [Price estimation matrix](https://github.com/prosehair/modern-shippo-python-client/tree/main/examples/estimate-shipping-prices.py)
+- [Retrieve rates, filter by delivery time and purchase cheapest label](https://github.com/prosehair/modern-shippo-python-client/tree/main/examples/filter-by-delivery-time.py)
+- [Retrieve rates, purchase label for fastest delivery option](https://github.com/prosehair/modern-shippo-python-client/tree/main/examples/purchase-fastest-service.py)
+- [Retrieve rates so customer can pick preferred shipping method, purchase label](https://github.com/prosehair/modern-shippo-python-client/tree/main/examples/get-rates-to-show-customer.py)
 
 
 ### Configuration
