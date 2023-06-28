@@ -3,7 +3,6 @@ from unittest import SkipTest
 from unittest.mock import patch
 
 import shippo
-from shippo.config import config
 from tests.helper import (
     create_mock_shipment,
     DUMMY_ADDRESS,
@@ -19,7 +18,7 @@ class FunctionalTests(ShippoTestCase):
         if not os.environ.get("SHIPPO_API_KEY"):
             raise SkipTest("Set your SHIPPO_API_KEY in your os.environ")
 
-    @patch.object(config, "api_base", "https://my-invalid-domain.ireallywontresolve/v1")
+    @patch.object(shippo.config, "api_base", "https://my-invalid-domain.ireallywontresolve/v1")
     def test_dns_failure(self):
         self.assertRaises(shippo.error.APIConnectionError, shippo.Address.create)
 

@@ -6,11 +6,10 @@ from unittest import TestCase
 import vcr
 
 import shippo
-from shippo.config import config
 
 vcr_log = logging.getLogger("vcr")
-vcr_log.setLevel(config.vcr_logging_level)
-shippo_vcr = vcr.VCR(filter_headers=["Authorization"], record_mode=config.vcr_record_mode)
+vcr_log.setLevel(shippo.config.vcr_logging_level)
+shippo_vcr = vcr.VCR(filter_headers=["Authorization"], record_mode=shippo.config.vcr_record_mode)
 
 NOW = datetime.datetime.now()
 
@@ -447,9 +446,9 @@ class ShippoTestCase(TestCase):
 
         api_base = os.environ.get("SHIPPO_API_BASE")
         if api_base:
-            config.api_base = api_base
+            shippo.config.api_base = api_base
 
-        config.api_key = os.environ.get("SHIPPO_API_KEY", "51895b669caa45038110fd4074e61e0d")
-        config.api_version = os.environ.get("SHIPPO_API_VERSION", "2018-02-08")
-        config.app_name = os.environ.get("APP_NAME", "MyAwesomeApp")
-        config.app_version = os.environ.get("APP_VERSION", "1.0.0")
+        shippo.config.api_key = os.environ.get("SHIPPO_API_KEY", "51895b669caa45038110fd4074e61e0d")
+        shippo.config.api_version = os.environ.get("SHIPPO_API_VERSION", "2018-02-08")
+        shippo.config.app_name = os.environ.get("APP_NAME", "MyAwesomeApp")
+        shippo.config.app_version = os.environ.get("APP_VERSION", "1.0.0")

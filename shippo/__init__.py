@@ -1,6 +1,7 @@
 # ruff: noqa
 
-from shippo.resource import (
+from .configuration import config
+from .resource import (
     Address,
     Batch,
     CarrierAccount,

@@ -1,7 +1,7 @@
 import logging
 import os
 
-from shippo.version import VERSION
+from .version import VERSION
 
 logging.basicConfig()
 

@@ -2,9 +2,9 @@ import json
 import urllib.parse
 import time
 import warnings
-from shippo import api_requestor, error
-from shippo.api_requestor import urljoin
-from shippo.config import config
+
+from . import api_requestor, config, error
+from .api_requestor import urljoin
 
 
 warnings.filterwarnings("always", category=DeprecationWarning, module="shippo")

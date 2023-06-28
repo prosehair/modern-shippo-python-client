@@ -6,8 +6,7 @@ import time
 import urllib.parse
 import warnings
 
-from shippo import error, http_client
-from shippo.config import config
+from . import config, error, http_client
 
 logger = logging.getLogger(__name__)
 

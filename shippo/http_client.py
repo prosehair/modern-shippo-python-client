@@ -9,11 +9,10 @@ from requests import Session
 from requests.auth import AuthBase
 from requests.exceptions import RequestException
 
-from shippo import error
-from shippo.config import config, Configuration
+from . import config, error
 
 
-def _get_shippo_user_agent_header(configuration: Configuration) -> str:
+def _get_shippo_user_agent_header(configuration) -> str:
     python_version = sys.version.split(" ", maxsplit=1)[0]
     key_value_pairs = []
     key_value_pairs.append("/".join([configuration.app_name, configuration.app_version]))
@@ -23,6 +22,9 @@ def _get_shippo_user_agent_header(configuration: Configuration) -> str:
 
 
 class ShippoAuth(AuthBase):
+    api_key: str = None
+    token_type: str = None
+
     def __init__(self, api_key=None):
         self.api_key = api_key or config.api_key
         self.token_type = "Bearer" if self.api_key.startswith("oauth.") else "ShippoToken"

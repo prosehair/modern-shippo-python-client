@@ -3,13 +3,19 @@ from unittest.mock import Mock, patch
 
 from requests.exceptions import RequestException
 
-from shippo import http_client
-from shippo.config import config, Configuration
+from shippo import config, http_client
+from shippo.configuration import Configuration
 from shippo.error import APIConnectionError
 from tests.helper import ShippoTestCase
 
 
 class ShippoAuthTest(ShippoTestCase):
+    def test_configuration(self):
+        test_key = "test_api_key"
+        with patch("shippo.config.api_key", test_key):
+            auth = http_client.ShippoAuth()
+            self.assertEqual(auth.api_key, test_key)
+
     def test_oauth_token_auth(self):
         api_key = "oauth.mocktoken.mocksig"
         auth = http_client.ShippoAuth(api_key)
