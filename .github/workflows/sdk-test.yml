@@ -1,11 +1,11 @@
 name: Python SDK Test
 
 on:
-  # Run the tests on every push to the master branch
+  # Run the tests on every push to the main branch
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
-  # Run the tests for the default branch [master] every Monday 3:00 pm UTC time (8:00 am PST)
+  # Run the tests for the default branch [main] every Monday 3:00 pm UTC time (8:00 am PST)
   schedule:
     - cron: "0 15 * * 1"
 
@@ -30,23 +30,24 @@ jobs:
       - name: Install hatch
         run: pip install hatch
       - id: test
-        name: Run the tests for PROD
+        name: Run tests
         env:
-          SHIPPO_API_KEY: ${{ secrets.SHIPPO_PROD_TEST_KEY }}
-          SHIPPO_API_BASE: ${{ secrets.SHIPPO_PROD_API_BASE }}
+          SHIPPO_API_KEY: ${{ secrets.SHIPPO_TEST_KEY }}
+          SHIPPO_API_BASE: ${{ secrets.SHIPPO_API_BASE }}
         run: hatch run test
-      - name: Send a Slack notification saying if tests are passing/failing for a given Python version
-        if: always()
-        shell: bash
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: |
-          conclusion=${{ steps.test.conclusion }}
-
-          if [[ "$conclusion" == "success" ]]; then
-            message="✅ Python SDK Test succeeded [Env: PROD, Python version: ${{ matrix.python }}]"
-          else
-            message="❌ Python SDK Test failed [Env: PROD, Python version: ${{ matrix.python }}]"
-          fi
-
-          curl -X POST --data-urlencode "payload={\"text\": \"$message\", \"link_names\": 1}" $SLACK_WEBHOOK_URL
+      - id: lint
+        name: Run lint
+        run: hatch run lint:style
+      # - name: Send a Slack notification saying if tests are passing/failing for a given Python version
+      #   if: always()
+      #   shell: bash
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #   run: |
+      #     conclusion=${{ steps.test.conclusion }}
+      #     if [[ "$conclusion" == "success" ]]; then
+      #       message="✅ Python SDK Test succeeded [Env: PROD, Python version: ${{ matrix.python }}]"
+      #     else
+      #       message="❌ Python SDK Test failed [Env: PROD, Python version: ${{ matrix.python }}]"
+      #     fi
+      #     curl -X POST --data-urlencode "payload={\"text\": \"$message\", \"link_names\": 1}" $SLACK_WEBHOOK_URL
